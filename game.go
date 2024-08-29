@@ -10,7 +10,7 @@ type Game struct {
 	Height float32
 	FPS int
 	BgColor rl.Color
-	GameObjects []Lifecycle
+	GameObjects []Renderable
 }
 
 
@@ -24,7 +24,7 @@ func NewGame(width, height float32, title string) *Game {
 	}
 }
 
-func (g *Game) Add(objects ...Lifecycle) {
+func (g *Game) Add(objects ...Renderable) {
 	g.GameObjects = append(g.GameObjects, objects...)
 }
 
@@ -67,14 +67,19 @@ func (g *Game) Draw() {
 
 	for _, obj := range g.GameObjects {
 		
-		rl.PushMatrix()
-		rl.Translatef(
-			obj.GetX() + (obj.GetWidth() * obj.GetOriginX()),
-			obj.GetY() + (obj.GetHeight() * obj.GetOriginY()), 0)
-		rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-		rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-		obj.OnDraw()
-		rl.PopMatrix()
+		if obj.IsVisible() {
+
+			// rl.PushMatrix()
+			// rl.Translatef(
+			// 	obj.GetX() + (obj.GetWidth() * obj.GetOriginX()),
+			// 	obj.GetY() + (obj.GetHeight() * obj.GetOriginY()), 0)
+			// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
+			// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+			obj.OnDraw()
+			// rl.Translatef(-obj.GetWidth() / 2, -obj.GetHeight() / 2, 0)
+			// rl.PopMatrix()
+	
+		}
 
 	}
 

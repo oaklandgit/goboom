@@ -22,21 +22,12 @@ func NewShape() Shape {
 			ScaleX: 1,
 			ScaleY: 1,
 		},
+		Visibility: Visibility{
+			Visible: true,
+		},
 	}
 }
 
 func (s *Shape) OnInit() {}
 
 func (s *Shape) OnUpdate() {}
-
-
-// func (s *Shape) SetColor(color rl.Color) *Shape {
-// 	s.Color = color
-// 	return s
-// }
-
-// func (s *Shape) OnInit() {}
-
-// func (s *Shape) OnDraw() {}
-
-// func (s *Shape) OnUpdate() {}

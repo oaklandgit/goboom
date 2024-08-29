@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -27,13 +25,10 @@ func (c *Circle) SetRadius(radius float32) *Circle {
 	return c
 }
 
-// func (s *Circle) OnInit() {}
-
-// func (s *Circle) OnUpdate() {}
-
 func (c *Circle) OnDraw() {
-	rl.DrawCircleLines(int32(c.X), int32(c.Y), c.Radius, c.Color)
-	fmt.Println("Drawing Circle")
+	// add the radius to the x and y to center the circle
+	// to let the GameObject handle the pivot
+	rl.DrawCircleLines(int32(c.X) + int32(c.Radius), int32(c.Y) + int32(c.Radius), c.Radius, c.Color)
 }
 
 func (c *Circle) GetWidth() float32{

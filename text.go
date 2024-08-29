@@ -26,7 +26,12 @@ func (t *Text) SetText(txt string) *Text {
 }
 
 func (t *Text) OnDraw() {
-	rl.DrawText(t.Text, int32(t.X), int32(t.Y), int32(t.FontSize), t.Color)
+
+	rl.DrawText(
+		t.Text,
+		int32(t.X),
+		int32(t.Y),
+		int32(t.FontSize), t.Color)
 }
 
 func (t *Text) GetText() string {
@@ -34,10 +39,10 @@ func (t *Text) GetText() string {
 }
 
 func (t *Text) GetWidth() float32 {
-	return float32(len(t.Text) * int(t.FontSize))
+	return float32(rl.MeasureText(t.Text, int32(t.FontSize)))
 }
 
 func (t *Text) GetHeight() float32 {
-	return t.FontSize
+	return float32(rl.MeasureText("M", int32(t.FontSize)))
 }
 

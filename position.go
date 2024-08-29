@@ -6,13 +6,11 @@ type Position struct {
 }
 
 func (p *Position) SetXY(x, y float32) {
-	// fmt.Println("Setting position: ", x, y)
 	p.X = x
 	p.Y = y
 }
 
 func (p *Position) GetXY() (float32, float32) {
-	// fmt.Println("Position: ", p.X, p.Y)
 	return p.X, p.Y
 }
 

@@ -1,6 +1,6 @@
 package main
 
-type Lifecycle interface {
+type Renderable interface {
 	OnInit()
 	OnUpdate()
 	OnDraw()
@@ -15,4 +15,5 @@ type Lifecycle interface {
 	GetOriginX() float32
 	GetOriginY() float32
 
+	IsVisible() bool
 }

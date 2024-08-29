@@ -21,7 +21,7 @@ func NewRectangle(x, y, width, height float32, color rl.Color) *Rectangle {
 }
 
 func (r *Rectangle) OnDraw() {
-	rl.DrawRectangleLines(int32(r.X), int32(r.Y), int32(r.X+r.Width), int32(r.Y+r.Height), r.Color)
+	rl.DrawRectangleLines(int32(r.X), int32(r.Y), int32(r.Width), int32(r.Height), r.Color)
 }
 
 func (r *Rectangle) GetWidth() float32 {
