@@ -7,10 +7,32 @@ type Placeable interface {
 	GetHeight() float32
 }
 
+func (g *Game) PutTop(p Placeable, offsetX, offsetY float32) {
+	centerX := float32(g.Width / 2)
+	p.SetXY(centerX - p.GetWidth()/2 + offsetX, offsetY)
+}
+
+func (g *Game) PutBottom(p Placeable, offsetX, offsetY float32) {
+	centerX := float32(g.Width / 2)
+	centerY := float32(g.Height)
+	p.SetXY(centerX - p.GetWidth()/2 + offsetX, centerY - p.GetHeight() + offsetY)
+}
+
+func (g *Game) PutLeft(p Placeable, offsetX, offsetY float32) {
+	centerY := float32(g.Height / 2)
+	p.SetXY(offsetX, centerY - p.GetHeight()/2 + offsetY)
+}
+
+func (g *Game) PutRight(p Placeable, offsetX, offsetY float32) {
+	centerX := float32(g.Width)
+	centerY := float32(g.Height / 2)
+	p.SetXY(centerX - p.GetWidth() + offsetX, centerY - p.GetHeight()/2 + offsetY)
+}
+
 func (g *Game) PutCenter(p Placeable, offsetX, offsetY float32) {
 	centerX := float32(g.Width / 2)
 	centerY := float32(g.Height / 2)
-	p.SetXY(centerX + offsetX, centerY + offsetY)
+	p.SetXY(centerX + offsetX - p.GetWidth()/2, centerY + offsetY - p.GetHeight())
 }
 
 func (g *Game) PutTopLeft(p Placeable, offsetX, offsetY float32) {

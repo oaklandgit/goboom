@@ -20,7 +20,7 @@ func main() {
 
 	rotated := NewRectangle(0, 0, 20, 40, rl.White)
 
-	game.PutTopLeft(circle, 0, 0)
+	game.PutLeft(circle, 0, 0)
 	game.PutTopLeft(text, 0, 0)
 	game.PutTopRight(tri, 0, 0)
 	game.PutBottomLeft(rect, 0, 0)
