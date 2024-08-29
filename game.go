@@ -46,6 +46,25 @@ func (g *Game) SetBgColor(color rl.Color) {
 
 func (g *Game) Run() {
 
+	debugMode := 0
+
+	DebugOff := func() {}
+	DrawGrid := func() {
+		DrawGrid(int32(g.Width), int32(g.Height), 12)
+		DrawMouseCoordinates()
+	}
+	var DebugModes = []func(){
+		DebugOff,
+		DrawGrid,
+		DrawPerformance,
+	}
+
+	
+
+	g.NewInput(rl.KeyD, KeyPressed, func() {
+		debugMode = (debugMode + 1) % len(DebugModes)
+	})
+
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
 	rl.SetTargetFPS(int32(g.FPS))
 
@@ -59,6 +78,7 @@ func (g *Game) Run() {
 		rl.ClearBackground(g.BgColor)
 		g.Update(rl.GetFrameTime())
 		g.Draw()
+		DebugModes[debugMode]()
 		rl.EndDrawing()
 	}
 	rl.CloseWindow()
