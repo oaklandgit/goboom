@@ -19,6 +19,9 @@ func main() {
 	game.PutBottomLeft(rect, 0, 0)
 	game.PutBottomRight(pent, 0, 0)
 
+	tri.SetVel(-1, 1)
+	circle.SetVelocityByHeading(45, 1)
+
 	game.Add(text, circle, rect, tri, pent)
 
 	game.Run()

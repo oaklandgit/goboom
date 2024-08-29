@@ -56,31 +56,10 @@ func (g *Game) Run() {
 	for !rl.WindowShouldClose() {	
 		rl.BeginDrawing()
 		rl.ClearBackground(g.BgColor)
+		g.Update(rl.GetFrameTime())
 		g.Draw()
 		rl.EndDrawing()
 	}
 	rl.CloseWindow()
-
-}
-
-func (g *Game) Draw() {
-
-	for _, obj := range g.GameObjects {
-		
-		if obj.IsVisible() {
-
-			// rl.PushMatrix()
-			// rl.Translatef(
-			// 	obj.GetX() + (obj.GetWidth() * obj.GetOriginX()),
-			// 	obj.GetY() + (obj.GetHeight() * obj.GetOriginY()), 0)
-			// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-			// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-			obj.OnDraw()
-			// rl.Translatef(-obj.GetWidth() / 2, -obj.GetHeight() / 2, 0)
-			// rl.PopMatrix()
-	
-		}
-
-	}
 
 }

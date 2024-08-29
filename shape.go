@@ -9,6 +9,7 @@ type Shape struct {
 	Position
 	Rotation
 	Scale
+	Velocity
 	Visibility
 	Size
 	Alpha
@@ -30,4 +31,9 @@ func NewShape() Shape {
 
 func (s *Shape) OnInit() {}
 
-func (s *Shape) OnUpdate() {}
+func (s *Shape) OnUpdate() {
+
+	s.Position.X += s.VelX
+	s.Position.Y += s.VelY
+
+}
