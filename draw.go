@@ -1,5 +1,7 @@
 package main
 
+import rl "github.com/gen2brain/raylib-go/raylib"
+
 type Renderable interface {
 	OnInit()
 	OnUpdate()
@@ -24,15 +26,23 @@ func (g *Game) Draw() {
 		
 		if obj.IsVisible() {
 
-			// rl.PushMatrix()
-			// rl.Translatef(
-			// 	obj.GetX() + (obj.GetWidth() * obj.GetOriginX()),
-			// 	obj.GetY() + (obj.GetHeight() * obj.GetOriginY()), 0)
-			// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-			// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+			rl.PushMatrix()
+
+			rl.Translatef(
+				obj.GetX() + obj.GetWidth() * obj.GetOriginX(),
+				obj.GetY() + obj.GetHeight() * obj.GetOriginY(), 0)
+
+			rl.Rotatef(obj.GetAngle(), 0, 0, 1)
+			rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+
+			rl.Translatef(
+				-obj.GetX() + obj.GetWidth() * obj.GetOriginX(),
+				-obj.GetY() + obj.GetHeight() * obj.GetOriginY(), 0)
+
+
 			obj.OnDraw()
-			// rl.Translatef(-obj.GetWidth() / 2, -obj.GetHeight() / 2, 0)
-			// rl.PopMatrix()
+
+			rl.PopMatrix()
 	
 		}
 

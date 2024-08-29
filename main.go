@@ -13,16 +13,21 @@ func main() {
 	tri := NewRegPoly(0, 0, 5, 25, rl.Red)
 	pent := NewRegPoly(0, 0, 5, 25, rl.Red)
 
+	rotated := NewRectangle(0, 0, 20, 40, rl.Red)
+
 	game.PutCenter(circle, 0, 0)
 	game.PutTopLeft(text, 0, 0)
 	game.PutTopRight(tri, 0, 0)
 	game.PutBottomLeft(rect, 0, 0)
 	game.PutBottomRight(pent, 0, 0)
+	game.PutCenter(rotated, 0, 0)
+
+	rotated.SetAngle(45)
 
 	tri.SetVel(-1, 1)
 	circle.SetVelocityByHeading(45, 1)
 
-	game.Add(text, circle, rect, tri, pent)
+	game.Add(text, circle, rect, tri, pent, rotated)
 
 	game.Run()
 
