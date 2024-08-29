@@ -1,8 +1,6 @@
 package main
 
-import (
-	rl "github.com/gen2brain/raylib-go/raylib"
-)
+import rl "github.com/gen2brain/raylib-go/raylib"
 
 type Rectangle struct {
 	Shape
@@ -11,7 +9,9 @@ type Rectangle struct {
 }
 
 func NewRectangle(x, y, width, height float32, color rl.Color) *Rectangle {
-	r := &Rectangle{}
+	r := &Rectangle{
+		Shape: NewShape(),
+	}
 	r.X = x
 	r.Y = y
 	r.Width = width

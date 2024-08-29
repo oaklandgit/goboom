@@ -1,8 +1,6 @@
 package main
 
-import (
-	rl "github.com/gen2brain/raylib-go/raylib"
-)
+import rl "github.com/gen2brain/raylib-go/raylib"
 
 type Text struct {
 	Shape
@@ -11,7 +9,9 @@ type Text struct {
 }
 
 func NewText(x, y float32, txt string, color rl.Color) *Text {
-	t := &Text{}
+	t := &Text{
+		Shape: NewShape(),
+	}
 	t.Color = color
 	t.X = x
 	t.Y = y

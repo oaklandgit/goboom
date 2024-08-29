@@ -6,19 +6,37 @@ import (
 
 type Shape struct {
 	Identity
-	Lifecycle
 	Position
+	Rotation
+	Scale
+	Visibility
 	Size
-	Hierarchy
+	Alpha
 	Pivot
 	Color rl.Color
 }
 
-func (s *Shape) SetColor(color rl.Color) *Shape {
-	s.Color = color
-	return s
+func NewShape() Shape {
+	return Shape{
+		Scale: Scale{
+			ScaleX: 1,
+			ScaleY: 1,
+		},
+	}
 }
 
 func (s *Shape) OnInit() {}
 
 func (s *Shape) OnUpdate() {}
+
+
+// func (s *Shape) SetColor(color rl.Color) *Shape {
+// 	s.Color = color
+// 	return s
+// }
+
+// func (s *Shape) OnInit() {}
+
+// func (s *Shape) OnDraw() {}
+
+// func (s *Shape) OnUpdate() {}
