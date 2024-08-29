@@ -12,6 +12,7 @@ type Shape struct {
 	Velocity
 	Visibility
 	Size
+	BoundingBox
 	Alpha
 	Pivot
 	Color rl.Color
