@@ -11,6 +11,7 @@ type Game struct {
 	FPS int
 	BgColor rl.Color
 	GameObjects []Renderable
+	Inputs []Input
 }
 
 
