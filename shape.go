@@ -11,11 +11,12 @@ type Shape struct {
 	Scale
 	Velocity
 	Visibility
+	Stroke
+	Fill
 	Size
 	BoundingBox
 	Alpha
 	Pivot
-	Color rl.Color
 }
 
 func NewShape() Shape {
@@ -23,6 +24,13 @@ func NewShape() Shape {
 		Scale: Scale{
 			ScaleX: 1,
 			ScaleY: 1,
+		},
+		Stroke: Stroke{
+			StrokeWeight: 1,
+			StrokeColor: rl.Magenta, // default stroke color
+		},
+		Fill: Fill{
+			FillColor: rl.Blank,
 		},
 		Visibility: Visibility{
 			Visible: true,

@@ -12,7 +12,7 @@ func NewText(x, y float32, txt string, color rl.Color) *Text {
 	t := &Text{
 		Shape: NewShape(),
 	}
-	t.Color = color
+	t.FillColor = color
 	t.X = x
 	t.Y = y
 	t.Text = txt
@@ -31,7 +31,7 @@ func (t *Text) OnDraw() {
 		t.Text,
 		int32(t.X),
 		int32(t.Y),
-		int32(t.FontSize), t.Color)
+		int32(t.FontSize), t.FillColor)
 }
 
 func (t *Text) GetText() string {

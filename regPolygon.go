@@ -10,7 +10,7 @@ type RegPoly struct {
 	Radius float32
 }
 
-func NewRegPoly(x, y float32, sides int32, radius float32, color rl.Color) *RegPoly {
+func NewRegPoly(x, y float32, sides int32, radius float32, strokeColor rl.Color) *RegPoly {
 	rp := &RegPoly{
 		Shape: NewShape(),
 	}
@@ -18,7 +18,7 @@ func NewRegPoly(x, y float32, sides int32, radius float32, color rl.Color) *RegP
 	rp.X = x
 	rp.Y = y
 	rp.Radius = radius
-	rp.Color = color
+	rp.StrokeColor = strokeColor
 	return rp
 }
 
@@ -31,7 +31,8 @@ func (rp *RegPoly) OnDraw() {
 	// add the radius to the x and y to center the polygon
 	// to let the GameObject handle the pivot
 	center := rl.Vector2{X: rp.X + rp.Radius, Y: rp.Y + rp.Radius}
-	rl.DrawPolyLines(center, rp.Sides, rp.Radius, 0, rp.Color)
+	rl.DrawPoly(center, rp.Sides, rp.Radius, 0, rp.FillColor)
+	rl.DrawPolyLinesEx(center, rp.Sides,rp.Radius, 0, rp.StrokeWeight, rp.StrokeColor); 
 }
 
 func (rp *RegPoly) GetWidth() float32{

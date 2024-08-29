@@ -8,7 +8,7 @@ type Rectangle struct {
 	Height float32
 }
 
-func NewRectangle(x, y, width, height float32, color rl.Color) *Rectangle {
+func NewRectangle(x, y, width, height float32, strokeColor rl.Color) *Rectangle {
 	r := &Rectangle{
 		Shape: NewShape(),
 	}
@@ -16,12 +16,24 @@ func NewRectangle(x, y, width, height float32, color rl.Color) *Rectangle {
 	r.Y = y
 	r.Width = width
 	r.Height = height
-	r.Color = color
+	r.StrokeColor = strokeColor
 	return r
 }
 
 func (r *Rectangle) OnDraw() {
-	rl.DrawRectangleLines(int32(r.X), int32(r.Y), int32(r.Width), int32(r.Height), r.Color)
+
+	rect := rl.Rectangle{X: r.X, Y: r.Y, Width: r.Width, Height: r.Height}
+
+	rl.DrawRectanglePro(
+		rect,
+		rl.Vector2{X: 0, Y: 0},
+		0,
+		r.FillColor)
+
+	rl.DrawRectangleLinesEx(
+		rect,
+		r.StrokeWeight,
+		r.StrokeColor)
 }
 
 func (r *Rectangle) GetWidth() float32 {
