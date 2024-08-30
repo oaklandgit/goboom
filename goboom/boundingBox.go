@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type BoundingBox struct {
 	MinX, MinY, MaxX, MaxY float32

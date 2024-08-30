@@ -1,4 +1,4 @@
-package main
+package goboom
 
 import (
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -28,17 +28,6 @@ func NewGame(width, height float32, title string) *Game {
 func (g *Game) Add(objects ...Renderable) {
 	g.GameObjects = append(g.GameObjects, objects...)
 }
-
-
-// func (p *GameObject) Add(children ...*GameObject) *GameObject {
-// 	for _, c := range children {
-// 		p.children = append(p.children, c)
-// 		c.parent = p
-// 		c.game = p.game
-// 	}
-
-// 	return p
-// }
 
 func (g *Game) SetBgColor(color rl.Color) {
 	g.BgColor = color

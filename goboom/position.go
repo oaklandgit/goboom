@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Position struct {
 	X float32

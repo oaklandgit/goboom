@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Visibility struct {
 	Visible bool

@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Size interface {
 	GetWidth() float32

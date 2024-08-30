@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Scale struct {
 	ScaleX float32

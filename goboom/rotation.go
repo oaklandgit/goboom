@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Rotation struct {
 	Angle float32

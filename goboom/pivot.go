@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Pivot struct {
 	OriginX float32

@@ -1,37 +1,39 @@
 package main
 
 import (
+	boom "goboom/goboom"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 func main() {
 
-	game := NewGame(800, 600, "My Game")
+	game := boom.NewGame(800, 600, "My Game")
 	game.SetBgColor(rl.Black)
 
-	circle := NewCircle(200, 200, 25, rl.White)
+	circle := boom.NewCircle(200, 200, 25, rl.White)
 	circle.SetFill(rl.Blue)
 	circle.SetStroke(rl.Blank, 2)
-	rect := NewRectangle(0, 0, 50, 50, rl.White)
-	text := NewText(400, 400, "Hello, World!", rl.White)
-	tri := NewRegPoly(0, 0, 5, 25, rl.White)
-	pent := NewRegPoly(0, 0, 5, 25, rl.White)
-	star := NewPolygon(
+	rect := boom.NewRectangle(0, 0, 50, 50, rl.White)
+	text := boom.NewText(400, 400, "Hello, World!", rl.White)
+	tri := boom.NewRegPoly(0, 0, 5, 25, rl.White)
+	pent := boom.NewRegPoly(0, 0, 5, 25, rl.White)
+	star := boom.NewPolygon(
 		0, 0, rl.White, true,
 		0, 50, 14, 15, 47, 15, 23, -7, 30, -42, 0, -25, -30, -42, -23, -7, -47, 15, -14, 15)
 
-	rect2 := NewRectangle(0, 0, 20, 40, rl.White)
+	rect2 := boom.NewRectangle(0, 0, 20, 40, rl.White)
 	rect2.SetOrigin(0.5, 0.5)
 
-	game.NewInput(rl.KeyRight, KeyDown, func() {
+	game.NewInput(rl.KeyRight, boom.KeyDown, func() {
 		rect2.SetAngle(rect2.GetAngle() + 10)
 	})
 
-	game.NewInput(rl.KeyLeft, KeyDown, func() {
+	game.NewInput(rl.KeyLeft, boom.KeyDown, func() {
 		rect2.SetAngle(rect2.GetAngle() - 10)
 	})
 
-	game.NewInput(rl.KeyUp, KeyReleased, func() {
+	game.NewInput(rl.KeyUp, boom.KeyReleased, func() {
 		rect2.SetVelocityByHeading(rect2.GetAngle(), 1)
 	})
 

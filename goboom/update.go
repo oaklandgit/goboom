@@ -1,4 +1,4 @@
-package main
+package goboom
 
 func (g *Game) Update(dt float32) {
 

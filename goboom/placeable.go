@@ -1,4 +1,4 @@
-package main
+package goboom
 
 type Placeable interface {
 	GetXY() (float32, float32)
