@@ -8,6 +8,7 @@ type Shape struct {
 	Identity
 	Position
 	Rotation
+	Lifespan
 	Scale
 	Velocity
 	Visibility

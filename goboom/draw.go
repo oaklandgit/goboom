@@ -18,6 +18,7 @@ type Renderable interface {
 	GetOriginY() float32
 
 	IsVisible() bool
+	IsDeleted() bool
 }
 
 func (g *Game) Draw() {

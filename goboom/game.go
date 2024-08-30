@@ -29,6 +29,15 @@ func (g *Game) Add(objects ...Renderable) {
 	g.GameObjects = append(g.GameObjects, objects...)
 }
 
+func (g *Game) Remove(obj Renderable) {
+	for i, o := range g.GameObjects {
+		if o == obj {
+			g.GameObjects = append(g.GameObjects[:i], g.GameObjects[i+1:]...)
+			break
+		}
+	}
+}
+
 func (g *Game) SetBgColor(color rl.Color) {
 	g.BgColor = color
 }
