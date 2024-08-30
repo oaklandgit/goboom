@@ -2,7 +2,7 @@ package goboom
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-type ButtonPress int
+type ButtonMode int
 
 const (
 	KeyPressed = iota
@@ -10,38 +10,42 @@ const (
 	KeyDown
 )
 
+type InputManager struct {
+	Inputs []Input
+}
+
 type Input struct {
 	Key   int32
-	Press ButtonPress
+	Mode ButtonMode
 	Action func()
 }
 
-func (g *Game) NewInput(key int32, press ButtonPress, action func()) {
+func (im *InputManager) NewInput(key int32, mode ButtonMode, action func()) {
 
 	input := Input{
 		Key:   key,
-		Press: press,
+		Mode: mode,
 		Action: action,
 	}
 
-	g.Inputs = append(g.Inputs, input)
+	im.Inputs = append(im.Inputs, input)
 }
 
-func CheckInput(input Input) {
+func (im *InputManager) RespondToInputs() {
 
-	if input.Press == KeyPressed && rl.IsKeyPressed(input.Key) {
-		input.Action()
-		return
-	}
+	for _, input := range im.Inputs {
 
-	if input.Press == KeyDown && rl.IsKeyDown(input.Key) {
-		input.Action()
-		return
-	}
+		if input.Mode == KeyPressed && rl.IsKeyPressed(input.Key) {
+			input.Action()
+		}
 
-	if input.Press == KeyReleased && rl.IsKeyReleased(input.Key) {
-		input.Action()
-		return
+		if input.Mode == KeyDown && rl.IsKeyDown(input.Key) {
+			input.Action()
+		}
+
+		if input.Mode == KeyReleased && rl.IsKeyReleased(input.Key) {
+			input.Action()
+		}
 	}
 
 }

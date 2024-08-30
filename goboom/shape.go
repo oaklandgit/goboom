@@ -18,6 +18,7 @@ type Shape struct {
 	BoundingBox
 	Alpha
 	Pivot
+	InputManager
 }
 
 func NewShape() Shape {

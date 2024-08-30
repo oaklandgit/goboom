@@ -19,6 +19,8 @@ type Renderable interface {
 
 	IsVisible() bool
 	IsDeleted() bool
+
+	RespondToInputs()
 }
 
 func (g *Game) Draw() {

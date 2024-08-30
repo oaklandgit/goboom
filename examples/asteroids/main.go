@@ -19,19 +19,19 @@ func main() {
 	ship.SetStroke(rl.White, 2)
 	ship.SetOrigin(0.5, 0.5)
 
-	game.NewInput(rl.KeyRight, boom.KeyDown, func() {
+	ship.NewInput(rl.KeyRight, boom.KeyDown, func() {
 		ship.SetAngle(ship.GetAngle() + ROTATE_SPEED)
 	})
 
-	game.NewInput(rl.KeyLeft, boom.KeyDown, func() {
+	ship.NewInput(rl.KeyLeft, boom.KeyDown, func() {
 		ship.SetAngle(ship.GetAngle() - ROTATE_SPEED)
 	})
 
-	game.NewInput(rl.KeyUp, boom.KeyDown, func() {
+	ship.NewInput(rl.KeyUp, boom.KeyDown, func() {
 		ship.SetVelocityByHeading(ship.GetAngle(), 2)
 	})
 
-	game.NewInput(rl.KeyX, boom.KeyPressed, func() {
+	ship.NewInput(rl.KeyX, boom.KeyPressed, func() {
 		fmt.Println("FIRE!")
 		bullet := boom.NewCircle(ship.GetX(), ship.GetY(), 3, rl.White)
 		bullet.SetFill(rl.White)
