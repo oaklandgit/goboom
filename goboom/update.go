@@ -12,7 +12,7 @@ func (g *Game) Update(dt float32) {
 		}
 
 		obj.OnUpdate()
-		obj.RespondToInputs()
+		obj.OnInput()
 	}
 
 }

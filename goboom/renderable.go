@@ -1,10 +1,14 @@
 package goboom
 
 type Renderable interface {
+
+	// Lifecycle methods
 	OnInit()
 	OnUpdate()
 	OnDraw()
+	OnInput()
 
+	// getters
 	GetX() float32
 	GetY() float32
 	GetXY() (float32, float32)
@@ -15,13 +19,12 @@ type Renderable interface {
 	GetAngle() float32
 	GetOriginX() float32
 	GetOriginY() float32
-
 	
+	// setters
 	SetXY(x, y float32)
 
-
+	// bools
 	IsVisible() bool
 	IsDeleted() bool
 
-	RespondToInputs()
 }

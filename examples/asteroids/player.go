@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	boom "goboom/goboom"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -27,8 +26,7 @@ func createPlayer(game *boom.Game) boom.Renderable {
 	})
 
 	ship.NewInput(rl.KeyX, boom.KeyPressed, func() {
-		fmt.Println("FIRE!")
-		bullet := boom.NewCircle(ship.GetX(), ship.GetY(), 3, rl.White)
+		bullet := boom.NewCircle(ship.GetX(), ship.GetY(), 3, rl.Blank)
 		bullet.SetFill(rl.White)
 		bullet.SetOrigin(0.5, 0.5)
 		bullet.SetVelocityByHeading(ship.GetAngle(), 5)

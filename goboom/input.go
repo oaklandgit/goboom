@@ -31,7 +31,7 @@ func (im *InputManager) NewInput(key int32, mode ButtonMode, action func()) {
 	im.Inputs = append(im.Inputs, input)
 }
 
-func (im *InputManager) RespondToInputs() {
+func (im *InputManager) OnInput() {
 
 	for _, input := range im.Inputs {
 
