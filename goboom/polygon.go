@@ -7,14 +7,14 @@ import (
 )
 
 type Polygon struct {
-	Shape
+	GameObject
 	Points []float32
 	Closed bool
 }
 
 func NewPolygon(x, y float32, strokeColor rl.Color, closed bool, points ...float32) *Polygon {
 	p := &Polygon{
-		Shape: NewShape(),
+		GameObject: NewGameObject(),
 	}
 	p.Points = points
 	p.X = x

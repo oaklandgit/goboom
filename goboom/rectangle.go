@@ -3,14 +3,14 @@ package goboom
 import rl "github.com/gen2brain/raylib-go/raylib"
 
 type Rectangle struct {
-	Shape
+	GameObject
 	Width  float32
 	Height float32
 }
 
 func NewRectangle(x, y, width, height float32, strokeColor rl.Color) *Rectangle {
 	r := &Rectangle{
-		Shape: NewShape(),
+		GameObject: NewGameObject(),
 	}
 	r.X = x
 	r.Y = y

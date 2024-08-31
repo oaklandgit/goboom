@@ -7,13 +7,13 @@ import (
 const CIRCLE_EDGES = 24
 
 type Circle struct {
-	Shape
+	GameObject
 	Radius float32
 }
 
 func NewCircle(x, y, radius float32, strokeColor rl.Color) *Circle {
 	c := &Circle{
-		Shape: NewShape(),
+		GameObject: NewGameObject(),
 	}
 	c.X = x
 	c.Y = y

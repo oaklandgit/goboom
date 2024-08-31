@@ -10,12 +10,12 @@ func (l *Lifespan) IsDeleted() bool {
 	return l.Delete
 }
 
-func (s *Shape) SetLifespan(millisecs int) *Shape {
+func (obj *GameObject) SetLifespan(millisecs int) *GameObject {
 	
 	go func() {
         time.Sleep(time.Duration(millisecs) * time.Millisecond)
-        s.Delete = true
+        obj.Delete = true
     }()
 
-	return s
+	return obj
 }

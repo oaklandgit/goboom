@@ -5,14 +5,14 @@ import (
 )
 
 type RegPoly struct {
-	Shape
+	GameObject
 	Sides int32
 	Radius float32
 }
 
 func NewRegPoly(x, y float32, sides int32, radius float32, strokeColor rl.Color) *RegPoly {
 	rp := &RegPoly{
-		Shape: NewShape(),
+		GameObject: NewGameObject(),
 	}
 	rp.Sides = sides
 	rp.X = x

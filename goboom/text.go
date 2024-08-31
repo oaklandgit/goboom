@@ -3,14 +3,14 @@ package goboom
 import rl "github.com/gen2brain/raylib-go/raylib"
 
 type Text struct {
-	Shape
+	GameObject
 	Text  string
 	FontSize float32
 }
 
 func NewText(x, y float32, txt string, color rl.Color) *Text {
 	t := &Text{
-		Shape: NewShape(),
+		GameObject: NewGameObject(),
 	}
 	t.FillColor = color
 	t.X = x

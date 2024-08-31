@@ -1,13 +1,13 @@
 package goboom
 
 type Group struct {
-	Shape
+	GameObject
 	Children []Renderable
 }
 
 func NewGroup(x, y float32) *Group {
 	g := &Group{
-		Shape: NewShape(),
+		GameObject: NewGameObject(),
 	}
 	g.X = x
 	g.Y = y

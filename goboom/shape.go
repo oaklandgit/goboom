@@ -4,7 +4,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-type Shape struct {
+type GameObject struct {
 	Identity
 	Position
 	Rotation
@@ -21,8 +21,8 @@ type Shape struct {
 	InputManager
 }
 
-func NewShape() Shape {
-	return Shape{
+func NewGameObject() GameObject {
+	return GameObject{
 		Scale: Scale{
 			ScaleX: 1,
 			ScaleY: 1,
@@ -40,11 +40,11 @@ func NewShape() Shape {
 	}
 }
 
-func (s *Shape) OnInit() {}
+func (obj *GameObject) OnInit() {}
 
-func (s *Shape) OnUpdate() {
+func (obj *GameObject) OnUpdate() {
 
-	s.Position.X += s.VelX
-	s.Position.Y += s.VelY
+	obj.Position.X += obj.VelX
+	obj.Position.Y += obj.VelY
 
 }
