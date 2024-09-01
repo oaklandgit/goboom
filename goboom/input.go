@@ -10,7 +10,7 @@ const (
 	KeyDown
 )
 
-type InputManager struct {
+type InputHandler struct {
 	Inputs []Input
 }
 
@@ -20,7 +20,7 @@ type Input struct {
 	Action func()
 }
 
-func (im *InputManager) NewInput(key int32, mode ButtonMode, action func()) {
+func (im *InputHandler) AddInput(key int32, mode ButtonMode, action func()) {
 
 	input := Input{
 		Key:   key,
@@ -31,7 +31,7 @@ func (im *InputManager) NewInput(key int32, mode ButtonMode, action func()) {
 	im.Inputs = append(im.Inputs, input)
 }
 
-func (im *InputManager) OnInput() {
+func (im *InputHandler) CheckInput() {
 
 	for _, input := range im.Inputs {
 

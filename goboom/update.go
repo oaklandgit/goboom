@@ -1,8 +1,6 @@
 package goboom
 
-func (g *Game) Update(dt float32) {
-
-
+func (g *Game) Update() {
 
 	for _, obj := range g.GameObjects {
 
@@ -11,8 +9,8 @@ func (g *Game) Update(dt float32) {
 			continue
 		}
 
-		obj.OnUpdate()
-		obj.OnInput()
+		obj.Update()
+		obj.CheckInput()
 	}
 
 }

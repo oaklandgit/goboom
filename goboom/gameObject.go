@@ -18,11 +18,13 @@ type GameObject struct {
 	BoundingBox
 	Alpha
 	Pivot
-	InputManager
+	InputHandler
+	LifeCycle
 }
 
 func NewGameObject() GameObject {
-	return GameObject{
+
+	obj := GameObject{
 		Scale: Scale{
 			ScaleX: 1,
 			ScaleY: 1,
@@ -38,13 +40,12 @@ func NewGameObject() GameObject {
 			Visible: true,
 		},
 	}
+
+	return obj
+		
 }
 
-func (obj *GameObject) OnInit() {}
-
-func (obj *GameObject) OnUpdate() {
-
-	obj.Position.X += obj.VelX
-	obj.Position.Y += obj.VelY
-
+func (g *GameObject) Update() {
+	g.X += g.VelX
+	g.Y += g.VelY
 }

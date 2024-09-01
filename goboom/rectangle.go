@@ -17,10 +17,15 @@ func NewRectangle(x, y, width, height float32, strokeColor rl.Color) *Rectangle 
 	r.Width = width
 	r.Height = height
 	r.StrokeColor = strokeColor
+
+	r.OnDraw = func() {
+		drawRectangle(r)
+	}
+
 	return r
 }
 
-func (r *Rectangle) OnDraw() {
+func drawRectangle(r *Rectangle) {
 
 	rect := rl.Rectangle{X: r.X, Y: r.Y, Width: r.Width, Height: r.Height}
 

@@ -26,6 +26,10 @@ func NewPolygon(x, y float32, strokeColor rl.Color, closed bool, points ...float
 		p.Points = append(p.Points, p.Points[0], p.Points[1])
 	}
 
+	p.OnDraw = func() {
+		drawPolygon(p)
+	}
+
 	return p
 }
 
@@ -42,7 +46,7 @@ func (p *Polygon) PointsToVectors() ([]rl.Vector2, error)  {
 	return vectors, nil
 }
 
-func (p *Polygon) OnDraw() {
+func drawPolygon(p *Polygon) {
 
 	vectors, err := p.PointsToVectors()
 

@@ -2,27 +2,6 @@ package goboom
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-// type Renderable interface {
-// 	OnInit()
-// 	OnUpdate()
-// 	OnDraw()
-
-// 	GetX() float32
-// 	GetY() float32
-// 	GetWidth() float32
-// 	GetHeight() float32
-// 	GetScaleX() float32
-// 	GetScaleY() float32
-// 	GetAngle() float32
-// 	GetOriginX() float32
-// 	GetOriginY() float32
-
-// 	IsVisible() bool
-// 	IsDeleted() bool
-
-// 	RespondToInputs()
-// }
-
 func (g *Game) Draw() {
 
 	for _, obj := range g.GameObjects {
@@ -40,7 +19,7 @@ func (g *Game) Draw() {
 			
 			rl.Translatef(-offsetX, -offsetY, 0)
 
-			obj.OnDraw()
+			obj.Draw()
 
 			rl.PopMatrix()
 	

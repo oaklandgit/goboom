@@ -13,19 +13,19 @@ func createPlayer(game *boom.Game) boom.Renderable {
 	ship.SetStroke(rl.White, 2)
 	ship.SetOrigin(0.5, 0.5)
 
-	ship.NewInput(rl.KeyRight, boom.KeyDown, func() {
+	ship.AddInput(rl.KeyRight, boom.KeyDown, func() {
 		ship.SetAngle(ship.GetAngle() + ROTATE_SPEED)
 	})
 
-	ship.NewInput(rl.KeyLeft, boom.KeyDown, func() {
+	ship.AddInput(rl.KeyLeft, boom.KeyDown, func() {
 		ship.SetAngle(ship.GetAngle() - ROTATE_SPEED)
 	})
 
-	ship.NewInput(rl.KeyUp, boom.KeyDown, func() {
+	ship.AddInput(rl.KeyUp, boom.KeyDown, func() {
 		ship.SetVelocityByHeading(ship.GetAngle(), 2)
 	})
 
-	ship.NewInput(rl.KeyX, boom.KeyPressed, func() {
+	ship.AddInput(rl.KeyX, boom.KeyPressed, func() {
 		bullet := boom.NewCircle(ship.GetX(), ship.GetY(), 3, rl.Blank)
 		bullet.SetFill(rl.White)
 		bullet.SetOrigin(0.5, 0.5)

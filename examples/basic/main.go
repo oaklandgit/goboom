@@ -25,15 +25,15 @@ func main() {
 	rect2 := boom.NewRectangle(0, 0, 20, 40, rl.White)
 	rect2.SetOrigin(0.5, 0.5)
 
-	game.NewInput(rl.KeyRight, boom.KeyDown, func() {
+	rect.AddInput(rl.KeyRight, boom.KeyDown, func() {
 		rect2.SetAngle(rect2.GetAngle() + 10)
 	})
 
-	game.NewInput(rl.KeyLeft, boom.KeyDown, func() {
+	rect.AddInput(rl.KeyLeft, boom.KeyDown, func() {
 		rect2.SetAngle(rect2.GetAngle() - 10)
 	})
 
-	game.NewInput(rl.KeyUp, boom.KeyReleased, func() {
+	rect.AddInput(rl.KeyUp, boom.KeyReleased, func() {
 		rect2.SetVelocityByHeading(rect2.GetAngle(), 1)
 	})
 

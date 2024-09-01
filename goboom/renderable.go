@@ -1,30 +1,71 @@
 package goboom
 
+import rl "github.com/gen2brain/raylib-go/raylib"
+
 type Renderable interface {
+    // Lifecycle methods
+    Init()
+    Update()
+    Draw()
 
-	// Lifecycle methods
-	OnInit()
-	OnUpdate()
-	OnDraw()
-	OnInput()
+    // InputHandler methods
+    AddInput(key int32, mode ButtonMode, action func())
+    CheckInput()
 
-	// getters
-	GetX() float32
-	GetY() float32
-	GetXY() (float32, float32)
-	GetWidth() float32
-	GetHeight() float32
-	GetScaleX() float32
-	GetScaleY() float32
-	GetAngle() float32
-	GetOriginX() float32
-	GetOriginY() float32
-	
-	// setters
-	SetXY(x, y float32)
+    // Identity methods
+    AddTags(tags []string)
+    GetId() string
+    GetTags() []string
+    SetId(id string)
 
-	// bools
-	IsVisible() bool
-	IsDeleted() bool
+    // Position methods
+    GetX() float32
+    GetY() float32
+    GetXY() (float32, float32)
+    SetXY(x, y float32)
 
+    // Rotation methods
+    GetAngle() float32
+    SetAngle(angle float32)
+
+    // BoundingBox methods
+    GetBBHeight() float32
+    GetBBWidth() float32
+
+    // Size methods
+    GetHeight() float32
+    GetWidth() float32
+
+    // Pivot methods
+    GetOrigin() (float32, float32)
+    GetOriginX() float32
+    GetOriginY() float32
+    SetOrigin(x float32, y float32)
+
+    // Scale methods
+    GetScale() (float32, float32)
+    GetScaleX() float32
+    GetScaleY() float32
+    SetScale(x float32, y float32)
+
+    // Velocity methods
+    GetVel() (float32, float32)
+    GetVelX() float32
+    GetVelY() float32
+    SetVel(x float32, y float32)
+    SetVelocityByHeading(heading float32, speed float32)
+
+    // Visibility methods
+    IsVisible() bool
+    SetVisible(visible bool)
+
+    // Lifespan methods
+    IsDeleted() bool
+    SetLifespan(millisecs int) *GameObject
+
+    // Stroke methods
+    SetStroke(color rl.Color, weight float32) *Stroke
+
+    // Fill methods
+    SetFill(color rl.Color) *Fill
 }

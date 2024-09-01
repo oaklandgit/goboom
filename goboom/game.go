@@ -11,7 +11,7 @@ type Game struct {
 	FPS int
 	BgColor rl.Color
 	GameObjects []Renderable
-	InputManager
+	InputHandler
 }
 
 
@@ -57,9 +57,7 @@ func (g *Game) Run() {
 		DrawPerformance,
 	}
 
-	
-
-	g.NewInput(rl.KeyD, KeyPressed, func() {
+	g.AddInput(rl.KeyD, KeyPressed, func() {
 		debugMode = (debugMode + 1) % len(DebugModes)
 	})
 
@@ -74,7 +72,7 @@ func (g *Game) Run() {
 	for !rl.WindowShouldClose() {	
 		rl.BeginDrawing()
 		rl.ClearBackground(g.BgColor)
-		g.Update(rl.GetFrameTime())
+		g.Update() // to do: add delta time
 		g.Draw()
 		DebugModes[debugMode]()
 		rl.EndDrawing()

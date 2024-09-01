@@ -19,6 +19,10 @@ func NewCircle(x, y, radius float32, strokeColor rl.Color) *Circle {
 	c.Y = y
 	c.StrokeColor = strokeColor
 	c.Radius = radius
+
+	c.OnDraw = func () {
+		drawCircle(c)
+	}
 	return c
 }
 
@@ -27,9 +31,7 @@ func (c *Circle) SetRadius(radius float32) *Circle {
 	return c
 }
 
-func (c *Circle) OnDraw() {
-	// add the radius to the x and y to center the circle
-	// to let the GameObject handle the pivot
+func drawCircle(c *Circle) {
 
 	// FILL
 	if c.FillColor != rl.Blank {

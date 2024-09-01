@@ -15,6 +15,8 @@ func main() {
 
 	ship := createPlayer(game)
 
+	// ship.SetVel(10, 10)
+
 	game.PutCenter(ship, 0, 0)
 	game.Add(ship)
 

@@ -19,6 +19,10 @@ func NewRegPoly(x, y float32, sides int32, radius float32, strokeColor rl.Color)
 	rp.Y = y
 	rp.Radius = radius
 	rp.StrokeColor = strokeColor
+
+	rp.OnDraw = func() {
+		drawRegPoly(rp)
+	}
 	return rp
 }
 
@@ -27,7 +31,7 @@ func (rp *RegPoly) SetRadius(radius float32) *RegPoly {
 	return rp
 }
 
-func (rp *RegPoly) OnDraw() {
+func drawRegPoly(rp *RegPoly) {
 	// add the radius to the x and y to center the polygon
 	// to let the GameObject handle the pivot
 	center := rl.Vector2{X: rp.X + rp.Radius, Y: rp.Y + rp.Radius}
