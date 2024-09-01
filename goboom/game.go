@@ -12,19 +12,30 @@ type Game struct {
 	Height float32
 	FPS int
 	BgColor rl.Color
-	GameObjects []Renderable
+	Scenes []Renderable
+	CurrentScene int
 	InputHandler
 }
 
 
 func NewGame(width, height float32, title string) *Game {
-	return &Game{
+
+	g := &Game{
 		Title: title,
 		Width: width,
 		Height: height,
 		BgColor: rl.White,
 		FPS: 60,
+		Scenes: []Renderable{},
+		CurrentScene: 0,
 	}
+
+	g.NewScene("default")
+	return g
+}
+
+func (g *Game) GetTitle() string {
+	return g.Title
 }
 
 func (g *Game) GetWidth() float32 {
@@ -35,17 +46,24 @@ func (g *Game) GetHeight() float32 {
 	return g.Height
 }
 
-func (g *Game) Add(objects ...Renderable) {
-	g.GameObjects = append(g.GameObjects, objects...)
+func (g *Game) NewScene(id string) Renderable {
+	scene := NewRectangle(0, 0, g.GetWidth(), g.GetHeight(), rl.Red) // for debugging
+	scene.SetStroke(rl.Red, 3) // for debugging
+	scene.SetGame(g)
+	scene.SetId(id)
+	g.Scenes = append(g.Scenes, scene)
+	
+	return scene
 }
 
-func (g *Game) Remove(obj Renderable) {
-	for i, o := range g.GameObjects {
-		if o == obj {
-			g.GameObjects = append(g.GameObjects[:i], g.GameObjects[i+1:]...)
-			break
-		}
-	}
+func (g *Game) GetCurrentScene() Renderable {
+	return g.Scenes[g.CurrentScene]
+}
+
+func (g *Game) SetScene(index int) {
+    if index >= 0 && index < len(g.Scenes) {
+        g.CurrentScene = index
+    }
 }
 
 func (g *Game) SetBgColor(color rl.Color) {

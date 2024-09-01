@@ -12,7 +12,12 @@ func createPlayer(game *boom.Game) boom.Renderable {
 	ship := boom.NewPolygon(
 		0, 0, rl.White, false, 0, 0, 20, 10, 0, 20)
 	ship.SetStroke(rl.White, 2)
-	ship.SetOrigin(0.5, 0.5)
+	// ship.SetOrigin(0.5, 0.5)
+
+	test := boom.NewRectangle(0, 0, 20, 20, rl.Red)
+	test.SetOrigin(0.5, 0.5)
+
+	ship.Add(test)
 
 	ship.AddInput(rl.KeyRight, boom.KeyDown, func() {
 		ship.SetAngle(ship.GetAngle() + ROTATE_SPEED)

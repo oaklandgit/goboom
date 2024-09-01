@@ -5,6 +5,19 @@ import (
 )
 
 type Renderable interface {
+
+    // Game methods
+    SetGame(game *Game)
+    GetGame() *Game
+
+    SetParent(parent Renderable)
+    GetParent() Renderable
+    RemoveParent()
+
+    Add(child ...Renderable)
+    GetChildren() []Renderable
+    Remove(child Renderable)
+
     // Lifecycle methods
     Init()
     Update()

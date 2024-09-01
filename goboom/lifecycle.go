@@ -4,7 +4,6 @@ type LifeCycle struct {
 	OnInit   func()
 	OnUpdate func()
 	OnDraw   func()
-	// OnInput  func()
 }
 
 func (lc *LifeCycle) Init() {

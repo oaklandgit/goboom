@@ -2,15 +2,15 @@ package goboom
 
 type Group struct {
 	GameObject
-	Children []Renderable
 }
 
-func NewGroup(x, y float32) *Group {
+func NewGroup(x, y float32, children ...Renderable) *Group {
 	g := &Group{
 		GameObject: NewGameObject(),
 	}
 	g.X = x
 	g.Y = y
+	g.Add(children...)
 	return g
 }
 

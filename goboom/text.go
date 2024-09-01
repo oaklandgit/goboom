@@ -17,6 +17,11 @@ func NewText(x, y float32, txt string, color rl.Color) *Text {
 	t.Y = y
 	t.Text = txt
 	t.FontSize = 16
+	t.OnDraw = func () {
+		drawText(t)
+	}
+
+
 	return t
 }
 
@@ -25,7 +30,7 @@ func (t *Text) SetText(txt string) *Text {
 	return t
 }
 
-func (t *Text) OnDraw() {
+func drawText(t *Text) {
 
 	rl.DrawText(
 		t.Text,

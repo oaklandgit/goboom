@@ -4,10 +4,13 @@ func (g *Game) Update() {
 
 	g.CheckInput()
 
-	for _, obj := range g.GameObjects {
+	scene := g.GetCurrentScene()
+	scene.Update()
+
+	for _, obj := range scene.GetChildren() {
 
 		if obj.IsDeleted() {
-			g.Remove(obj)
+			scene.Remove(obj)
 			continue
 		}
 

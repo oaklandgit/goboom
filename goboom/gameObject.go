@@ -6,6 +6,7 @@ import (
 
 type GameObject struct {
 	Identity
+	Hierarchy
 	Position
 	Rotation
 	Lifespan
@@ -30,7 +31,7 @@ func NewGameObject() GameObject {
 			ScaleY: 1,
 		},
 		Stroke: Stroke{
-			StrokeWeight: 1,
+			StrokeWeight: 2,
 			StrokeColor: rl.Magenta, // default stroke color
 		},
 		Fill: Fill{

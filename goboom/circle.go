@@ -43,14 +43,14 @@ func drawCircle(c *Circle) {
 	}
 
 	// STROKE
-	if c.StrokeColor == rl.Blank {
-	rl.DrawPolyLinesEx(
-		rl.Vector2{X: c.X + c.Radius, Y: c.Y + c.Radius},
-		CIRCLE_EDGES,
-		c.Radius,
-		0, // rotation handled by the GameObject
-		c.StrokeWeight,
-		c.StrokeColor)
+	if c.StrokeColor != rl.Blank {
+		rl.DrawPolyLinesEx(
+			rl.Vector2{X: c.X + c.Radius, Y: c.Y + c.Radius},
+			CIRCLE_EDGES,
+			c.Radius,
+			0, // rotation handled by the GameObject
+			c.StrokeWeight,
+			c.StrokeColor)
 	}
 	
 }
