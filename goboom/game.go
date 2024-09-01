@@ -1,6 +1,8 @@
 package goboom
 
 import (
+	"fmt"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -58,6 +60,7 @@ func (g *Game) Run() {
 	}
 
 	g.AddInput(rl.KeyD, KeyPressed, func() {
+		fmt.Println("Debug mode")
 		debugMode = (debugMode + 1) % len(DebugModes)
 	})
 
