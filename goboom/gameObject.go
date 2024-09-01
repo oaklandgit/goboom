@@ -18,8 +18,8 @@ type GameObject struct {
 	BoundingBox
 	Alpha
 	Pivot
-	InputHandler
 	LifeCycle
+	InputHandler
 }
 
 func NewGameObject() GameObject {
@@ -40,6 +40,7 @@ func NewGameObject() GameObject {
 			Visible: true,
 		},
 	}
+
 
 	return obj
 		

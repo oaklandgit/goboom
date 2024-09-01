@@ -1,6 +1,8 @@
 package goboom
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
 
 type Renderable interface {
     // Lifecycle methods
@@ -12,11 +14,13 @@ type Renderable interface {
     AddInput(key int32, mode ButtonMode, action func())
     CheckInput()
 
+
     // Identity methods
-    AddTags(tags []string)
-    GetId() string
-    GetTags() []string
     SetId(id string)
+    GetId() string
+    AddTags(tags ...string)
+    GetTags() []string
+    RemoveTag(tag string)
 
     // Position methods
     GetX() float32

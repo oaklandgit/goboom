@@ -29,8 +29,11 @@ func main() {
         game.Add(asteroid)
     }
 
+
 	game.PutCenter(ship, 0, 0)
 	game.Add(ship)
+
+
 
 	game.Run()
 

@@ -7,12 +7,21 @@ type Identity struct {
 	Tags []string
 }
 
-func (i *Identity) SetId(id string) {
-	i.Id = id
+func (me *Identity) SetId(id string) {
+	me.Id = id
 }
 
-func (i *Identity) AddTags(tags []string) {
-	i.Tags = append(i.Tags, tags...)
+func (me *Identity) AddTags(tags ...string) {
+	me.Tags = append(me.Tags, tags...)
+}
+
+func (me *Identity) RemoveTag(tag string) {
+	for i, t := range me.Tags {
+		if t == tag {
+			me.Tags = append(me.Tags[:i], me.Tags[i+1:]...)
+			break
+		}
+	}
 }
 
 func (i *Identity) GetId() string {
