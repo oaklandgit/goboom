@@ -26,11 +26,7 @@ func createPlayer(game *boom.Game) boom.Renderable {
 	})
 
 	ship.AddInput(rl.KeyX, boom.KeyPressed, func() {
-		bullet := boom.NewCircle(ship.GetX(), ship.GetY(), 3, rl.Blank)
-		bullet.SetFill(rl.White)
-		bullet.SetOrigin(0.5, 0.5)
-		bullet.SetVelocityByHeading(ship.GetAngle(), 5)
-		bullet.SetLifespan(1_000) // 1 second
+		bullet := createBullet(ship.GetX(), ship.GetY(), ship.GetAngle())
 		game.Add(bullet)
 	})
 

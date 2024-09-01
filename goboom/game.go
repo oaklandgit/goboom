@@ -27,6 +27,14 @@ func NewGame(width, height float32, title string) *Game {
 	}
 }
 
+func (g *Game) GetWidth() float32 {
+	return g.Width
+}
+
+func (g *Game) GetHeight() float32 {
+	return g.Height
+}
+
 func (g *Game) Add(objects ...Renderable) {
 	g.GameObjects = append(g.GameObjects, objects...)
 }
