@@ -7,16 +7,16 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func createPlayer(game *boom.Game) boom.Renderable {
+func createPlayer(scene boom.Renderable) boom.Renderable {
 
 	ship := boom.NewPolygon(
 		0, 0, rl.White, false, 0, 0, 20, 10, 0, 20)
 	ship.SetStroke(rl.White, 2)
-	// ship.SetOrigin(0.5, 0.5)
+	ship.SetOrigin(0.5, 0.5)
+	ship.SetId("player")
 
 	test := boom.NewRectangle(0, 0, 20, 20, rl.Red)
-	test.SetOrigin(0.5, 0.5)
-
+	test.SetId("testbox")
 	ship.Add(test)
 
 	ship.AddInput(rl.KeyRight, boom.KeyDown, func() {
@@ -42,7 +42,7 @@ func createPlayer(game *boom.Game) boom.Renderable {
 			cancelInvincibility()
 			cancelInvincibility = nil
 		}
-		game.Add(bullet)
+		scene.Add(bullet)
 	})
 
 

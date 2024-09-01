@@ -17,7 +17,9 @@ func main() {
 	game := boom.NewGame(800, 600, "Asteroids")
 	game.SetBgColor(rl.Black)
 
-	ship := createPlayer(game)
+	scene := game.GetCurrentScene()
+
+	ship := createPlayer(scene)
 
 	for i := 0; i < 5; i++ {
 		x := rand.Intn(int(game.GetWidth()))
@@ -26,14 +28,12 @@ func main() {
 
         asteroid := createAsteroid(float32(x), float32(y))
 		asteroid.SetVelocityByHeading(angle, 1)
-        game.Add(asteroid)
+        scene.Add(asteroid)
     }
 
 
 	game.PutCenter(ship, 0, 0)
-	game.Add(ship)
-
-
+	scene.Add(ship)
 
 	game.Run()
 
