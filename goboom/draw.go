@@ -4,6 +4,8 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+// SCENE GRAPH CURRENTLY WORKS! DON'T BREAK IT!
+
 func (g *Game) Draw() {
 
 	scene := g.GetCurrentScene()
