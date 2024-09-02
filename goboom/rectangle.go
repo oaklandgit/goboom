@@ -42,9 +42,9 @@ func drawRectangle(r *Rectangle) {
 }
 
 func (r *Rectangle) GetWidth() float32 {
-	return r.Width
+	return r.Width * r.ScaleX
 }
 
 func (r *Rectangle) GetHeight() float32 {
-	return r.Height
+	return r.Height * r.ScaleY
 }

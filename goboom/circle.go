@@ -56,9 +56,9 @@ func drawCircle(c *Circle) {
 }
 
 func (c *Circle) GetWidth() float32{
-	return c.Radius * 2
+	return c.Radius * 2 * c.ScaleX
 }
 
 func (c *Circle) GetHeight() float32{
-	return c.Radius * 2
+	return c.Radius * 2 * c.ScaleY
 }
