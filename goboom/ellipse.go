@@ -8,7 +8,7 @@ type Ellipse struct {
 	RadiusV float32
 }
 
-func NewEllipse(x, y, radiusH, radiusV float32, strokeColor rl.Color) *GameObject {
+func NewEllipse(x, y, radiusH, radiusV float32, strokeColor rl.Color) *Ellipse {
 	e := &Ellipse{
 		GameObject: NewGameObject(),
 	}
