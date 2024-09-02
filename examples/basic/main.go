@@ -39,19 +39,19 @@ func main() {
 		rect2.SetVelocityByHeading(rect2.GetAngle(), 1)
 	})
 
-	// game.PutLeft(circle, 0, 0)
-	// game.PutTopLeft(text, 0, 0)
-	// game.PutTopRight(tri, 0, 0)
-	// game.PutBottomLeft(rect, 0, 0)
-	// game.PutBottomRight(pent, 0, 0)
-	// game.PutCenter(rect2, 0, 0)
-	// game.PutCenter(star, 0, 0)
-
 	tri.SetVel(-1, 1)
 	star.SetVelocityByHeading(45, 0.1)
 	star.SetAngle(30)
 
 	scene.Add(text, circle, rect, tri, pent, rect2, star)
+
+	boom.PutCenter(scene, circle, 0, 0)
+	boom.PutCenter(scene, text, 0, 0)
+	boom.PutCenter(scene, rect, 0, 0)
+	boom.PutCenter(scene, tri, 0, 0)
+	boom.PutCenter(scene, pent, 0, 0)
+	boom.PutCenter(scene, rect2, 0, 0)
+	boom.PutCenter(scene, star, 0, 0)
 
 	game.Run()
 

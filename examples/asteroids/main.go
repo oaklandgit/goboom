@@ -31,8 +31,8 @@ func main() {
         scene.Add(asteroid)
     }
 
-
-	game.PutCenter(ship, 0, 0)
+	ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
+	// scene.PutCenter(ship, 0, 0)
 	scene.Add(ship)
 
 	game.Run()

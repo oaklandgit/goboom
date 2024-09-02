@@ -1,11 +1,5 @@
 package goboom
 
-// type Hierarchy struct {
-// 	Game *Game
-// 	Parent Renderable
-// 	Children []Renderable
-// }
-
 func GetGlobalX(r Renderable) float32 {
 	if r.GetParent() == nil {
 		return r.GetX()

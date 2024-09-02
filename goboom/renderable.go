@@ -86,4 +86,17 @@ type Renderable interface {
 
     // Fill methods
     SetFill(color rl.Color) *Fill
+
+    // Convenience methods
+    // PutCenter(a Renderable, b Renderable, offsetX, offsetY float32)
+    // PutTop(a *GameObject, b *GameObject, offsetX, offsetY float32)
+    // PutBottom(parent Renderable, offsetX, offsetY float32)
+    // PutLeft(a *GameObject, b *GameObject, offsetX, offsetY float32)
+    // PutRight(parent Renderable, offsetX, offsetY float32)
+    // PutTopLeft(parent Renderable, offsetX, offsetY float32)
+    // PutTopRight(parent Renderable, offsetX, offsetY float32)
+    // PutBottomLeft(parent Renderable, offsetX, offsetY float32)
+    // PutBottomRight(parent Renderable, offsetX, offsetY float32)
+
+
 }
