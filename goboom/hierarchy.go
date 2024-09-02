@@ -1,10 +1,10 @@
 package goboom
 
-type Hierarchy struct {
-	Game *Game
-	Parent Renderable
-	Children []Renderable
-}
+// type Hierarchy struct {
+// 	Game *Game
+// 	Parent Renderable
+// 	Children []Renderable
+// }
 
 func GetGlobalX(r Renderable) float32 {
 	if r.GetParent() == nil {
@@ -34,27 +34,27 @@ func GetGlobalScaleX(r Renderable) float32 {
 	return r.GetScaleX() * GetGlobalScaleX(r.GetParent())
 }
 
-func (h *Hierarchy) SetGame(game *Game) {
+func (h *GameObject) SetGame(game *Game) {
 	h.Game = game
 }
 
-func (h *Hierarchy) GetGame() *Game {
+func (h *GameObject) GetGame() *Game {
 	return h.Game
 }
 
-func (h *Hierarchy) SetParent(parent Renderable) {
+func (h *GameObject) SetParent(parent Renderable) {
 	h.Parent = parent
 }
 
-func (h *Hierarchy) GetParent() Renderable {
+func (h *GameObject) GetParent() Renderable {
 	return h.Parent
 }
 
-func (h *Hierarchy) RemoveParent() {
+func (h *GameObject) RemoveParent() {
 	h.Parent = nil
 }
 
-func (h *Hierarchy) Add(children ...Renderable) {
+func (h *GameObject) Add(children ...Renderable) {
 	for _, c := range children {
 		h.Children = append(h.Children, c)
 
@@ -62,16 +62,31 @@ func (h *Hierarchy) Add(children ...Renderable) {
 			c.RemoveParent()
 		}
 
-		// c.SetParent(h) TO DO
+		c.SetParent(h)
 	}
 }
 
-func (h *Hierarchy) GetChildren() []Renderable {
+// func Nest(parent Renderable, c ...Renderable) {
+// 	for _, child := range c {
+
+// 		parent.SetChildren(append(parent.GetChildren(), child))
+
+// 		if child.GetParent() != nil {
+// 			child.RemoveParent()
+// 		}
+
+// 		child.SetParent(parent)
+// 	}
+// }
+
+
+
+func (h *GameObject) GetChildren() []Renderable {
 	return h.Children
 }
 
 
-func (h *Hierarchy) Remove(child Renderable) {
+func (h *GameObject) Remove(child Renderable) {
 	for i, c := range h.Children {
 		if c == child {
 			h.Children = append(h.Children[:i], h.Children[i+1:]...)

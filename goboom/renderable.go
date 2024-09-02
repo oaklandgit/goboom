@@ -17,6 +17,7 @@ type Renderable interface {
     Add(child ...Renderable)
     GetChildren() []Renderable
     Remove(child Renderable)
+    // SetChildren(children []Renderable)
 
     // Lifecycle methods
     Init()

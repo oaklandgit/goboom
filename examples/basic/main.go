@@ -11,6 +11,8 @@ func main() {
 	game := boom.NewGame(800, 600, "My Game")
 	game.SetBgColor(rl.Black)
 
+	scene := game.GetCurrentScene()
+
 	circle := boom.NewCircle(200, 200, 25, rl.White)
 	circle.SetFill(rl.Blue)
 	circle.SetStroke(rl.Blank, 2)
@@ -37,19 +39,19 @@ func main() {
 		rect2.SetVelocityByHeading(rect2.GetAngle(), 1)
 	})
 
-	game.PutLeft(circle, 0, 0)
-	game.PutTopLeft(text, 0, 0)
-	game.PutTopRight(tri, 0, 0)
-	game.PutBottomLeft(rect, 0, 0)
-	game.PutBottomRight(pent, 0, 0)
-	game.PutCenter(rect2, 0, 0)
-	game.PutCenter(star, 0, 0)
+	// game.PutLeft(circle, 0, 0)
+	// game.PutTopLeft(text, 0, 0)
+	// game.PutTopRight(tri, 0, 0)
+	// game.PutBottomLeft(rect, 0, 0)
+	// game.PutBottomRight(pent, 0, 0)
+	// game.PutCenter(rect2, 0, 0)
+	// game.PutCenter(star, 0, 0)
 
 	tri.SetVel(-1, 1)
 	star.SetVelocityByHeading(45, 0.1)
 	star.SetAngle(30)
 
-	game.Add(text, circle, rect, tri, pent, rect2, star)
+	scene.Add(text, circle, rect, tri, pent, rect2, star)
 
 	game.Run()
 

@@ -6,7 +6,7 @@ import (
 
 type GameObject struct {
 	Identity
-	Hierarchy
+	// Hierarchy
 	Position
 	Rotation
 	Lifespan
@@ -21,6 +21,10 @@ type GameObject struct {
 	Pivot
 	LifeCycle
 	InputHandler
+
+	Children []Renderable
+	Parent Renderable
+	Game *Game
 }
 
 func NewGameObject() GameObject {
