@@ -7,23 +7,26 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+const ROTATE_SPEED = 10
+
 func createPlayer(scene boom.Renderable) boom.Renderable {
 
 	ship := boom.NewGroup(0, 0)
-	ship.SetOrigin(0, 0.5)
+	ship.SetOrigin(0.9, 0.5)
+	ship.SetId("player")
 
-	shape := boom.NewPolygon(0, 0, rl.White, true,
-		29, 7.65, 27.45, 22.4, 23.76, 22.01, 24.16, 18.21, 21.76, 18.21, 19.87, 21.26, 9.4, 21.26, 7.52, 18.21, 4.84, 18.21, 5.24, 22.01, 1.55, 22.4, 0, 7.65, 3.69, 7.26, 4.55, 15.43, 7.54, 15.43, 10.95, 0, 18.05, 0, 21.46, 15.43, 24.46, 15.43, 25.32, 7.26, 29, 7.65)
-	shape.SetAngle(90)
+	// BODY
+	body := boom.NewEllipse(0, 0, 7, 12, rl.Blue)
+	body.SetOrigin(0.5, 0.2)
 
-	ship.Add(shape)
-	
+	ship.Add(body)
+
 	ship.AddInput(rl.KeyRight, boom.KeyDown, func() {
-		ship.SetAngle(ship.GetAngle() + ROTATE_SPEED)
+		ship.AddAngle(ROTATE_SPEED)
 	})
 
 	ship.AddInput(rl.KeyLeft, boom.KeyDown, func() {
-		ship.SetAngle(ship.GetAngle() - ROTATE_SPEED)
+		ship.AddAngle(- ROTATE_SPEED)
 	})
 
 	ship.AddInput(rl.KeyUp, boom.KeyDown, func() {

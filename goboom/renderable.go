@@ -45,6 +45,7 @@ type Renderable interface {
     // Rotation methods
     GetAngle() float32
     SetAngle(angle float32)
+    AddAngle(angle float32)
 
     // BoundingBox methods
     GetBBHeight() float32
@@ -53,6 +54,10 @@ type Renderable interface {
     // Size methods
     GetHeight() float32
     GetWidth() float32
+    // HalfHeight() float32
+    // HalfWidth() float32
+    // CenterX() float32
+    // CenterY() float32
 
     // Pivot methods
     GetOrigin() (float32, float32)

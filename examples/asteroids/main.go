@@ -8,8 +8,6 @@ import (
 	"golang.org/x/exp/rand"
 )
 
-const ROTATE_SPEED = 10
-
 
 func main() {
 
