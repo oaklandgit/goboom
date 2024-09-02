@@ -15,6 +15,7 @@ func (g *Game) Update() {
 		}
 
 		obj.Update()
+		obj.Wrap()
 		obj.CheckInput()
 	}
 

@@ -57,6 +57,7 @@ func (h *GameObject) Add(children ...Renderable) {
 		}
 
 		c.SetParent(h)
+		c.SetGame(h.GetGame())
 	}
 }
 

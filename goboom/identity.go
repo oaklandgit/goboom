@@ -25,7 +25,6 @@ func (me *Identity) RemoveTag(tag string) {
 }
 
 func (i *Identity) GetId() string {
-	fmt.Println("ID: ", i.Id)
 	return i.Id
 }
 

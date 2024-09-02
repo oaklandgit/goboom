@@ -6,7 +6,7 @@ import (
 
 type GameObject struct {
 	Identity
-	// Hierarchy
+	Wrapping
 	Position
 	Rotation
 	Lifespan

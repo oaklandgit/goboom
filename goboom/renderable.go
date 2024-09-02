@@ -23,6 +23,10 @@ type Renderable interface {
     Init()
     Update()
     Draw()
+    Wrap()
+
+    SetWrap(wrap ...bool)
+    GetWrap() (bool, bool)
 
     // InputHandler methods
     AddInput(key int32, mode ButtonMode, action func())
@@ -40,6 +44,8 @@ type Renderable interface {
     GetX() float32
     GetY() float32
     GetXY() (float32, float32)
+    SetX(x float32)
+    SetY(y float32)
     SetXY(x, y float32)
 
     // Rotation methods
@@ -52,8 +58,8 @@ type Renderable interface {
     GetBBWidth() float32
 
     // Size methods
-    GetHeight() float32
     GetWidth() float32
+    GetHeight() float32
     // HalfHeight() float32
     // HalfWidth() float32
     // CenterX() float32

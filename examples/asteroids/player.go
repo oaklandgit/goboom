@@ -14,6 +14,7 @@ func createPlayer(scene boom.Renderable) boom.Renderable {
 	ship := boom.NewGroup(0, 0)
 	ship.SetOrigin(0.9, 0.5)
 	ship.SetId("player")
+	ship.SetWrap(true)
 
 	// BODY
 	body := boom.NewEllipse(0, 0, 7, 12, rl.Blue)
