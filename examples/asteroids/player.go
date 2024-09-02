@@ -18,6 +18,7 @@ func createPlayer(scene boom.Renderable) boom.Renderable {
 
 	// BODY
 	body := boom.NewEllipse(0, 0, 7, 12, rl.Blue)
+	body.SetStrokeWeight(2)
 	body.SetOrigin(0.5, 0.2)
 
 	ship.Add(body)

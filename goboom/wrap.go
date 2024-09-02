@@ -35,10 +35,9 @@ func (o *GameObject) GetWrap() (bool, bool) {
 	return o.wrapX, o.wrapY
 }
 
-func (o *GameObject) SetPadding(paddingX, paddingY float32) *GameObject {
+func (o *GameObject) SetPadding(paddingX, paddingY float32) {
 	o.paddingX = paddingX
 	o.paddingY = paddingY
-	return o
 }
 
 func (o *GameObject) Wrap() {

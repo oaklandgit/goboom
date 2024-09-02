@@ -21,7 +21,7 @@ func NewCircle(x, y, radius float32, strokeColor rl.Color) *Circle {
 	c.Radius = radius
 
 	c.OnDraw = func () {
-		drawCircle(c)
+		DrawCircle(c)
 	}
 	return c
 }
@@ -31,7 +31,7 @@ func (c *Circle) SetRadius(radius float32) *Circle {
 	return c
 }
 
-func drawCircle(c *Circle) {
+func DrawCircle(c *Circle) {
 
 	// FILL
 	if c.FillColor != rl.Blank {

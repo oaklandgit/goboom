@@ -25,5 +25,7 @@ func createAsteroid(x, y float32) boom.Renderable {
     points = append(points, points[0], points[1])
 
     asteroid := boom.NewPolygon(x, y, rl.White, true, points...)
+    asteroid.SetWrap(true)
+    asteroid.SetPadding(asteroid.GetWidth(), asteroid.GetHeight())
     return asteroid
 }

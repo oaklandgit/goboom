@@ -26,6 +26,7 @@ type Renderable interface {
     Wrap()
 
     SetWrap(wrap ...bool)
+    SetPadding(paddingX, paddingY float32)
     GetWrap() (bool, bool)
 
     // InputHandler methods
@@ -94,6 +95,7 @@ type Renderable interface {
 
     // Stroke methods
     SetStroke(color rl.Color, weight float32) *Stroke
+    SetStrokeWeight(weight float32) *Stroke
 
     // Fill methods
     SetFill(color rl.Color) *Fill

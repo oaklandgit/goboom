@@ -17,6 +17,11 @@ func (s *Stroke) SetStroke(color rl.Color, weight float32) *Stroke {
 	return s
 }
 
+func (s *Stroke) SetStrokeWeight(weight float32) *Stroke {
+	s.StrokeWeight = weight
+	return s
+}
+
 func (f *Fill) SetFill(color rl.Color) *Fill {
 	f.FillColor = color
 	return f

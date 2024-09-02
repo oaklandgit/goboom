@@ -32,10 +32,13 @@ func drawEllipse(e *Ellipse) {
 		0,
 		e.RadiusH, e.RadiusV, e.FillColor)
 
-	rl.DrawEllipseLines(
+	// simulate stroke weight
+	for i := e.StrokeWeight; i > 0; i-- {
+		rl.DrawEllipseLines(
 			0,
 			0,
-			e.RadiusH, e.RadiusV, e.StrokeColor)
+			e.RadiusH + i, e.RadiusV + i, e.StrokeColor)
+	}
 }
 
 func (e *Ellipse) GetWidth() float32 {
