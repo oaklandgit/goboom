@@ -19,16 +19,24 @@ func main() {
 
 	scene := game.GetCurrentScene()
 
-	createBrick := func() boom.Renderable {
-		brick := boom.NewRectangle(0, 0, 40, 20, rl.White)
-		brick.SetFill(rl.Red)
-		return brick
+	// Paddle
+	paddle := createPaddle()
+	boom.PutBottom(scene, paddle, 0, -60)
+
+	// Ball
+	ball := createBall()
+	boom.PutCenter(scene, ball, 0, 0)
+
+	// One Brick
+	redBrick := func() boom.Renderable {
+		return createBrick(rl.Red)
 	}
 
-	bricks := boom.GridArray(3, 8, 4, createBrick)
-	bricks.SetXY(100, 100)
+	// Bricks
+	bricks := boom.GridArray(3, 14, 6, redBrick)
+	boom.PutCenter(scene, bricks, 0, -140)
 
-	scene.Add(bricks)
+	scene.Add(paddle, bricks, ball)
 	
 	game.Run()
 

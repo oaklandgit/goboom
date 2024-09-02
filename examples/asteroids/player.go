@@ -9,16 +9,15 @@ import (
 
 func createPlayer(scene boom.Renderable) boom.Renderable {
 
-	ship := boom.NewPolygon(
-		0, 0, rl.White, false, 0, 0, 20, 10, 0, 20)
-	ship.SetStroke(rl.White, 2)
-	ship.SetOrigin(0.5, 0.5)
-	ship.SetId("player")
+	ship := boom.NewGroup(0, 0)
+	ship.SetOrigin(0, 0.5)
 
-	test := boom.NewRectangle(0, 0, 20, 20, rl.Red)
-	test.SetId("testbox")
-	ship.Add(test)
+	shape := boom.NewPolygon(0, 0, rl.White, true,
+		29, 7.65, 27.45, 22.4, 23.76, 22.01, 24.16, 18.21, 21.76, 18.21, 19.87, 21.26, 9.4, 21.26, 7.52, 18.21, 4.84, 18.21, 5.24, 22.01, 1.55, 22.4, 0, 7.65, 3.69, 7.26, 4.55, 15.43, 7.54, 15.43, 10.95, 0, 18.05, 0, 21.46, 15.43, 24.46, 15.43, 25.32, 7.26, 29, 7.65)
+	shape.SetAngle(90)
 
+	ship.Add(shape)
+	
 	ship.AddInput(rl.KeyRight, boom.KeyDown, func() {
 		ship.SetAngle(ship.GetAngle() + ROTATE_SPEED)
 	})

@@ -16,12 +16,11 @@ func PutCenter(a Renderable, b Renderable, offsetX, offsetY float32) {
 	b.SetXY(centerX + offsetX - b.GetWidth()/2, centerY + offsetY - b.GetHeight())
 }
 
-
-// func (g *GameObject) PutBottom(p Renderable, offsetX, offsetY float32) {
-// 	centerX := float32(g.GetWidth() / 2)
-// 	centerY := float32(g.GetHeight())
-// 	p.SetXY(centerX - p.GetWidth()/2 + offsetX, centerY - p.GetHeight() + offsetY)
-// }
+func PutBottom(a Renderable, b Renderable, offsetX, offsetY float32) {
+	centerX := float32(a.GetWidth() / 2)
+	centerY := float32(a.GetHeight())
+	b.SetXY(centerX - b.GetWidth()/2 + offsetX, centerY - b.GetHeight() + offsetY)
+}
 
 
 
