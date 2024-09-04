@@ -28,7 +28,7 @@ func main() {
 	boom.PutCenter(scene, ball, 0, 0)
 
 	// One Brick
-	redBrick := func() boom.Renderable {
+	redBrick := func() *boom.GameObject {
 		return createBrick(rl.Red)
 	}
 

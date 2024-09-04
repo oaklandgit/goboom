@@ -17,7 +17,7 @@ func main() {
 	rect := boom.NewRectangle(0, 0, 40, 40, rl.Orange)
 	regpoly := boom.NewRegPoly(0, 0, 5, 50, rl.Pink)
 	text := boom.NewText(0, 0, "HELLO WORLD!", rl.Black)
-	scene.Add(circle, poly, rect, regpoly, text)
+	scene.Add(circle, poly, rect, regpoly, &text.GameObject)
 
 	game.Run()
 }

@@ -6,59 +6,43 @@ import (
 
 const CIRCLE_EDGES = 24
 
-type Circle struct {
-	GameObject
-	Radius float32
-}
 
-func NewCircle(x, y, radius float32, strokeColor rl.Color) *Circle {
-	c := &Circle{
-		GameObject: NewGameObject(),
-	}
+func NewCircle(x, y, radius float32, strokeColor rl.Color) *GameObject {
+
+	c := NewGameObject()
+
 	c.X = x
 	c.Y = y
 	c.StrokeColor = strokeColor
-	c.Radius = radius
 
 	c.OnDraw = func () {
-		DrawCircle(c)
+		// FILL
+		if c.FillColor != rl.Blank {
+			rl.DrawPoly(rl.Vector2{X: c.X + radius, Y: c.Y + radius},
+				CIRCLE_EDGES,
+				radius,
+				0, // rotation handled by the GameObject
+				c.FillColor)
+		}
+
+		// STROKE
+		if c.StrokeColor != rl.Blank {
+			rl.DrawPolyLinesEx(
+				rl.Vector2{X: c.X + radius, Y: c.Y + radius},
+				CIRCLE_EDGES,
+				radius,
+				0, // rotation handled by the GameObject
+				c.StrokeWeight,
+				c.StrokeColor)
+		}
+	}
+
+	c.GetWidth = func() float32 {
+		return radius * 2 * c.ScaleX
+	}
+
+	c.GetHeight = func() float32 {
+		return radius * 2 * c.ScaleY
 	}
 	return c
-}
-
-func (c *Circle) SetRadius(radius float32) *Circle {
-	c.Radius = radius
-	return c
-}
-
-func DrawCircle(c *Circle) {
-
-	// FILL
-	if c.FillColor != rl.Blank {
-		rl.DrawPoly(rl.Vector2{X: c.X + c.Radius, Y: c.Y + c.Radius},
-			CIRCLE_EDGES,
-			c.Radius,
-			0, // rotation handled by the GameObject
-			c.FillColor)
-	}
-
-	// STROKE
-	if c.StrokeColor != rl.Blank {
-		rl.DrawPolyLinesEx(
-			rl.Vector2{X: c.X + c.Radius, Y: c.Y + c.Radius},
-			CIRCLE_EDGES,
-			c.Radius,
-			0, // rotation handled by the GameObject
-			c.StrokeWeight,
-			c.StrokeColor)
-	}
-	
-}
-
-func (c *Circle) GetWidth() float32{
-	return c.Radius * 2 * c.ScaleX
-}
-
-func (c *Circle) GetHeight() float32{
-	return c.Radius * 2 * c.ScaleY
 }

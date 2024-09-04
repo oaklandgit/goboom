@@ -3,7 +3,7 @@ package goboom
 type LifeCycle struct {
 	OnInit   func()
 	OnUpdate func()
-	OnDraw   func()
+	// OnDraw   func()
 }
 
 func (lc *LifeCycle) Init() {
@@ -18,8 +18,8 @@ func (lc *LifeCycle) Update() {
 	}
 }
 
-func (lc *LifeCycle) Draw() {
-	if lc.OnDraw != nil {
-		lc.OnDraw()
+func (s *Shape) Draw() {
+	if s.OnDraw != nil {
+		s.OnDraw()
 	}
 }

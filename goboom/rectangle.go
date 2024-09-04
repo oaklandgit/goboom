@@ -2,16 +2,9 @@ package goboom
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-type Rectangle struct {
-	GameObject
-	Width  float32
-	Height float32
-}
+func NewRectangle(x, y, width, height float32, strokeColor rl.Color) *GameObject {
 
-func NewRectangle(x, y, width, height float32, strokeColor rl.Color) *Rectangle {
-	r := &Rectangle{
-		GameObject: NewGameObject(),
-	}
+	r := NewGameObject()
 	r.X = x
 	r.Y = y
 	r.Width = width
@@ -22,10 +15,18 @@ func NewRectangle(x, y, width, height float32, strokeColor rl.Color) *Rectangle 
 		drawRectangle(r)
 	}
 
+	r.GetWidth = func() float32 {
+		return r.Width * r.ScaleX
+	}
+
+	r.GetHeight = func() float32 {
+		return r.Height * r.ScaleY
+	}
+
 	return r
 }
 
-func drawRectangle(r *Rectangle) {
+func drawRectangle(r *GameObject) {
 
 	rect := rl.Rectangle{X: r.X, Y: r.Y, Width: r.Width, Height: r.Height}
 
@@ -39,12 +40,4 @@ func drawRectangle(r *Rectangle) {
 		rect,
 		r.StrokeWeight,
 		r.StrokeColor)
-}
-
-func (r *Rectangle) GetWidth() float32 {
-	return r.Width * r.ScaleX
-}
-
-func (r *Rectangle) GetHeight() float32 {
-	return r.Height * r.ScaleY
 }

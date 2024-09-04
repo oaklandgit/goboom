@@ -12,7 +12,7 @@ type Game struct {
 	Height float32
 	FPS int
 	BgColor rl.Color
-	Scenes []Renderable
+	Scenes []*GameObject
 	CurrentScene int
 	InputHandler
 }
@@ -26,7 +26,7 @@ func NewGame(width, height float32, title string) *Game {
 		Height: height,
 		BgColor: rl.White,
 		FPS: 60,
-		Scenes: []Renderable{},
+		Scenes: []*GameObject{},
 		CurrentScene: 0,
 	}
 
@@ -46,7 +46,7 @@ func (g *Game) GetHeight() float32 {
 	return g.Height
 }
 
-func (g *Game) NewScene(id string) Renderable {
+func (g *Game) NewScene(id string) *GameObject {
 	scene := NewRectangle(0, 0, g.GetWidth(), g.GetHeight(), rl.Red) // for debugging
 	scene.SetStroke(rl.Red, 3) // for debugging
 	scene.SetGame(g)
@@ -56,7 +56,7 @@ func (g *Game) NewScene(id string) Renderable {
 	return scene
 }
 
-func (g *Game) GetCurrentScene() Renderable {
+func (g *Game) GetCurrentScene() *GameObject {
 	return g.Scenes[g.CurrentScene]
 }
 
@@ -79,8 +79,14 @@ func (g *Game) Run() {
 		DrawGrid(int32(g.Width), int32(g.Height), 12)
 		DrawMouseCoordinates()
 	}
-	var DebugModes = []func(){
+
+	DrawBoundingBoxesWrapper := func() {
+		DrawBoundingBoxes(g.GetCurrentScene().GetChildren())
+	}
+
+	var DebugModes = []func() {
 		DebugOff,
+		DrawBoundingBoxesWrapper,
 		DrawGrid,
 		DrawPerformance,
 	}

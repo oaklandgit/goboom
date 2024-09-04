@@ -25,3 +25,14 @@ func DrawPerformance() {
 	perf := fmt.Sprintf("FPS: %d", rl.GetFPS())
 	rl.DrawText(perf, 20, 20, 16, rl.White)
 }
+
+func DrawBoundingBoxes(objects []*GameObject) {
+	for _, r := range objects {
+		rl.DrawRectangleLines(
+			int32(GetBoundingBox(r).X) - int32(GetBoundingBox(r).Width)/2,
+			int32(GetBoundingBox(r).Y) - int32(GetBoundingBox(r).Height)/2,
+			int32(GetBoundingBox(r).Width),
+			int32(GetBoundingBox(r).Height),
+			rl.Red)
+	}
+}

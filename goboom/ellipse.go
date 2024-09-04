@@ -2,49 +2,26 @@ package goboom
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-type Ellipse struct {
-	GameObject
-	RadiusH float32
-	RadiusV float32
-}
-
-func NewEllipse(x, y, radiusH, radiusV float32, strokeColor rl.Color) *Ellipse {
-	e := &Ellipse{
-		GameObject: NewGameObject(),
-	}
+func NewEllipse(x, y, radiusH, radiusV float32, strokeColor rl.Color) *GameObject {
+	e := NewGameObject()
 	e.X = x
 	e.Y = y
-	e.RadiusH = radiusH
-	e.RadiusV = radiusV
 	e.StrokeColor = strokeColor
 
 	e.OnDraw = func() {
-		drawEllipse(e)
+		rl.DrawEllipse(
+			0,
+			0,
+			radiusH, radiusV, e.FillColor)
+	
+		// simulate stroke weight
+		for i := e.StrokeWeight; i > 0; i-- {
+			rl.DrawEllipseLines(
+				0,
+				0,
+				radiusH + i, radiusV + i, e.StrokeColor)
+		}
 	}
 
 	return e
-}
-
-func drawEllipse(e *Ellipse) {
-
-	rl.DrawEllipse(
-		0,
-		0,
-		e.RadiusH, e.RadiusV, e.FillColor)
-
-	// simulate stroke weight
-	for i := e.StrokeWeight; i > 0; i-- {
-		rl.DrawEllipseLines(
-			0,
-			0,
-			e.RadiusH + i, e.RadiusV + i, e.StrokeColor)
-	}
-}
-
-func (e *Ellipse) GetWidth() float32 {
-	return e.RadiusH * e.ScaleX
-}
-
-func (e *Ellipse) GetHeight() float32 {
-	return e.RadiusH * e.ScaleY
 }

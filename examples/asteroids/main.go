@@ -8,6 +8,9 @@ import (
 	"golang.org/x/exp/rand"
 )
 
+const (
+	ASTEROIDS_COUNT = 12
+)
 
 func main() {
 
@@ -17,9 +20,9 @@ func main() {
 
 	scene := game.GetCurrentScene()
 
-	ship := createPlayer(scene)
+	// ship := createPlayer(scene)
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < ASTEROIDS_COUNT ; i++ {
 		x := rand.Intn(int(game.GetWidth()))
 		y := rand.Intn(int(game.GetWidth()))
 		angle := float32(rand.Intn(360))
@@ -29,9 +32,8 @@ func main() {
         scene.Add(asteroid)
     }
 
-	ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
-	// scene.PutCenter(ship, 0, 0)
-	scene.Add(ship)
+	// ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
+	// scene.Add(ship)
 
 	game.Run()
 

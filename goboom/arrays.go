@@ -2,7 +2,7 @@ package goboom
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-func GridArray(rows, cols int, gap float32, objFunc func() Renderable) Renderable {
+func GridArray(rows, cols int, gap float32, objFunc func() *GameObject) *GameObject {
 
 	group := NewRectangle(0, 0, 0, 0, rl.Blank)
 

@@ -43,10 +43,10 @@ func main() {
 	star.SetVelocityByHeading(45, 0.1)
 	star.SetAngle(30)
 
-	scene.Add(text, circle, rect, tri, pent, rect2, star)
+	scene.Add(&text.GameObject, circle, rect, tri, pent, rect2, star)
 
 	boom.PutCenter(scene, circle, 0, 0)
-	boom.PutCenter(scene, text, 0, 0)
+	boom.PutCenter(scene, &text.GameObject, 0, 0)
 	boom.PutCenter(scene, rect, 0, 0)
 	boom.PutCenter(scene, tri, 0, 0)
 	boom.PutCenter(scene, pent, 0, 0)

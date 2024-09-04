@@ -6,7 +6,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func createBall() boom.Renderable {
+func createBall() *boom.GameObject {
 
 	ball := boom.NewCircle(0, 0, 8, rl.Blank)
 	ball.SetFill(rl.White)

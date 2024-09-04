@@ -6,92 +6,94 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-type Polygon struct {
-	GameObject
-	Points []float32
-	Closed bool
-}
-
-func NewPolygon(x, y float32, strokeColor rl.Color, closed bool, points ...float32) *Polygon {
-	p := &Polygon{
-		GameObject: NewGameObject(),
-	}
-	p.Points = points
+func NewPolygon(x, y float32, strokeColor rl.Color, closed bool, points ...float32) *GameObject {
+	p := NewGameObject()
+	// p.X = GetTopLeftX(points)
+	// p.Y = GetTopLeftY(points)
 	p.X = x
 	p.Y = y
 	p.StrokeColor = strokeColor
-	p.Closed = closed
-
-	if p.Closed {
-		p.Points = append(p.Points, p.Points[0], p.Points[1])
-	}
 
 	p.OnDraw = func() {
-		drawPolygon(p)
+		vectors, err := PointsToVectors(points)
+
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
+		rl.PushMatrix()
+		rl.Translatef(p.X, p.Y, 0)
+		rl.DrawSplineLinear(vectors, p.StrokeWeight, p.StrokeColor) 
+		rl.PopMatrix()
+	}
+
+	p.GetWidth = func() float32 {
+		var minX, maxX float32
+		minX = points[0]
+		maxX = points[0]
+	
+		for i := 0; i < len(points); i += 2 {
+			if points[i] < minX {
+				minX = points[i]
+			}
+			if points[i] > maxX {
+				maxX = points[i]
+			}
+		}
+	
+		return maxX - minX
+	}
+
+	p.GetHeight = func() float32 {
+		var minY, maxY float32
+		minY = points[1]
+		maxY = points[1]
+
+		for i := 1; i < len(points); i += 2 {
+			if points[i] < minY {
+				minY = points[i]
+			}
+			if points[i] > maxY {
+				maxY = points[i]
+			}
+		}
+
+		return maxY - minY
 	}
 
 	return p
 }
 
-
-func (p *Polygon) PointsToVectors() ([]rl.Vector2, error)  {
-	if len(p.Points)%2 != 0 {
-        return nil, fmt.Errorf("points must be in pairs")
-    }
-
-	var vectors []rl.Vector2
-	for i := 0; i < len(p.Points); i += 2 {
-		vectors = append(vectors, rl.Vector2{X: p.Points[i], Y: p.Points[i+1]})
+func GetTopLeftX(points []float32) float32 {
+	minX := points[0]
+	for i := 0; i < len(points); i += 2 {
+		if points[i] < minX {
+			minX = points[i]
+		}
 	}
-	return vectors, nil
+	return minX
 }
 
-func drawPolygon(p *Polygon) {
-
-	vectors, err := p.PointsToVectors()
-
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
+func GetTopLeftY(points []float32) float32 {
+	minY := points[1]
+	for i := 1; i < len(points); i += 2 {
+		if points[i] < minY {
+			minY = points[i]
+		}
 	}
-
-	rl.PushMatrix()
-	rl.Translatef(p.X, p.Y, 0)
-	rl.DrawSplineLinear(vectors, p.StrokeWeight, p.StrokeColor) 
-	rl.PopMatrix()
+	return minY
 }
 
-func (p *Polygon) GetWidth() float32{
-	var minX, maxX float32
-	minX = p.Points[0]
-	maxX = p.Points[0]
 
-	for i := 0; i < len(p.Points); i += 2 {
-		if p.Points[i] < minX {
-			minX = p.Points[i]
-		}
-		if p.Points[i] > maxX {
-			maxX = p.Points[i]
-		}
+func PointsToVectors(pts []float32) ([]rl.Vector2, error)  {
+	if len(pts)%2 != 0 {
+		return nil, fmt.Errorf("points must be in pairs")
 	}
 
-	return maxX - minX
-
-}
-
-func (p *Polygon) GetHeight() float32{
-	var minY, maxY float32
-	minY = p.Points[1]
-	maxY = p.Points[1]
-
-	for i := 1; i < len(p.Points); i += 2 {
-		if p.Points[i] < minY {
-			minY = p.Points[i]
-		}
-		if p.Points[i] > maxY {
-			maxY = p.Points[i]
-		}
+	var vecs []rl.Vector2
+	for i := 0; i < len(pts); i += 2 {
+		vecs = append(vecs, rl.Vector2{X: pts[i], Y: pts[i+1]})
 	}
-
-	return maxY - minY
+	return vecs, nil
 }

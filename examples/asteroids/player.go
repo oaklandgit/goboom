@@ -8,13 +8,27 @@ import (
 )
 
 const ROTATE_SPEED = 10
+const THRUST_FORCE = 2
+const BULLET_FORCE = 10
 
-func createPlayer(scene boom.Renderable) boom.Renderable {
+func createPlayer(scene *boom.GameObject) *boom.GameObject {
 
 	ship := boom.NewGroup(0, 0)
 	ship.SetOrigin(0.9, 0.5)
 	ship.SetId("player")
 	ship.SetWrap(true)
+
+	// WINDOW
+	window := boom.NewCircle(0, 0, 3, rl.Blank)
+	window.SetFill(rl.White)
+	window.SetOrigin(0.5, 0.5)
+	boom.PutLeft(ship, window, -3, -4)
+	ship.Add(window)
+
+	// FIRE ORIGIN
+	fireOrigin := boom.NewGroup(0, 0)
+	fireOrigin.SetXY(-2, -8)
+	ship.Add(fireOrigin)
 
 	// BODY
 	body := boom.NewEllipse(0, 0, 7, 12, rl.Blue)
@@ -32,7 +46,7 @@ func createPlayer(scene boom.Renderable) boom.Renderable {
 	})
 
 	ship.AddInput(rl.KeyUp, boom.KeyDown, func() {
-		ship.SetVelocityByHeading(ship.GetAngle(), 2)
+		ship.SetVelocityByHeading(ship.GetAngle(), THRUST_FORCE)
 	})
 
 	// always spawn the ship invincible for 3 seconds
@@ -40,7 +54,11 @@ func createPlayer(scene boom.Renderable) boom.Renderable {
 
 	// cancel the invincibility if user fires
 	ship.AddInput(rl.KeyX, boom.KeyPressed, func() {
-		bullet := createBullet(ship.GetX(), ship.GetY(), ship.GetAngle())
+		bullet := createBullet(
+			boom.GetGlobalX(fireOrigin),
+			boom.GetGlobalY(fireOrigin),
+			boom.GetGlobalAngle(fireOrigin),
+			BULLET_FORCE)
 		
 		if cancelInvincibility != nil {
 			cancelInvincibility()
@@ -54,10 +72,10 @@ func createPlayer(scene boom.Renderable) boom.Renderable {
 
 }
 
-func Invincible(r boom.Renderable) func(boom.Renderable) {
+func Invincible(r *boom.GameObject) func(*boom.GameObject) {
 	r.SetStroke(rl.DarkGray, 2)
 	r.AddTags("invincible")
-	return func(r boom.Renderable) {
+	return func(r *boom.GameObject) {
 		r.SetStroke(rl.White, 2)
 		r.RemoveTag("invincible")
 	}

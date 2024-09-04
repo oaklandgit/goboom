@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-func PowerUp(r Renderable,  f func(Renderable) func(Renderable), d time.Duration) func() {
+func PowerUp(r *GameObject,  f func(*GameObject) func(*GameObject), d time.Duration) func() {
 
 	revert := f(r) // do the function and set revert to the function returned by f
 	cancelChannel := make(chan struct{})

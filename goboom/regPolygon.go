@@ -4,45 +4,24 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-type RegPoly struct {
-	GameObject
-	Sides int32
-	Radius float32
-}
 
-func NewRegPoly(x, y float32, sides int32, radius float32, strokeColor rl.Color) *RegPoly {
-	rp := &RegPoly{
-		GameObject: NewGameObject(),
-	}
-	rp.Sides = sides
+func NewRegPoly(x, y float32, sides int32, radius float32, strokeColor rl.Color) *GameObject {
+
+	rp := NewGameObject()
 	rp.X = x
 	rp.Y = y
-	rp.Radius = radius
 	rp.StrokeColor = strokeColor
 
 	rp.OnDraw = func() {
-		drawRegPoly(rp)
+		center := rl.Vector2{X: rp.X + radius, Y: rp.Y + radius}
+		rl.DrawPoly(center, sides, radius, 0, rp.FillColor)
+		rl.DrawPolyLinesEx(center, sides, radius, 0, rp.StrokeWeight, rp.StrokeColor); 
+	}
+	rp.GetWidth = func() float32 {
+		return radius * 2
+	}
+	rp.GetHeight = func() float32 {
+		return radius * 2
 	}
 	return rp
-}
-
-func (rp *RegPoly) SetRadius(radius float32) *RegPoly {
-	rp.Radius = radius
-	return rp
-}
-
-func drawRegPoly(rp *RegPoly) {
-	// add the radius to the x and y to center the polygon
-	// to let the GameObject handle the pivot
-	center := rl.Vector2{X: rp.X + rp.Radius, Y: rp.Y + rp.Radius}
-	rl.DrawPoly(center, rp.Sides, rp.Radius, 0, rp.FillColor)
-	rl.DrawPolyLinesEx(center, rp.Sides,rp.Radius, 0, rp.StrokeWeight, rp.StrokeColor); 
-}
-
-func (rp *RegPoly) GetWidth() float32{
-	return rp.Radius * 2
-}
-
-func (rp *RegPoly) GetHeight() float32{
-	return rp.Radius * 2
 }

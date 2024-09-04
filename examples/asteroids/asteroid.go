@@ -6,12 +6,18 @@ import (
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
+const (
+    MIN_SIDES = 5
+    MAX_SIDES = 9
+    MIN_SIZE = 20
+    MAX_SIZE = 80
+)
 
-func createAsteroid(x, y float32) boom.Renderable {
+func createAsteroid(x, y float32) *boom.GameObject {
 
     points := []float32{}
-    sides := rl.GetRandomValue(5, 9)
-    size := rl.GetRandomValue(20, 50)
+    sides := rl.GetRandomValue(MIN_SIDES, MAX_SIDES)
+    size := rl.GetRandomValue(MIN_SIZE, MAX_SIZE)
     angleIncrement := 2 * math.Pi / float64(sides)
 
     for i := 0; i < int(sides); i++ {

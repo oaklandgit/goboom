@@ -17,7 +17,7 @@ func (g *Game) Draw() {
 }
 
 
-func drawWithTransforms(obj Renderable) {
+func drawWithTransforms(obj *GameObject) {
 
 	offsetX := obj.GetX() + (obj.GetWidth() * obj.GetOriginX())
 	offsetY := obj.GetY() + (obj.GetHeight() * obj.GetOriginY())

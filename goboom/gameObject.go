@@ -13,21 +13,22 @@ type GameObject struct {
 	Scale
 	Velocity
 	Visibility
+	Shape
 	Stroke
 	Fill
-	Size
-	BoundingBox
+	// Size
+	// BoundingBox
 	Alpha
 	Pivot
 	LifeCycle
 	InputHandler
 
-	Children []Renderable
-	Parent Renderable
+	Children []*GameObject
+	Parent *GameObject
 	Game *Game
 }
 
-func NewGameObject() GameObject {
+func NewGameObject() *GameObject {
 
 	obj := GameObject{
 		Scale: Scale{
@@ -47,7 +48,7 @@ func NewGameObject() GameObject {
 	}
 
 
-	return obj
+	return &obj
 		
 }
 
