@@ -16,8 +16,6 @@ type GameObject struct {
 	Shape
 	Stroke
 	Fill
-	// Size
-	// BoundingBox
 	Alpha
 	Pivot
 	LifeCycle

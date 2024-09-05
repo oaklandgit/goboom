@@ -1,10 +1,6 @@
 package goboom
 
-import (
-	"math"
-
-	rl "github.com/gen2brain/raylib-go/raylib"
-)
+import rl "github.com/gen2brain/raylib-go/raylib"
 
 
 func NewGroup(x, y float32, children ...*GameObject) *GameObject {
@@ -12,53 +8,35 @@ func NewGroup(x, y float32, children ...*GameObject) *GameObject {
 	g.X = x
 	g.Y = y
 	g.Add(children...)
-    g.OnDraw = func() {}
+    g.OnDraw = func() {
+        rl.DrawRectangle(int32(g.GetX()), int32(g.GetY()), int32(g.GetWidth()), int32(g.GetHeight()), rl.Yellow)
+    }
     g.GetWidth = func() float32 {
-        return CalculateGroupBounds(g.Children).Width
+        minX := float32(0)
+        maxX := float32(0)
+        for _, child := range g.Children {
+          
+            if child.GetX() < minX {
+                minX = child.GetX()
+            }
+            if child.GetX() + child.GetWidth() > maxX {
+                maxX = child.GetX() + child.GetWidth()
+            }
+        }
+        return maxX - minX
     }
     g.GetHeight = func() float32 {
-        return CalculateGroupBounds(g.Children).Height
+        minY := float32(0)
+        maxY := float32(0)
+        for _, child := range g.Children {
+            if child.GetY() < minY {
+                minY = child.GetY()
+            }
+            if child.GetY() + child.GetHeight() > maxY {
+                maxY = child.GetY() + child.GetHeight()
+            }
+        }
+        return maxY - minY
     }
 	return g
-}
-
-func CalculateGroupBounds(children []*GameObject) rl.Rectangle {
-    // Initialize bounds
-    minX, minY := float32(math.MaxFloat32), float32(math.MaxFloat32)
-    maxX, maxY := float32(-math.MaxFloat32), float32(-math.MaxFloat32)
-
-    // Iterate over children to find the bounds
-    for _, child := range children {
-        // Calculate the child's bounding box
-        childX := GetGlobalX(child)
-        childY := GetGlobalY(child)
-        childWidth := child.GetWidth()
-        childHeight := child.GetHeight()
-
-        // Update min and max bounds
-        if childX < minX {
-            minX = childX
-        }
-        if childY < minY {
-            minY = childY
-        }
-        if childX+childWidth > maxX {
-            maxX = childX + childWidth
-        }
-        if childY+childHeight > maxY {
-            maxY = childY + childHeight
-        }
-    }
-
-    // Calculate the group's bounding box
-    groupWidth := maxX - minX
-    groupHeight := maxY - minY
-
-    // Return the group's bounding rectangle
-    return rl.Rectangle{
-        X:      minX,
-        Y:      minY,
-        Width:  groupWidth,
-        Height: groupHeight,
-    }
 }

@@ -11,13 +11,14 @@ func main() {
 
 	scene := game.GetCurrentScene()
 
-	// text := boom.NewText(100, 100, "HELLO WORLD!", rl.Black)
+	message := "HELLO WORLD!"
+
 	poly := boom.NewPolygon(0, 0, rl.Red, true, 0, 0, 10, 0, 10, 10, 0, 10)
 	circle := boom.NewCircle(0, 0, 10, rl.Blue)
 	rect := boom.NewRectangle(0, 0, 40, 40, rl.Orange)
 	regpoly := boom.NewRegPoly(0, 0, 5, 50, rl.Pink)
-	text := boom.NewText(0, 0, "HELLO WORLD!", rl.Black)
-	scene.Add(circle, poly, rect, regpoly, &text.GameObject)
+	text := boom.NewText(0, 0, &message, rl.Black)
+	scene.Add(circle, poly, rect, regpoly, text)
 
 	game.Run()
 }

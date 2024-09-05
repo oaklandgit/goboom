@@ -17,8 +17,8 @@ func GridArray(rows, cols int, gap float32, objFunc func() *GameObject) *GameObj
 		}
 	}
 
-	group.Width = (objFunc().GetWidth() + gap) * float32(cols)
-	group.Height = (objFunc().GetHeight() + gap) * float32(rows)
+	// group.GetWidth = (objFunc().GetWidth() + gap) * float32(cols)
+	// group.Height = (objFunc().GetHeight() + gap) * float32(rows)
 
 	return group
 }

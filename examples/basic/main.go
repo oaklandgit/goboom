@@ -11,13 +11,15 @@ func main() {
 	game := boom.NewGame(800, 600, "My Game")
 	game.SetBgColor(rl.Black)
 
+	message := "HELLO WORLD"
+
 	scene := game.GetCurrentScene()
 
 	circle := boom.NewCircle(200, 200, 25, rl.White)
 	circle.SetFill(rl.Blue)
 	circle.SetStroke(rl.Blank, 2)
 	rect := boom.NewRectangle(0, 0, 50, 50, rl.White)
-	text := boom.NewText(400, 400, "Hello, World!", rl.White)
+	text := boom.NewText(400, 400, &message, rl.White)
 	tri := boom.NewRegPoly(0, 0, 5, 25, rl.White)
 	pent := boom.NewRegPoly(0, 0, 5, 25, rl.White)
 	star := boom.NewPolygon(
@@ -43,10 +45,10 @@ func main() {
 	star.SetVelocityByHeading(45, 0.1)
 	star.SetAngle(30)
 
-	scene.Add(&text.GameObject, circle, rect, tri, pent, rect2, star)
+	scene.Add(text, circle, rect, tri, pent, rect2, star)
 
 	boom.PutCenter(scene, circle, 0, 0)
-	boom.PutCenter(scene, &text.GameObject, 0, 0)
+	boom.PutCenter(scene, text, 0, 0)
 	boom.PutCenter(scene, rect, 0, 0)
 	boom.PutCenter(scene, tri, 0, 0)
 	boom.PutCenter(scene, pent, 0, 0)

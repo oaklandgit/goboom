@@ -20,7 +20,7 @@ func main() {
 
 	scene := game.GetCurrentScene()
 
-	// ship := createPlayer(scene)
+	ship := createPlayer(scene)
 
 	for i := 0; i < ASTEROIDS_COUNT ; i++ {
 		x := rand.Intn(int(game.GetWidth()))
@@ -32,8 +32,8 @@ func main() {
         scene.Add(asteroid)
     }
 
-	// ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
-	// scene.Add(ship)
+	ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
+	scene.Add(ship)
 
 	game.Run()
 

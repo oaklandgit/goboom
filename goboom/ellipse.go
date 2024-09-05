@@ -23,5 +23,13 @@ func NewEllipse(x, y, radiusH, radiusV float32, strokeColor rl.Color) *GameObjec
 		}
 	}
 
+	e.GetWidth = func() float32 {
+		return radiusH * 2 * e.ScaleX
+	}
+
+	e.GetHeight = func() float32 {
+		return radiusV * 2 * e.ScaleY
+	}
+
 	return e
 }
