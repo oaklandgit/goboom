@@ -77,19 +77,13 @@ func (g *Game) Run() {
 		func() {}, // DebugOff
 		func() {
 			DrawGrid(int32(g.Width), int32(g.Height), 12)
-			DrawMouseCoordinates(20, rl.Yellow)
+			DrawMouseCoordinates(22, 22, 20, rl.Yellow)
 		},
 		func() {
 			DrawBoundingBoxes(
 				g.GetCurrentScene().
 				GetChildren(),
-				rl.Red)
-		},
-		func() {
-			DrawBoundingBoxes(
-				g.GetCurrentScene().
-				GetChildren(),
-				rl.Green)
+				rl.Yellow)
 		},
 		func() {
 			DrawPerformance(22, 22, 20, rl.Yellow)

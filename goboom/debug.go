@@ -14,11 +14,17 @@ func DrawGrid(w, h, every int32) {
 	}
 }
 
-func DrawMouseCoordinates(fontSize int32, color rl.Color) {
+func DrawMouseCoordinates(x, y, fontSize int32, color rl.Color) {
+
 	mouseX := rl.GetMouseX()
 	mouseY := rl.GetMouseY()
 	text := fmt.Sprintf("X: %d, Y: %d", mouseX, mouseY)
-	rl.DrawText(text, mouseX, mouseY+20, fontSize, color)
+	rl.SetMouseCursor(rl.MouseCursorCrosshair)
+
+	rl.DrawLine(mouseX, 0, mouseX, int32(rl.GetScreenHeight()), color)
+	rl.DrawLine(0, mouseY, int32(rl.GetScreenWidth()), mouseY, color)
+
+	rl.DrawText(text, x, y, fontSize, color)
 }
 
 func DrawPerformance(x, y, size int32, color rl.Color) {
