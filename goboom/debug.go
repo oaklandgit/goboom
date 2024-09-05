@@ -6,12 +6,16 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func DrawGrid(w, h, every int32) {
+func DrawGrid(w, h, every int32, color rl.Color) {
 	for x := int32(0); x < w; x += every {
 		for y := int32(0); y < h; y += every {
-			rl.DrawPixel(x, y, rl.DarkGray)
+			rl.DrawPixel(x, y, color)
 		}
 	}
+}
+
+func DrawGridSize(x, y, every, fontSize int32, color rl.Color) {
+	rl.DrawText(fmt.Sprintf("GRID: %d", every), x, y, fontSize, color)
 }
 
 func DrawMouseCoordinates(x, y, fontSize int32, color rl.Color) {

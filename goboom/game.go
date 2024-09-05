@@ -1,6 +1,8 @@
 package goboom
 
 import (
+	"math"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -72,12 +74,15 @@ func (g *Game) Update() {
 func (g *Game) Run() {
 
 	debugMode := 0
+	gridSize := int32(10)
 
 	DebugModes := []func() {
 		func() {}, // DebugOff
 		func() {
-			DrawGrid(int32(g.Width), int32(g.Height), 12)
-			DrawMouseCoordinates(22, 22, 20, rl.Yellow)
+			DrawGrid(int32(g.Width), int32(g.Height), gridSize, rl.Brown)
+			DrawGridSize(22, 22, gridSize, 20, rl.Yellow)
+			DrawMouseCoordinates(22, 46, 20, rl.Yellow)
+			
 		},
 		func() {
 			DrawBoundingBoxes(
@@ -87,12 +92,20 @@ func (g *Game) Run() {
 		},
 		func() {
 			DrawPerformance(22, 22, 20, rl.Yellow)
-			DrawObjectCount(22, 44, 20, rl.Yellow, g.GetCurrentScene().GetAll())
+			DrawObjectCount(22, 46, 20, rl.Yellow, g.GetCurrentScene().GetAll())
 		},
 	}
 
 	g.AddInput(rl.KeyD, KeyPressed, func() {
 		debugMode = (debugMode + 1) % len(DebugModes)
+	})
+
+	g.AddInput(rl.KeyLeftBracket, KeyPressed, func() {
+		gridSize = int32(math.Max(float64(gridSize-1), 4))
+	})
+
+	g.AddInput(rl.KeyRightBracket, KeyPressed, func() {
+		gridSize = int32(math.Min(float64(gridSize+1), 20))
 	})
 
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
