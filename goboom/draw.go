@@ -9,7 +9,7 @@ import (
 func (g *Game) Draw() {
 
 	scene := g.GetCurrentScene()
-	scene.Draw()
+	scene.OnDraw()
 
 	for _, obj := range scene.GetChildren() {
 		drawWithTransforms(obj)
@@ -30,7 +30,7 @@ func drawWithTransforms(obj *GameObject) {
 	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
 	rl.Translatef(-offsetX, -offsetY, 0)
 
-	obj.Draw()
+	obj.OnDraw()
 
 	if len(obj.GetChildren()) > 0 {
 

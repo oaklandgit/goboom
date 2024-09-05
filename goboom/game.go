@@ -46,48 +46,22 @@ func (g *Game) GetHeight() float32 {
 	return g.Height
 }
 
-func (g *Game) NewScene(id string) *GameObject {
-	scene := NewRectangle(0, 0, g.GetWidth(), g.GetHeight(), rl.Red) // for debugging
-	scene.SetStroke(rl.Red, 3) // for debugging
-	scene.SetGame(g)
-	scene.SetId(id)
-	g.Scenes = append(g.Scenes, scene)
-	
-	return scene
-}
-
-func (g *Game) GetCurrentScene() *GameObject {
-	return g.Scenes[g.CurrentScene]
-}
-
-func (g *Game) SetScene(index int) {
-    if index >= 0 && index < len(g.Scenes) {
-        g.CurrentScene = index
-    }
-}
-
-func (g *Game) SetBgColor(color rl.Color) {
-	g.BgColor = color
-}
-
 func (g *Game) Run() {
 
 	debugMode := 0
 
-	DebugOff := func() {}
-	DrawGrid := func() {
-		DrawGrid(int32(g.Width), int32(g.Height), 12)
-		DrawMouseCoordinates()
-	}
-
-	DrawBoundingBoxesWrapper := func() {
-		DrawBoundingBoxes(g.GetCurrentScene().GetChildren())
-	}
-
-	var DebugModes = []func() {
-		DebugOff,
-		DrawBoundingBoxesWrapper,
-		DrawGrid,
+	DebugModes := []func() {
+		func() {}, // DebugOff
+		func() {
+			DrawGrid(int32(g.Width), int32(g.Height), 12)
+			DrawMouseCoordinates()
+		},
+		func() {
+			DrawBoundingBoxes(g.GetCurrentScene().GetChildren(), rl.Red)
+		},
+		func() {
+			DrawBoundingBoxes(g.GetCurrentScene().GetChildren(), rl.Green)
+		},
 		DrawPerformance,
 	}
 

@@ -5,7 +5,7 @@ func (g *Game) Update() {
 	g.CheckInput()
 
 	scene := g.GetCurrentScene()
-	scene.Update()
+	scene.OnUpdate()
 
 	for _, obj := range scene.GetChildren() {
 
@@ -14,8 +14,8 @@ func (g *Game) Update() {
 			continue
 		}
 
-		obj.Update()
-		obj.Wrap()
+		obj.OnUpdate()
+		obj.OnWrap()
 		obj.CheckInput()
 	}
 

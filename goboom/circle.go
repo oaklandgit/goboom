@@ -6,7 +6,6 @@ import (
 
 const CIRCLE_EDGES = 24
 
-
 func NewCircle(x, y, radius float32, strokeColor rl.Color) *GameObject {
 
 	c := NewGameObject()

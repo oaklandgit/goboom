@@ -40,7 +40,7 @@ func (o *GameObject) SetPadding(paddingX, paddingY float32) {
 	o.paddingY = paddingY
 }
 
-func (o *GameObject) Wrap() {
+func (o *GameObject) OnWrap() {
 
 
 	handleWrap := func(coordinate, max, padding float32, wrap bool) float32 {
