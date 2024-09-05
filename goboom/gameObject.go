@@ -8,19 +8,24 @@ type GameObject struct {
 	OnInit   func()
 	OnUpdate func()
 	OnDraw   func()
-	
+
 	Identity
-	Wrapping
-	Position
-	Rotation
-	Lifespan
-	Scale
-	Velocity
+	
 	Shape
 	Stroke
 	Fill
+	
+	Position
+	Rotation
+	Scale
 	Pivot
+	
+	Velocity
+	Wrapping
+	
+	Lifespan
 	InputHandler
+	Collisions
 
 	Game *Game
 	Parent *GameObject

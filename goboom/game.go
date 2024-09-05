@@ -56,6 +56,7 @@ func (g *Game) Update() {
 
 	scene := g.GetCurrentScene()
 	scene.OnUpdate()
+	scene.CheckCollisions()
 
 	for _, obj := range scene.GetChildren() {
 

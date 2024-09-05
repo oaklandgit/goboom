@@ -15,6 +15,7 @@ func createPlayer(scene *boom.GameObject) *boom.GameObject {
 
 	ship := boom.NewGroup(0, 0)
 	ship.SetId("player")
+	ship.AddTags("player")
 	ship.SetWrap(true)
 
 	// WINDOW

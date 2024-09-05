@@ -13,6 +13,19 @@ func (node *GameObject) HasTag(tag string) bool {
 	return false
 }
 
+func (node *GameObject) GetAllTagged() []*GameObject {
+
+	tagged := []*GameObject{}
+
+	for _, c := range node.GetAll() {
+		if len(c.Tags) > 0 {
+			tagged = append(tagged, c)
+		}
+	}
+
+	return tagged
+}
+
 func (node *GameObject) GetAll(tags ...string) []*GameObject {
 
 	var objs = []*GameObject{}
