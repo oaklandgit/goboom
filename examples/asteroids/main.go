@@ -12,6 +12,9 @@ const (
 	ASTEROIDS_COUNT = 12
 )
 
+var score = 0
+var scoreString = "0"
+
 func main() {
 
 	rand.Seed(uint64(time.Now().UnixNano()))
@@ -19,6 +22,9 @@ func main() {
 	game.SetBgColor(rl.Black)
 
 	scene := game.GetCurrentScene()
+
+	scoreboard := boom.NewText(scene.CenterX(), 12, &scoreString, rl.White)
+	scoreboard.SetScale(2, 2)
 
 	ship := createPlayer(scene)
 
@@ -33,7 +39,7 @@ func main() {
     }
 
 	ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
-	scene.Add(ship)
+	scene.Add(scoreboard, ship)
 
 	game.Run()
 

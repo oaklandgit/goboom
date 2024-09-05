@@ -4,6 +4,7 @@ import rl "github.com/gen2brain/raylib-go/raylib"
 
 const FONT_SIZE = 16
 
+
 func NewText(x, y float32, txt *string, color rl.Color) *GameObject {
 	
 	t := NewGameObject()
