@@ -41,7 +41,7 @@ func main() {
 		rect2.SetVelocityByHeading(rect2.GetAngle(), 1)
 	})
 
-	tri.SetVel(-1, 1)
+	tri.SetVelocity(-1, 1)
 	star.SetVelocityByHeading(45, 0.1)
 	star.SetAngle(30)
 

@@ -124,9 +124,9 @@ func (g *Game) Run() {
 	rl.SetTargetFPS(int32(g.FPS))
 
 	// INITIALIZATION
-	// for _, obj := range g.GameObjects {
-	// 	obj.OnInit()
-	// }
+	for _, obj := range g.GetCurrentScene().GetAll() {
+		obj.OnInit()
+	}
 
 	for !rl.WindowShouldClose() {	
 		rl.BeginDrawing()
