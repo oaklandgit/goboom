@@ -49,9 +49,9 @@ func createPlayer(scene *boom.GameObject) *boom.GameObject {
 	// cancel the invincibility if user fires
 	ship.AddInput(rl.KeyX, boom.KeyPressed, func() {
 		bullet := createBullet(
-			boom.GetGlobalX(window),
-			boom.GetGlobalY(window),
-			boom.GetGlobalAngle(window),
+			window.GetGlobalX(),
+			window.GetGlobalY(),
+			window.GetGlobalAngle(),
 			BULLET_FORCE)
 		
 		if cancelInvincibility != nil {

@@ -1,15 +1,15 @@
 package goboom
 
-func (h *GameObject) SetGame(game *Game) {
-	h.Game = game
+func (obj *GameObject) SetGame(game *Game) {
+	obj.Game = game
 }
 
-func (h *GameObject) GetGame() *Game {
-	return h.Game
+func (obj *GameObject) GetGame() *Game {
+	return obj.Game
 }
 
-func (h *GameObject) SetParent(parent *GameObject) {
-	h.Parent = parent
+func (obj *GameObject) SetParent(parent *GameObject) {
+	obj.Parent = parent
 }
 
 func (h *GameObject) GetParent() *GameObject {

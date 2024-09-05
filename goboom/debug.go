@@ -29,10 +29,10 @@ func DrawPerformance() {
 func DrawBoundingBoxes(objects []*GameObject, color rl.Color) {
 	for _, r := range objects {
 		rl.DrawRectangleLines(
-			int32(GetBoundingBox(r).X) - int32(GetBoundingBox(r).Width)/2,
-			int32(GetBoundingBox(r).Y) - int32(GetBoundingBox(r).Height)/2,
-			int32(GetBoundingBox(r).Width),
-			int32(GetBoundingBox(r).Height),
+			int32(r.GetBoundingBox().X) - int32(r.GetBoundingBox().Width)/2,
+			int32(r.GetBoundingBox().Y) - int32(r.GetBoundingBox().Height)/2,
+			int32(r.GetBoundingBox().Width),
+			int32(r.GetBoundingBox().Height),
 			color)
 	}
 }

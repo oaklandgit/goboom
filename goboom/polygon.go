@@ -8,8 +8,6 @@ import (
 
 func NewPolygon(x, y float32, strokeColor rl.Color, closed bool, points ...float32) *GameObject {
 	p := NewGameObject()
-	// p.X = GetTopLeftX(points)
-	// p.Y = GetTopLeftY(points)
 	p.X = x
 	p.Y = y
 	p.StrokeColor = strokeColor

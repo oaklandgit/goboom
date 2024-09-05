@@ -20,7 +20,6 @@ type GameObject struct {
 	Shape
 	Stroke
 	Fill
-	Alpha
 	Pivot
 	InputHandler
 

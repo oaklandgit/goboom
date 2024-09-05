@@ -1,15 +1,12 @@
 package goboom
 
-
 func NewGroup(x, y float32, children ...*GameObject) *GameObject {
 	g := NewGameObject()
 	g.X = x
 	g.Y = y
 	g.Add(children...)
-    g.OnDraw = func() {
-        // for debugging
-        // rl.DrawRectangle(int32(g.GetX()), int32(g.GetY()), int32(g.GetWidth()), int32(g.GetHeight()), rl.Yellow)
-    }
+    g.OnDraw = func() {}
+
     g.GetWidth = func() float32 {
         minX := float32(0)
         maxX := float32(0)

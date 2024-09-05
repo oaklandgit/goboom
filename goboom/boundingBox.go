@@ -3,65 +3,65 @@ package goboom
 import rl "github.com/gen2brain/raylib-go/raylib"
 
 
-func GetBoundingBox(r *GameObject) rl.Rectangle {
+func (r *GameObject) GetBoundingBox() rl.Rectangle {
     rect := rl.Rectangle{
-            X: GetGlobalX(r),
-            Y: GetGlobalY(r),
-            Width: GetGlobalWidth(r),
-            Height: GetGlobalHeight(r)}
+            X: r.GetGlobalX() + r.GetGlobalWidth() / 2,
+            Y: r.GetGlobalY() + r.GetGlobalHeight() / 2,
+            Width: r.GetGlobalWidth(),
+            Height: r.GetGlobalHeight()}
 
     return rect
 }
 
-func GetGlobalX(r *GameObject) float32 {
+func (r *GameObject) GetGlobalX() float32 {
 	if r.GetParent() == nil {
 		return r.GetX()
 	}
-	return r.GetX() + GetGlobalX(r.GetParent())
+	return r.GetX() + r.GetParent().GetGlobalX()
 }
 
-func GetGlobalY(r *GameObject) float32 {
+func (r *GameObject) GetGlobalY() float32 {
 	if r.GetParent() == nil {
 		return r.GetY()
 	}
-	return r.GetY() + GetGlobalY(r.GetParent())
+	return r.GetY() + r.GetParent().GetGlobalY()
 }
 
 
-func GetGlobalScaleX(r *GameObject) float32 {
+func (r *GameObject) GetGlobalScaleX() float32 {
 	if r.GetParent() == nil {
 		return r.GetScaleX()
 	}
-	return r.GetScaleX() * GetGlobalScaleX(r.GetParent())
+	return r.GetScaleX() * r.GetParent().GetGlobalScaleX()
 }
 
-func GetGlobalScaleY(r *GameObject) float32 {
+func (r *GameObject) GetGlobalScaleY() float32 {
 	if r.GetParent() == nil {
 		return r.GetScaleY()
 	}
-	return r.GetScaleY() * GetGlobalScaleY(r.GetParent())
+	return r.GetScaleY() * r.GetParent().GetGlobalScaleY()
 }
 
-func GetGlobalWidth(r *GameObject) float32 {
+func (r *GameObject) GetGlobalWidth() float32 {
 	
 	if r.GetParent() == nil {
 		return r.GetWidth()
 	}
 	
-	return r.GetWidth() * GetGlobalScaleX(r.GetParent())
+	return r.GetWidth() * r.GetParent().GetGlobalScaleX()
 }
 
-func GetGlobalHeight(r *GameObject) float32 {
+func (r *GameObject) GetGlobalHeight() float32 {
 	if r.GetParent() == nil {
 		return r.GetHeight()
 	}
-	return r.GetHeight() * GetGlobalScaleY(r.GetParent())
+	return r.GetHeight() * r.GetParent().GetGlobalScaleY()
 }
 
-func GetGlobalAngle(r *GameObject) float32 {
+func (r *GameObject) GetGlobalAngle() float32 {
 	if r.GetParent() == nil {
 		return r.GetAngle()
 	}
-	return r.GetAngle() + GetGlobalAngle(r.GetParent())
+	return r.GetAngle() + r.GetParent().GetGlobalAngle()
 }
 

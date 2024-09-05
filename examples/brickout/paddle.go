@@ -10,6 +10,6 @@ func createPaddle() *boom.GameObject {
 
 	paddle := boom.NewRectangle(0, 0, 80, 16, rl.Blank)
 	paddle.SetFill(rl.White)
-
+	
 	return paddle
 }
