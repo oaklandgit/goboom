@@ -24,9 +24,9 @@ func createBullet(x, y, angle, thrust float32) *boom.GameObject {
 			func() *boom.GameObject {
 				return boom.NewRectangle(0, 0, 10, 10, rl.White)
 			})
-			self.SetLifespan(0)
-			asteroid.SetLifespan(0)
-			IncreaseScore(10)
+		self.SetLifespan(0)
+		asteroid.SetLifespan(0)
+		IncreaseScore(10)
 
     })
 

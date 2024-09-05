@@ -8,7 +8,10 @@ import (
 	"golang.org/x/exp/rand"
 )
 
-const ROTATE_SPEED = 10
+const (
+	PADDLE_SPEED = 10
+	WALL_WIDTH = 22
+)
 
 
 func main() {
@@ -36,7 +39,13 @@ func main() {
 	bricks := boom.GridArray(3, 14, 6, redBrick)
 	boom.PutCenter(scene, bricks, 0, -140)
 
-	scene.Add(paddle, bricks, ball)
+	
+	// Walls
+	leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
+	rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
+	ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
+
+	scene.Add(paddle, bricks, ball, ceiling, leftWall, rightWall)
 	
 	game.Run()
 

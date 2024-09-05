@@ -57,6 +57,7 @@ func (g *Game) Update() {
 	scene := g.GetCurrentScene()
 	scene.OnUpdate()
 	scene.CheckCollisions()
+	
 
 	for _, obj := range scene.GetChildren() {
 
@@ -70,6 +71,16 @@ func (g *Game) Update() {
 		obj.CheckInput()
 	}
 
+	scene.Cleanup()
+
+}
+
+func (scene *GameObject) Cleanup() {
+	for _, c := range scene.GetAll() {
+		if c.IsDeleted() {
+			c.GetParent().Remove(c)
+		}
+	}
 }
 
 func (g *Game) Run() {

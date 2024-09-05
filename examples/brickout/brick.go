@@ -10,6 +10,7 @@ func createBrick(color rl.Color) *boom.GameObject {
 
 	brick := boom.NewRectangle(0, 0, 40, 20, rl.Blank)
 	brick.SetFill(color)
+	brick.AddTags("brick")
 
 	return brick
 }

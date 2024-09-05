@@ -11,13 +11,22 @@ type Velocity struct {
 	VelY float32
 }
 
-func (v *Velocity) SetVel(x, y float32) {
+func (v *Velocity) SetVelocity(x, y float32) {
 	v.VelX = x
 	v.VelY = y
 }
 
-func (v *Velocity) GetVel() (float32, float32) {
+func (v *Velocity) SetVelocityVect(vec rl.Vector2) {
+	v.VelX = vec.X
+	v.VelY = vec.Y
+}
+
+func (v *Velocity) GetVelocityXY() (float32, float32) {
 	return v.VelX, v.VelY
+}
+
+func (v *Velocity) GetVelocityVect() rl.Vector2 {
+	return rl.NewVector2(v.VelX, v.VelY)
 }
 
 func (v *Velocity) GetVelX() float32 {
