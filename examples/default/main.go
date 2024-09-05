@@ -13,7 +13,7 @@ func main() {
 
 	message := "HELLO WORLD!"
 
-	poly := boom.NewPolygon(0, 0, rl.Red, true, 0, 0, 10, 0, 10, 10, 0, 10)
+	poly := boom.NewPolygon(0, 0, rl.Red, true, "0 0 10 0 10 10 0 10")
 	circle := boom.NewCircle(0, 0, 10, rl.Blue)
 	rect := boom.NewRectangle(0, 0, 40, 40, rl.Orange)
 	regpoly := boom.NewRegPoly(0, 0, 5, 50, rl.Pink)

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	boom "goboom/goboom"
 	"math"
 
@@ -15,7 +16,7 @@ const (
 
 func createAsteroid(x, y float32) *boom.GameObject {
 
-    points := []float32{}
+    points := ""
     sides := rl.GetRandomValue(MIN_SIDES, MAX_SIDES)
     size := rl.GetRandomValue(MIN_SIZE, MAX_SIZE)
     angleIncrement := 2 * math.Pi / float64(sides)
@@ -23,14 +24,16 @@ func createAsteroid(x, y float32) *boom.GameObject {
     for i := 0; i < int(sides); i++ {
         r := rl.GetRandomValue(int32(size/2), int32(size))
         angle := float64(i) * angleIncrement
-        points = append(points, float32(r)*float32(math.Cos(angle)))
-        points = append(points, float32(r)*float32(math.Sin(angle)))
+
+        points += fmt.Sprintf("%.1f %.1f ", float32(r)*float32(math.Cos(angle)), float32(r)*float32(math.Sin(angle)))
     }
 
     // Ensure the polygon is closed by adding the first point at the end
-    points = append(points, points[0], points[1])
+    // points = append(points, points[0], points[1])
 
-    asteroid := boom.NewPolygon(x, y, rl.White, true, points...)
+    fmt.Println(points)
+
+    asteroid := boom.NewPolygon(x, y, rl.White, true, points)
     asteroid.SetWrap(true)
     asteroid.SetPadding(asteroid.GetWidth(), asteroid.GetHeight())
     return asteroid

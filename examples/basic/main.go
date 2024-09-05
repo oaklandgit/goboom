@@ -24,7 +24,7 @@ func main() {
 	pent := boom.NewRegPoly(0, 0, 5, 25, rl.White)
 	star := boom.NewPolygon(
 		0, 0, rl.White, true,
-		0, 50, 14, 15, 47, 15, 23, -7, 30, -42, 0, -25, -30, -42, -23, -7, -47, 15, -14, 15)
+		"0 50 14 15 47 15 23 -7 30 -42 0 -25 -30 -42 -23 -7 -47 15 -14 15")
 
 	rect2 := boom.NewRectangle(0, 0, 20, 40, rl.White)
 	rect2.SetOrigin(0.5, 0.5)
