@@ -1,7 +1,5 @@
 package goboom
 
-import rl "github.com/gen2brain/raylib-go/raylib"
-
 
 func NewGroup(x, y float32, children ...*GameObject) *GameObject {
 	g := NewGameObject()
@@ -9,7 +7,8 @@ func NewGroup(x, y float32, children ...*GameObject) *GameObject {
 	g.Y = y
 	g.Add(children...)
     g.OnDraw = func() {
-        rl.DrawRectangle(int32(g.GetX()), int32(g.GetY()), int32(g.GetWidth()), int32(g.GetHeight()), rl.Yellow)
+        // for debugging
+        // rl.DrawRectangle(int32(g.GetX()), int32(g.GetY()), int32(g.GetWidth()), int32(g.GetHeight()), rl.Yellow)
     }
     g.GetWidth = func() float32 {
         minX := float32(0)
