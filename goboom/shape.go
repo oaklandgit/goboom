@@ -5,5 +5,4 @@ type Shape struct {
 	GetWidth func() float32
 	GetHeight func() float32
 	Opacity float32
-	
 }

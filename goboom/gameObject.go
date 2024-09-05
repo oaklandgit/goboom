@@ -54,26 +54,3 @@ func NewGameObject() *GameObject {
 
 	return &obj
 }
-
-// func (g *GameObject) Update() {
-// 	g.X += g.VelX
-// 	g.Y += g.VelY
-// }
-
-// func (lc *LifeCycle) Init() {
-// 	if lc.OnInit != nil {
-// 		lc.OnInit()
-// 	}
-// }
-
-// func (lc *LifeCycle) Update() {
-// 	if lc.OnUpdate != nil {
-// 		lc.OnUpdate()
-// 	}
-// }
-
-// func (s *Shape) Draw() {
-// 	if s.OnDraw != nil {
-// 		s.OnDraw()
-// 	}
-// }

@@ -1,7 +1,5 @@
 package goboom
 
-import rl "github.com/gen2brain/raylib-go/raylib"
-
 func (g *Game) NewScene(id string) *GameObject {
 	
 	scene := &GameObject{
@@ -39,8 +37,4 @@ func (g *Game) SetScene(index int) {
     if index >= 0 && index < len(g.Scenes) {
         g.CurrentScene = index
     }
-}
-
-func (g *Game) SetBgColor(color rl.Color) {
-	g.BgColor = color
 }

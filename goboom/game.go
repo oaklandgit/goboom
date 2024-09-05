@@ -1,8 +1,6 @@
 package goboom
 
 import (
-	"fmt"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -34,6 +32,10 @@ func NewGame(width, height float32, title string) *Game {
 	return g
 }
 
+func (g *Game) SetBgColor(color rl.Color) {
+	g.BgColor = color
+}
+
 func (g *Game) GetTitle() string {
 	return g.Title
 }
@@ -46,6 +48,27 @@ func (g *Game) GetHeight() float32 {
 	return g.Height
 }
 
+func (g *Game) Update() {
+
+	g.CheckInput()
+
+	scene := g.GetCurrentScene()
+	scene.OnUpdate()
+
+	for _, obj := range scene.GetChildren() {
+
+		if obj.IsDeleted() {
+			scene.Remove(obj)
+			continue
+		}
+
+		obj.OnUpdate()
+		obj.OnWrap()
+		obj.CheckInput()
+	}
+
+}
+
 func (g *Game) Run() {
 
 	debugMode := 0
@@ -54,19 +77,29 @@ func (g *Game) Run() {
 		func() {}, // DebugOff
 		func() {
 			DrawGrid(int32(g.Width), int32(g.Height), 12)
-			DrawMouseCoordinates()
+			DrawMouseCoordinates(20, rl.Yellow)
 		},
 		func() {
-			DrawBoundingBoxes(g.GetCurrentScene().GetChildren(), rl.Red)
+			DrawBoundingBoxes(
+				g.GetCurrentScene().
+				GetChildren(),
+				rl.Red)
 		},
 		func() {
-			DrawBoundingBoxes(g.GetCurrentScene().GetChildren(), rl.Green)
+			DrawBoundingBoxes(
+				g.GetCurrentScene().
+				GetChildren(),
+				rl.Green)
 		},
-		DrawPerformance,
+		func() {
+			DrawPerformance(22, 22, 20, rl.Yellow)
+		},
+		func() {
+			DrawPerformance(22, int32(g.GetHeight()) - 34, 20, rl.Yellow)
+		},
 	}
 
 	g.AddInput(rl.KeyD, KeyPressed, func() {
-		fmt.Println("Debug mode")
 		debugMode = (debugMode + 1) % len(DebugModes)
 	})
 

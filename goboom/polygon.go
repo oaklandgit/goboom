@@ -12,7 +12,6 @@ func NewPolygon(x, y float32, strokeColor rl.Color, closed bool, path string) *G
 
 	vectors, err := StringToVectors(path)
 
-
 	if err != nil {
 		fmt.Println("Error:", err)
 		return nil

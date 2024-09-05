@@ -14,16 +14,16 @@ func DrawGrid(w, h, every int32) {
 	}
 }
 
-func DrawMouseCoordinates() {
+func DrawMouseCoordinates(fontSize int32, color rl.Color) {
 	mouseX := rl.GetMouseX()
 	mouseY := rl.GetMouseY()
 	text := fmt.Sprintf("X: %d, Y: %d", mouseX, mouseY)
-	rl.DrawText(text, mouseX, mouseY+20, 16, rl.White)
+	rl.DrawText(text, mouseX, mouseY+20, fontSize, color)
 }
 
-func DrawPerformance() {
+func DrawPerformance(x, y, size int32, color rl.Color) {
 	perf := fmt.Sprintf("FPS: %d", rl.GetFPS())
-	rl.DrawText(perf, 20, 20, 16, rl.White)
+	rl.DrawText(perf, x, y, size, color)
 }
 
 func DrawBoundingBoxes(objects []*GameObject, color rl.Color) {
