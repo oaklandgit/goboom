@@ -26,6 +26,11 @@ func DrawPerformance(x, y, size int32, color rl.Color) {
 	rl.DrawText(perf, x, y, size, color)
 }
 
+func DrawObjectCount(x, y, size int32, color rl.Color, objects []*GameObject) {
+	count := fmt.Sprintf("OBJECTS: %d", len(objects))
+	rl.DrawText(count, x, y, size, color)
+}
+
 func DrawBoundingBoxes(objects []*GameObject, color rl.Color) {
 	for _, r := range objects {
 		rl.DrawRectangleLines(

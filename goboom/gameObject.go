@@ -16,7 +16,6 @@ type GameObject struct {
 	Lifespan
 	Scale
 	Velocity
-	Visibility
 	Shape
 	Stroke
 	Fill
@@ -42,7 +41,7 @@ func NewGameObject() *GameObject {
 		Fill: Fill{
 			FillColor: rl.Blank,
 		},
-		Visibility: Visibility{
+		Shape: Shape{
 			Visible: true,
 		},
 	}

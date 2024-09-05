@@ -10,9 +10,6 @@ func (p *Pivot) SetOrigin(x, y float32) {
 	p.OriginY = y
 }
 
-func (p *Pivot) GetOrigin() (float32, float32) {
-	return p.OriginX, p.OriginY
-}
 
 func (p *Pivot) GetOriginX() float32 {
 	return p.OriginX
@@ -20,4 +17,8 @@ func (p *Pivot) GetOriginX() float32 {
 
 func (p *Pivot) GetOriginY() float32 {
 	return p.OriginY
+}
+
+func (p *Pivot) GetOrigin() (float32, float32) {
+	return p.GetOriginX(), p.GetOriginY()
 }

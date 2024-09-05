@@ -93,9 +93,7 @@ func (g *Game) Run() {
 		},
 		func() {
 			DrawPerformance(22, 22, 20, rl.Yellow)
-		},
-		func() {
-			DrawPerformance(22, int32(g.GetHeight()) - 34, 20, rl.Yellow)
+			DrawObjectCount(22, 44, 20, rl.Yellow, g.GetCurrentScene().GetAll())
 		},
 	}
 

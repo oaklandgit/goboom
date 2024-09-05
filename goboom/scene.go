@@ -7,10 +7,8 @@ func (g *Game) NewScene(id string) *GameObject {
 			ScaleX: 1,
 			ScaleY: 1,
 		},
-		Visibility: Visibility{
-			Visible: true,
-		},
 		Shape: Shape{
+			Visible: true,
 			GetWidth: func() float32 {
 				return g.Width
 			},
