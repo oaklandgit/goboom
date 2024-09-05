@@ -58,3 +58,7 @@ func NewGameObject() *GameObject {
 
 	return &obj
 }
+
+func (obj *GameObject) GetScene() *GameObject {
+	return obj.GetGame().GetCurrentScene()
+}

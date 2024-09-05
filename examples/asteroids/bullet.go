@@ -15,8 +15,18 @@ func createBullet(x, y, angle, thrust float32) *boom.GameObject {
 	bullet.SetAngle(angle)
 	bullet.SetLifespan(1_000) // 1 second
 
-	bullet.AddCollider("asteroid", func(a, b *boom.GameObject) {
+	bullet.AddCollider("asteroid", func(self, asteroid *boom.GameObject) {
         fmt.Println("Bullet collided with asteroid!")
+		bullet.GetScene().NewExplosion(
+		 	self.CenterX(), self.CenterY(),
+			4, 6,
+			5, 12,
+			func() *boom.GameObject {
+				return boom.NewRectangle(0, 0, 10, 10, rl.White)
+			})
+			self.SetLifespan(0)
+			asteroid.SetLifespan(0)
+
     })
 
 	return bullet

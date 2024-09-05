@@ -16,3 +16,11 @@ func (s *Shape) SetVisible(visible bool) {
 func (s *Shape) IsVisible() bool {
 	return s.Visible
 }
+
+func (s *GameObject) CenterX() float32 {
+	return s.GetX() + s.GetWidth() / 2
+}
+
+func (s *GameObject) CenterY() float32 {
+	return s.GetY() + s.GetHeight() / 2
+}
