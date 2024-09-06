@@ -14,8 +14,7 @@ func main() {
 	game.SetBgColor(rl.Black)
 	scene := game.GetCurrentScene()
 
-	player := boom.NewSprite(0, 0, IMAGE_PATH)
-	player.SetXY(scene.CenterX(), scene.CenterY())
+	player := boom.NewSprite(scene.CenterX(), scene.CenterY(), IMAGE_PATH)
 	player.SetOrigin(0.5, 0.5)
 	player.SetScale(5, 5)
 
