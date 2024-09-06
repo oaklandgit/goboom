@@ -56,6 +56,8 @@ func NewGameObject() *GameObject {
 		obj.Y += obj.VelY
 	}
 
+	obj.OnInit = func() {}
+
 	return &obj
 }
 
