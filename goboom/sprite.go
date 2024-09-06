@@ -4,11 +4,16 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+type Sprite struct {
+	Frames []rl.Texture2D
+	CurrentFrame int
+}
+
 func NewSprite(x, y float32, path string) *GameObject {
 
 	tx := rl.Texture2D{}
-	s := NewGameObject()
 
+	s := NewGameObject()
 	s.X = x
 	s.Y = y
 
@@ -28,5 +33,6 @@ func NewSprite(x, y float32, path string) *GameObject {
 	s.GetHeight = func() float32 {
 		return float32(tx.Height)
 	}
+
 	return s
 }

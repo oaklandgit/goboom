@@ -30,6 +30,7 @@ type GameObject struct {
 	Game *Game
 	Parent *GameObject
 	Children []*GameObject
+	Components []Component
 }
 
 func NewGameObject() *GameObject {
