@@ -32,6 +32,11 @@ func (g *GameObject) GetComponents() []Component {
 	return g.Components
 }
 
+// Alias
+func (g *GameObject) With(c Component) {
+	g.AddComponent(c)
+}
+
 func (g *GameObject) Get(id string) Component {
 	for _, c := range g.Components {
 		if c.GetComponentId() == id {

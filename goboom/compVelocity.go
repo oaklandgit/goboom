@@ -51,6 +51,10 @@ func (c *VelocityComp) GetVelXY() (float32, float32) {
 	return c.VelX, c.VelY
 }
 
+// Alias
+func (c *VelocityComp) Set(args ...interface{}) {
+	c.SetVelocity(args...)
+}
 
 
 func (c *VelocityComp) SetVelocity(args ...interface{}) {
@@ -63,10 +67,27 @@ func (c *VelocityComp) SetVelocity(args ...interface{}) {
     }
 
     if len(args) == 2 {
+		// int case
+		if vx, ok := args[0].(int); ok {
+			if vy, ok := args[1].(int); ok {
+				c.VelX = float32(vx)
+				c.VelY = float32(vy)
+				return
+			}
+		}
+        // float32 case
         if vx, ok := args[0].(float32); ok {
             if vy, ok := args[1].(float32); ok {
                 c.VelX = vx
                 c.VelY = vy
+                return
+            }
+        }
+        // float64 case
+        if vx, ok := args[0].(float64); ok {
+            if vy, ok := args[1].(float64); ok {
+                c.VelX = float32(vx)
+                c.VelY = float32(vy)
                 return
             }
         }

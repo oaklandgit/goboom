@@ -46,8 +46,9 @@ func main() {
 	sprite.SetScale(2, 2)
 	regpoly.SetScale(2, 3)
 
-	circle.AddComponent(boom.NewVelocityComp(0, 0))
-	circle.Get("velocity").(*boom.VelocityComp).SetVelocity(rl.NewVector2(2, 1))
+	vel := boom.NewVelocityComp(0, 0)
+	circle.With(vel)
+	vel.Set(2, 1)
 
 	scene.Add(circle, rect, sprite, poly, regpoly, multi, test, anim)
 
