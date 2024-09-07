@@ -10,6 +10,16 @@ type Component interface {
 	GetComponentId() string
 }
 
+func Create(x, y float32, c ...Component) *GameObject {	
+	obj := NewGameObject()
+	obj.X = x
+	obj.Y = y
+	for _, comp := range c {
+		obj.AddComponent(comp)
+	}
+	return obj
+}
+
 func (g *GameObject) AddComponent(c Component) {
 	c.SetGameObject(g)
 	g.Components = append(g.Components, c)
@@ -18,6 +28,8 @@ func (g *GameObject) AddComponent(c Component) {
 func (g *GameObject) GetComponents() []Component {
 	return g.Components
 }
+
+
 
 
 // TEST COMPONENT

@@ -8,8 +8,7 @@ import (
 
 func createPaddle() *boom.GameObject {
 
-	paddle := boom.NewRectangle(0, 0, 80, 16, rl.Blank)
-	paddle.SetFill(rl.White)
+	paddle := boom.Rectangle(0, 0, 80, 16, rl.White, rl.Blank, 0)
 	paddle.AddTags("paddle")
 
 	paddle.AddInput(rl.KeyLeft, boom.KeyDown, func() {

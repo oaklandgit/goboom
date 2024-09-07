@@ -19,6 +19,13 @@ func Rectangle(x, y, w, h float32, fill, stroke rl.Color, strokeWeight float32) 
 	obj.X = x
 	obj.Y = y
 
+	comp := NewRectComp(w, h, fill, stroke, strokeWeight)
+	obj.AddComponent(comp)
+	
+	return obj
+}
+
+func NewRectComp(w, h float32, fill, stroke rl.Color, strokeWeight float32) *RectComp {
 	comp := &RectComp{
 		Width: w,
 		Height: h,
@@ -26,10 +33,7 @@ func Rectangle(x, y, w, h float32, fill, stroke rl.Color, strokeWeight float32) 
 		StrokeColor: stroke,
 		StrokeWeight: strokeWeight,
 	}
-
-	obj.AddComponent(comp)
-	
-	return obj
+	return comp
 }
 
 func (c *RectComp) GetComponentId() string {

@@ -8,8 +8,7 @@ import (
 
 func createBall() *boom.GameObject {
 
-	ball := boom.NewCircle(0, 0, 8, rl.Blank)
-	ball.SetFill(rl.White)
+	ball := boom.Circle(0, 0, 8, rl.White, rl.Red, 2)
 	ball.SetVelocityByHeading(-45, 5)
 	ball.AddTags("ball")
 

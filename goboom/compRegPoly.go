@@ -4,30 +4,23 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const EDGES = 24
-
-type CircleComp struct {
+type RegPolyComp struct {
 	GameObject 		*GameObject
+	Sides 			int32
 	Radius 			float32
 	Fill
 	Stroke
 }
 
 
-func Circle(x, y, r float32, fill, stroke rl.Color, strokeWeight float32) *GameObject {
+func RegPolygon(x, y, r float32, sides int32, fill, stroke rl.Color, strokeWeight float32) *GameObject {
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
 
-	comp := NewCircleComp(r, fill, stroke, strokeWeight)
-	obj.AddComponent(comp)
-	
-	return obj
-}
-
-func NewCircleComp(r float32, fill, stroke rl.Color, strokeWeight float32) *CircleComp {
-	comp := &CircleComp{
+	comp := &RegPolyComp{
 		Radius: r,
+		Sides: sides,
 		Fill: Fill{
 			FillColor: fill,
 		},
@@ -36,23 +29,26 @@ func NewCircleComp(r float32, fill, stroke rl.Color, strokeWeight float32) *Circ
 			StrokeWeight: strokeWeight,
 		},
 	}
-	return comp
+
+	obj.AddComponent(comp)
+	
+	return obj
 }
 
 
-func (c *CircleComp) GetComponentId() string {
-	return "circle"
+func (c *RegPolyComp) GetComponentId() string {
+	return "regpolygon"
 }
 
-func (c *CircleComp) SetGameObject(g *GameObject) {
+func (c *RegPolyComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
-func (c *CircleComp) OnInit() {}
+func (c *RegPolyComp) OnInit() {}
 
-func (c *CircleComp) OnUpdate() {}
+func (c *RegPolyComp) OnUpdate() {}
 
-func (c *CircleComp) OnDraw() {
+func (c *RegPolyComp) OnDraw() {
 	obj := c.GameObject
 	centerX := obj.X + c.GetWidth() * obj.GetOriginX()
 	centerY := obj.Y + c.GetHeight() * obj.GetOriginY()
@@ -65,7 +61,7 @@ func (c *CircleComp) OnDraw() {
 	
 	if c.FillColor != rl.Blank {
 		rl.DrawPoly(rl.Vector2{X: obj.X + c.Radius, Y: obj.Y + c.Radius},
-			EDGES,
+			c.Sides,
 			c.Radius,
 			0, // rotation handled by the GameObject
 			c.FillColor)
@@ -74,7 +70,7 @@ func (c *CircleComp) OnDraw() {
 	if c.StrokeColor != rl.Blank {
 		rl.DrawPolyLinesEx(
 			rl.Vector2{X: obj.X + c.Radius, Y: obj.Y + c.Radius},
-			EDGES,
+			c.Sides,
 			c.Radius,
 			0, // rotation handled by the GameObject
 			c.StrokeWeight,
@@ -84,10 +80,10 @@ func (c *CircleComp) OnDraw() {
 	rl.PopMatrix()
 }
 
-func (c *CircleComp) GetWidth() float32 {
+func (c *RegPolyComp) GetWidth() float32 {
 	return c.Radius * 2 * c.GameObject.GetScaleX()
 }
 
-func (c *CircleComp) GetHeight() float32 {
+func (c *RegPolyComp) GetHeight() float32 {
 	return c.Radius * 2 * c.GameObject.GetScaleY()
 }

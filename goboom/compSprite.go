@@ -8,7 +8,7 @@ import (
 
 type SpriteComp struct {
 	GameObject *GameObject
-	Paths []string
+	ImagePaths []string
 	Frames []rl.Texture2D
 	CurrentFrame int
 	Animations map[string][]Animation
@@ -21,21 +21,21 @@ type Animation struct {
 	Loop bool
 }
 
-func Sprite(x, y float32, path string) *GameObject {
+func Sprite(x, y float32, imagePath string) *GameObject {
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
 
-	comp := NewSpriteComp(path)
+	comp := NewSpriteComp(imagePath)
 	obj.AddComponent(comp)
 	
 	return obj
 }
 
 
-func NewSpriteComp(paths ...string) *SpriteComp {
+func NewSpriteComp(imagePaths ...string) *SpriteComp {
 	return &SpriteComp{
-		Paths: paths,
+		ImagePaths: imagePaths,
 	}
 }
 
@@ -49,7 +49,7 @@ func (c *SpriteComp) SetGameObject(g *GameObject) {
 
 func (c *SpriteComp) OnInit() {
 	fmt.Println("Initializing sprite component")
-	for _, path := range c.Paths {
+	for _, path := range c.ImagePaths {
 		c.Frames = append(c.Frames, rl.LoadTexture(path))
 	}
 }
@@ -83,7 +83,7 @@ func (c *SpriteComp) GetHeight() float32 {
 }
 
 func (c *SpriteComp) AddFrame(path string) {
-	c.Paths = append(c.Paths, path)
+	c.ImagePaths = append(c.ImagePaths, path)
 }
 
 func (c *SpriteComp) AddAnim(id string, frames []int, speed int, loop bool) {

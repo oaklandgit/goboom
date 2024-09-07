@@ -7,8 +7,7 @@ import (
 )
 
 func createWall(x, y, width, height float32) *boom.GameObject {
-	wall := boom.NewRectangle(x, y, width, height, rl.Blank)
-	wall.SetFill(rl.Red)
+	wall := boom.Rectangle(x, y, width, height, rl.Red, rl.White, 2)
 	wall.AddTags("wall")
 
 	return wall
