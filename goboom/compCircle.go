@@ -4,7 +4,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const EDGES = 12
+const EDGES = 24
 
 type CircleComp struct {
 	GameObject 		*GameObject
@@ -24,7 +24,7 @@ func Circle(x, y, r float32, fill, stroke rl.Color, strokeWeight float32) *GameO
 		Radius: r,
 		FillColor: fill,
 		StrokeColor: stroke,
-		StrokeWeight: 1,
+		StrokeWeight: strokeWeight,
 	}
 
 	obj.AddComponent(comp)

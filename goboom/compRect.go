@@ -24,7 +24,7 @@ func Rectangle(x, y, w, h float32, fill, stroke rl.Color, strokeWeight float32) 
 		Height: h,
 		FillColor: fill,
 		StrokeColor: stroke,
-		StrokeWeight: 1,
+		StrokeWeight: strokeWeight,
 	}
 
 	obj.AddComponent(comp)

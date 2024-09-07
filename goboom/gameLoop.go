@@ -1,6 +1,7 @@
 package goboom
 
 import (
+	"fmt"
 	"math"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -19,12 +20,12 @@ func (g *Game) Run() {
 			DrawMouseCoordinates(22, 46, 20, rl.Yellow)
 			
 		},
-		func() {
-			DrawBoundingBoxes(
-				g.GetCurrentScene().
-				GetChildren(),
-				rl.Yellow)
-		},
+		// func() {
+		// 	DrawBoundingBoxes(
+		// 		g.GetCurrentScene().
+		// 		GetChildren(),
+		// 		rl.Yellow)
+		// },
 		func() {
 			DrawPerformance(22, 22, 20, rl.Yellow)
 			DrawObjectCount(22, 46, 20, rl.Yellow, g.GetCurrentScene().GetAll())
@@ -32,6 +33,7 @@ func (g *Game) Run() {
 	}
 
 	g.AddInput(rl.KeyD, KeyPressed, func() {
+		fmt.Println("Debug mode!")
 		debugMode = (debugMode + 1) % len(DebugModes)
 	})
 
@@ -46,27 +48,34 @@ func (g *Game) Run() {
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
 	rl.SetTargetFPS(int32(g.FPS))
 
-	// INITIALIZATION
+	// Inialize all components
 	for _, obj := range g.GetCurrentScene().GetAll() {
 		for _, c := range obj.GetComponents() {
 			c.OnInit()
 		}
 	}
 
+	// Main game loop
 	for !rl.WindowShouldClose() {	
 		rl.BeginDrawing()
 		rl.ClearBackground(g.BgColor)
 
-		for _, obj := range g.GetCurrentScene().GetAll() {
-			// obj.OnInit()
+		g.CheckInput()
+		scene := g.GetCurrentScene()
+		scene.OnUpdate()
+		scene.CheckCollisions()
+
+		// Update and draw all object components
+		for _, obj := range scene.GetAll() {
+			obj.CheckInput()
 			for _, c := range obj.GetComponents() {
 				c.OnUpdate()
 				c.OnDraw()
 			}
 		}
 
-		// g.Update() // to do: add delta time
-		// g.Draw()
+		scene.Cleanup()
+
 		DebugModes[debugMode]()
 		rl.EndDrawing()
 	}

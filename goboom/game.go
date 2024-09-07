@@ -48,31 +48,6 @@ func (g *Game) GetHeight() float32 {
 	return g.Height
 }
 
-func (g *Game) Update() {
-
-	g.CheckInput()
-
-	scene := g.GetCurrentScene()
-	scene.OnUpdate()
-	scene.CheckCollisions()
-	
-
-	for _, obj := range scene.GetChildren() {
-
-		obj.OnUpdate()
-		obj.OnWrap()
-		obj.CheckInput()
-
-		for _, c := range obj.GetComponents() {
-			c.OnUpdate()
-			c.OnDraw()
-		}
-	}
-
-	scene.Cleanup()
-
-}
-
 func (scene *GameObject) Cleanup() {
 	for _, c := range scene.GetAll() {
 		if c.IsDeleted() {
@@ -80,72 +55,3 @@ func (scene *GameObject) Cleanup() {
 		}
 	}
 }
-
-// func (g *Game) Run() {
-
-// 	debugMode := 0
-// 	gridSize := int32(10)
-
-// 	DebugModes := []func() {
-// 		func() {}, // DebugOff
-// 		func() {
-// 			DrawGrid(int32(g.Width), int32(g.Height), gridSize, rl.Brown)
-// 			DrawGridSize(22, 22, gridSize, 20, rl.Yellow)
-// 			DrawMouseCoordinates(22, 46, 20, rl.Yellow)
-			
-// 		},
-// 		func() {
-// 			DrawBoundingBoxes(
-// 				g.GetCurrentScene().
-// 				GetChildren(),
-// 				rl.Yellow)
-// 		},
-// 		func() {
-// 			DrawPerformance(22, 22, 20, rl.Yellow)
-// 			DrawObjectCount(22, 46, 20, rl.Yellow, g.GetCurrentScene().GetAll())
-// 		},
-// 	}
-
-// 	g.AddInput(rl.KeyD, KeyPressed, func() {
-// 		debugMode = (debugMode + 1) % len(DebugModes)
-// 	})
-
-// 	g.AddInput(rl.KeyLeftBracket, KeyPressed, func() {
-// 		gridSize = int32(math.Max(float64(gridSize-1), 4))
-// 	})
-
-// 	g.AddInput(rl.KeyRightBracket, KeyPressed, func() {
-// 		gridSize = int32(math.Min(float64(gridSize+1), 20))
-// 	})
-
-// 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
-// 	rl.SetTargetFPS(int32(g.FPS))
-
-// 	// INITIALIZATION
-// 	for _, obj := range g.GetCurrentScene().GetAll() {
-// 		// obj.OnInit()
-// 		for _, c := range obj.GetComponents() {
-// 			c.OnInit()
-// 		}
-// 	}
-
-// 	for !rl.WindowShouldClose() {	
-// 		rl.BeginDrawing()
-// 		rl.ClearBackground(g.BgColor)
-
-// 		for _, obj := range g.GetCurrentScene().GetAll() {
-// 			// obj.OnInit()
-// 			for _, c := range obj.GetComponents() {
-// 				c.OnUpdate()
-// 				c.OnDraw()
-// 			}
-// 		}
-
-// 		// g.Update() // to do: add delta time
-// 		// g.Draw()
-// 		DebugModes[debugMode]()
-// 		rl.EndDrawing()
-// 	}
-// 	rl.CloseWindow()
-
-// }

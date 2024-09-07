@@ -15,11 +15,15 @@ func main() {
 	game.SetBgColor(rl.Black)
 	scene := game.GetCurrentScene()
 
-	rect := boom.Rectangle(300, 100, 50, 50, rl.Red, rl.Blue, 2)
-	circle := boom.Circle(100, 100, 50, rl.Red, rl.Blue, 2)
+	rect := boom.Rectangle(300, 100, 50, 50, rl.Pink, rl.Blue, 8)
+	circle := boom.Circle(10, 20, 30, rl.Red, rl.Yellow, 2)
 	sprite := boom.Sprite(100, 100, UGENE)
 
-	scene.Add(sprite, circle, rect)
+	rect.SetAngle(30)
+	circle.SetScale(2, 1)
+	sprite.SetScale(2, 2)
+
+	scene.Add(circle, rect, sprite)
 
 	game.Run()
 
