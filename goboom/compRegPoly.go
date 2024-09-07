@@ -50,8 +50,8 @@ func (c *RegPolyComp) OnUpdate() {}
 
 func (c *RegPolyComp) OnDraw() {
 	obj := c.GameObject
-	centerX := obj.X + c.GetWidth() * obj.GetOriginX()
-	centerY := obj.Y + c.GetHeight() * obj.GetOriginY()
+	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
+	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
 	rl.PushMatrix()
 	rl.Translatef(centerX, centerY, 0)
 	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
@@ -80,10 +80,16 @@ func (c *RegPolyComp) OnDraw() {
 	rl.PopMatrix()
 }
 
-func (c *RegPolyComp) GetWidth() float32 {
-	return c.Radius * 2 * c.GameObject.GetScaleX()
+func (c *RegPolyComp) ModifyWidth(w float32) float32 {
+	if c.Radius * 2 > w {
+		return c.Radius * 2
+	}
+	return w
 }
 
-func (c *RegPolyComp) GetHeight() float32 {
-	return c.Radius * 2 * c.GameObject.GetScaleY()
+func (c *RegPolyComp) ModifyHeight(h float32) float32 {
+	if c.Radius * 2 > h {
+		return c.Radius * 2
+	}
+	return h
 }

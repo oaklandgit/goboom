@@ -80,8 +80,8 @@ func (c *SpriteComp) OnUpdate() {
 
 func (c *SpriteComp) OnDraw() {
 	obj := c.GameObject
-	centerX := obj.X + c.GetWidth() * obj.GetOriginX()
-	centerY := obj.Y + c.GetHeight() * obj.GetOriginY()
+	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
+	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
 	rl.PushMatrix()
 	rl.Translatef(centerX, centerY, 0)
 	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
@@ -90,19 +90,28 @@ func (c *SpriteComp) OnDraw() {
 	
 	rl.DrawTexture(
 		c.Frames[c.CurrentFrame],
-		int32(obj.X - c.GetWidth() * obj.GetOriginX()),
-		int32(obj.Y - c.GetHeight() * obj.GetOriginY()),
+		int32(obj.X - obj.GetWidth() * obj.GetOriginX()),
+		int32(obj.Y - obj.GetHeight() * obj.GetOriginY()),
 		rl.White)
 	rl.PopMatrix()
 }
 
-func (c *SpriteComp) GetWidth() float32 {
-	return float32(c.Frames[c.CurrentFrame].Width)
+func (c *SpriteComp) ModifyWidth(w float32) float32 {
+	localW := float32(c.Frames[c.CurrentFrame].Width)
+	if localW > w {
+		return localW
+	}
+	return w
 }
 
-func (c *SpriteComp) GetHeight() float32 {
-	return float32(c.Frames[c.CurrentFrame].Height)
+func (c *SpriteComp) ModifyHeight(h float32) float32 {
+	localH := float32(c.Frames[c.CurrentFrame].Height)
+	if localH > h {
+		return localH
+	}
+	return h
 }
+
 
 func (c *SpriteComp) AddFrame(path string) {
 	c.ImagePaths = append(c.ImagePaths, path)

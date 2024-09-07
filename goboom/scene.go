@@ -9,12 +9,8 @@ func (g *Game) NewScene(id string) *GameObject {
 		},
 		Shape: Shape{
 			Visible: true,
-			GetWidth: func() float32 {
-				return g.Width
-			},
-			GetHeight: func() float32 {
-				return g.Height
-			},
+			Width: g.Width,
+			Height: g.Height,
 		},
 		OnUpdate: func() {},
 		OnDraw: func() {},

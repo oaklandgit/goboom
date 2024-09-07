@@ -50,8 +50,8 @@ func (c *RectComp) OnUpdate() {}
 
 func (c *RectComp) OnDraw() {
 	obj := c.GameObject
-	centerX := obj.X + c.GetWidth() * obj.GetOriginX()
-	centerY := obj.Y + c.GetHeight() * obj.GetOriginY()
+	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
+	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
 
 	rl.PushMatrix()
 	rl.Translatef(centerX, centerY, 0)
@@ -76,10 +76,16 @@ func (c *RectComp) OnDraw() {
 	rl.PopMatrix()
 }
 
-func (c *RectComp) GetWidth() float32 {
-	return c.Width * c.GameObject.GetScaleX()
+func (c *RectComp) ModifyWidth(w float32) float32 {
+	if c.Width > w {
+		return c.Width
+	}
+	return w
 }
 
-func (c *RectComp) GetHeight() float32 {
-	return c.Height * c.GameObject.GetScaleY()
+func (c *RectComp) ModifyHeight(h float32) float32 {
+	if c.Height > h {
+		return c.Height
+	}
+	return h
 }

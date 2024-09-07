@@ -36,13 +36,6 @@ func NewGameObject() *GameObject {
 			ScaleX: 1,
 			ScaleY: 1,
 		},
-		// Stroke: Stroke{
-		// 	StrokeWeight: 2,
-		// 	StrokeColor: rl.Magenta, // default stroke color
-		// },
-		// Fill: Fill{
-		// 	FillColor: rl.Blank,
-		// },
 		Shape: Shape{
 			Visible: true,
 		},
@@ -54,7 +47,6 @@ func NewGameObject() *GameObject {
 	}
 
 	obj.OnDraw = func() {}
-
 	obj.OnInit = func() {}
 
 	return &obj
