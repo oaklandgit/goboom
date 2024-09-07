@@ -61,7 +61,7 @@ func (c *SpriteComp) OnUpdate() {
         return
     }
 
-	fmt.Println(c.ElapsedTime)
+	// fmt.Println(c.ElapsedTime)
 	anim := c.Animations[c.CurrentAnim]
 	c.ElapsedTime += rl.GetFrameTime()
 
@@ -76,8 +76,6 @@ func (c *SpriteComp) OnUpdate() {
             }
         }
     }
-
-
 }
 
 func (c *SpriteComp) OnDraw() {
