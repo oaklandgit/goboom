@@ -19,15 +19,15 @@ func (g *Game) Draw() {
 
 func drawWithTransforms(obj *GameObject) {
 
-	offsetX := obj.GetX() + (obj.GetWidth() * obj.GetOriginX())
-	offsetY := obj.GetY() + (obj.GetHeight() * obj.GetOriginY())
+	// offsetX := obj.GetX() + (obj.GetWidth() * obj.GetOriginX())
+	// offsetY := obj.GetY() + (obj.GetHeight() * obj.GetOriginY())
 
-	rl.PushMatrix()
+	// rl.PushMatrix()
 	
-		rl.Translatef(offsetX, offsetY, 0)
-		rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-		rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-		rl.Translatef(-offsetX, -offsetY, 0)
+		// rl.Translatef(offsetX, offsetY, 0)
+		// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
+		// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+		// rl.Translatef(-offsetX, -offsetY, 0)
 
 		obj.OnDraw()
 
@@ -40,7 +40,7 @@ func drawWithTransforms(obj *GameObject) {
 			}
 		}
 
-	rl.PopMatrix()
+	// rl.PopMatrix()
 
 
 }

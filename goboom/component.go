@@ -1,18 +1,57 @@
 package goboom
 
+import "fmt"
+
 type Component interface {
-	Init()
-	Update()
-	Draw()
+	SetGameObject(g *GameObject)
+	OnInit()
+	OnUpdate()
+	OnDraw()
+	GetComponentId() string
 }
 
 func (g *GameObject) AddComponent(c Component) {
+	c.SetGameObject(g)
 	g.Components = append(g.Components, c)
+}
+
+func (g *GameObject) GetComponents() []Component {
+	return g.Components
 }
 
 
 // TEST COMPONENT
 
-type SayHello struct {
-	Hello string
+type SayMessage struct {
+	GameObject *GameObject
+	Message string
+}
+
+
+func NewSayMessage(message string) *SayMessage {
+	return &SayMessage{
+		Message: message,
+	}
+}
+
+func (c *SayMessage) GetComponentId() string {
+	return "SayMessage"
+}
+
+func (c *SayMessage) SetGameObject(g *GameObject) {
+	c.GameObject = g
+}
+
+func (s *SayMessage) OnInit() {
+	fmt.Println("Initializing message")
+}
+
+func (s *SayMessage) OnUpdate() {
+	
+	tags := s.GameObject.GetTags()
+	fmt.Println(tags)
+}
+
+func (s *SayMessage) OnDraw() {
+	fmt.Println(s.Message)
 }

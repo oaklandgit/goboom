@@ -61,14 +61,14 @@ func (g *Game) Update() {
 
 	for _, obj := range scene.GetChildren() {
 
-		if obj.IsDeleted() {
-			scene.Remove(obj)
-			continue
-		}
-
 		obj.OnUpdate()
 		obj.OnWrap()
 		obj.CheckInput()
+
+		for _, c := range obj.GetComponents() {
+			c.OnUpdate()
+			c.OnDraw()
+		}
 	}
 
 	scene.Cleanup()
@@ -126,6 +126,9 @@ func (g *Game) Run() {
 	// INITIALIZATION
 	for _, obj := range g.GetCurrentScene().GetAll() {
 		obj.OnInit()
+		for _, c := range obj.GetComponents() {
+			c.OnInit()
+		}
 	}
 
 	for !rl.WindowShouldClose() {	
