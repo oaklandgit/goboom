@@ -35,13 +35,18 @@ func main() {
 		boom.NewPolyComp("12 13 1 8.5 22 32 101 10", true, rl.Blue, rl.Purple, 2),
 	)
 
+	anim := boom.Sprite(400, 400, UGENE, DOOR)
+
+	anim.Get("sprite").(*boom.SpriteComp).AddAnim("idle", []int{0, 1}, 2, true)
+	anim.Get("sprite").(*boom.SpriteComp).Play("idle")
+
 	test.SetAngle(12)
 	rect.SetAngle(30)
 	circle.SetScale(2, 1)
 	sprite.SetScale(2, 2)
 	regpoly.SetScale(2, 3)
 
-	scene.Add(circle, rect, sprite, poly, regpoly, multi, test)
+	scene.Add(circle, rect, sprite, poly, regpoly, multi, test, anim)
 
 	game.Run()
 

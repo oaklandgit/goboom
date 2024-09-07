@@ -1,6 +1,9 @@
 package goboom
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 type Component interface {
 	SetGameObject(g *GameObject)
@@ -29,6 +32,36 @@ func (g *GameObject) GetComponents() []Component {
 	return g.Components
 }
 
+func (g *GameObject) Get(id string) Component {
+	for _, c := range g.Components {
+		if c.GetComponentId() == id {
+			return c
+		}
+	}
+	return nil
+}
+
+func (obj *GameObject) Do(componentID, methodName string, args ...interface{}) {
+    comp := obj.Get(componentID)
+    if comp == nil {
+        fmt.Printf("Error: component %s not found\n", componentID)
+        return
+    }
+
+    compValue := reflect.ValueOf(comp)
+    method := compValue.MethodByName(methodName)
+    if !method.IsValid() {
+        fmt.Printf("Error: method %s not found on component %s\n", methodName, componentID)
+        return
+    }
+
+    methodArgs := make([]reflect.Value, len(args))
+    for i, arg := range args {
+        methodArgs[i] = reflect.ValueOf(arg)
+    }
+
+    method.Call(methodArgs)
+}
 
 
 

@@ -11,8 +11,9 @@ type SpriteComp struct {
 	ImagePaths []string
 	Frames []rl.Texture2D
 	CurrentFrame int
-	Animations map[string][]Animation
+	Animations map[string]Animation
 	CurrentAnim string
+	ElapsedTime float32
 }
 
 type Animation struct {
@@ -21,12 +22,12 @@ type Animation struct {
 	Loop bool
 }
 
-func Sprite(x, y float32, imagePath string) *GameObject {
+func Sprite(x, y float32, imagePaths ...string) *GameObject {
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
 
-	comp := NewSpriteComp(imagePath)
+	comp := NewSpriteComp(imagePaths...)
 	obj.AddComponent(comp)
 	
 	return obj
@@ -36,6 +37,7 @@ func Sprite(x, y float32, imagePath string) *GameObject {
 func NewSpriteComp(imagePaths ...string) *SpriteComp {
 	return &SpriteComp{
 		ImagePaths: imagePaths,
+		Animations: make(map[string]Animation),
 	}
 }
 
@@ -54,7 +56,29 @@ func (c *SpriteComp) OnInit() {
 	}
 }
 
-func (c *SpriteComp) OnUpdate() {}
+func (c *SpriteComp) OnUpdate() {
+	if c.CurrentAnim == "" {
+        return
+    }
+
+	fmt.Println(c.ElapsedTime)
+	anim := c.Animations[c.CurrentAnim]
+	c.ElapsedTime += rl.GetFrameTime()
+
+	if c.ElapsedTime >= 1.0/float32(anim.Speed) {
+        c.ElapsedTime = 0
+        c.CurrentFrame++
+        if c.CurrentFrame >= len(anim.Frames) {
+            if anim.Loop {
+                c.CurrentFrame = 0
+            } else {
+                c.CurrentFrame = len(anim.Frames) - 1
+            }
+        }
+    }
+
+
+}
 
 func (c *SpriteComp) OnDraw() {
 	obj := c.GameObject
@@ -87,12 +111,17 @@ func (c *SpriteComp) AddFrame(path string) {
 }
 
 func (c *SpriteComp) AddAnim(id string, frames []int, speed int, loop bool) {
-	c.Animations[id] = append(c.Animations[id],
+	c.Animations[id] =
 		Animation{
 			Frames: frames,
 			Speed: speed,
 			Loop: loop,
-		})
+		}
+}
+
+func (c *SpriteComp) Play(id string) {
+	c.CurrentAnim = id
+	c.CurrentFrame = 0
 }
 	
 
