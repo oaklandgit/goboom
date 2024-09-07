@@ -29,7 +29,7 @@ func drawWithTransforms(obj *GameObject) {
 		// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
 		// rl.Translatef(-offsetX, -offsetY, 0)
 
-		obj.OnDraw()
+		// obj.OnDraw()
 
 		if len(obj.GetChildren()) > 0 {
 

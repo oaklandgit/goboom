@@ -21,6 +21,17 @@ type Animation struct {
 	Loop bool
 }
 
+func Sprite(x, y float32, path string) *GameObject {
+	obj := NewGameObject()
+	obj.X = x
+	obj.Y = y
+
+	comp := NewSpriteComp(path)
+	obj.AddComponent(comp)
+	
+	return obj
+}
+
 
 func NewSpriteComp(paths ...string) *SpriteComp {
 	return &SpriteComp{

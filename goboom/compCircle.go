@@ -15,29 +15,23 @@ type CircleComp struct {
 }
 
 
-func NewCircleObj(x, y, r float32, fill, stroke rl.Color, strokeWeight float32) *GameObject {
+func Circle(x, y, r float32, fill, stroke rl.Color, strokeWeight float32) *GameObject {
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
 
-	comp := NewCircleComp(r)
-	comp.FillColor = fill
-	comp.StrokeColor = stroke
-	comp.StrokeWeight = strokeWeight
+	comp := &CircleComp{
+		Radius: r,
+		FillColor: fill,
+		StrokeColor: stroke,
+		StrokeWeight: 1,
+	}
 
 	obj.AddComponent(comp)
 	
 	return obj
 }
 
-func NewCircleComp(r float32) *CircleComp {
-	return &CircleComp{
-		Radius: r,
-		FillColor: rl.Blank,
-		StrokeColor: rl.Blank,
-		StrokeWeight: 1,
-	}
-}
 
 func (c *CircleComp) GetComponentId() string {
 	return "circle"
