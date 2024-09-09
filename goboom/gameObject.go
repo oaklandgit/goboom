@@ -20,7 +20,7 @@ type GameObject struct {
 	Wrapping
 	
 	Lifespan
-	InputHandler
+	// InputHandler
 	Collisions
 
 	Game *Game

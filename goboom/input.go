@@ -1,51 +1,49 @@
 package goboom
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+// type ButtonMode int
 
-type ButtonMode int
+// const (
+// 	KeyPressed = iota
+// 	KeyReleased
+// 	KeyDown
+// )
 
-const (
-	KeyPressed = iota
-	KeyReleased
-	KeyDown
-)
+// type InputHandler struct {
+// 	Inputs []Input
+// }
 
-type InputHandler struct {
-	Inputs []Input
-}
+// type Input struct {
+// 	Key   int32
+// 	Mode ButtonMode
+// 	Action func()
+// }
 
-type Input struct {
-	Key   int32
-	Mode ButtonMode
-	Action func()
-}
+// func (im *InputHandler) AddInput(key int32, mode ButtonMode, action func()) {
 
-func (im *InputHandler) AddInput(key int32, mode ButtonMode, action func()) {
+// 	input := Input{
+// 		Key:   key,
+// 		Mode: mode,
+// 		Action: action,
+// 	}
 
-	input := Input{
-		Key:   key,
-		Mode: mode,
-		Action: action,
-	}
+// 	im.Inputs = append(im.Inputs, input)
+// }
 
-	im.Inputs = append(im.Inputs, input)
-}
+// func (im *InputHandler) CheckInput() {
 
-func (im *InputHandler) CheckInput() {
+// 	for _, input := range im.Inputs {
 
-	for _, input := range im.Inputs {
+// 		if input.Mode == KeyPressed && rl.IsKeyPressed(input.Key) {
+// 			input.Action()
+// 		}
 
-		if input.Mode == KeyPressed && rl.IsKeyPressed(input.Key) {
-			input.Action()
-		}
+// 		if input.Mode == KeyDown && rl.IsKeyDown(input.Key) {
+// 			input.Action()
+// 		}
 
-		if input.Mode == KeyDown && rl.IsKeyDown(input.Key) {
-			input.Action()
-		}
+// 		if input.Mode == KeyReleased && rl.IsKeyReleased(input.Key) {
+// 			input.Action()
+// 		}
+// 	}
 
-		if input.Mode == KeyReleased && rl.IsKeyReleased(input.Key) {
-			input.Action()
-		}
-	}
-
-}
+// }

@@ -47,7 +47,18 @@ func main() {
 	sprite.SetScale(2, 2)
 	regpoly.SetScale(2, 3)
 
-	// vel := boom.NewVelocityComp(0, 0)
+	test.AddComponent(boom.NewInputComp())
+
+	turnLeft := boom.NewInput(rl.KeyLeft, boom.KeyDown, func() {
+		test.AddAngle(-1)
+	})
+
+	turnRight := boom.NewInput(rl.KeyRight, boom.KeyDown, func() {
+		test.AddAngle(1)
+	})
+
+	test.AddComponent(boom.NewInputComp(turnLeft, turnRight))
+
 	circle.With(boom.NewVelocityComp(0, 0))
 	circle.Get("velocity").(*boom.VelocityComp).SetVelocity(2, 1)
 

@@ -1,9 +1,6 @@
 package goboom
 
 import (
-	"fmt"
-	"math"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -32,18 +29,18 @@ func (g *Game) Run() {
 		},
 	}
 
-	g.AddInput(rl.KeyD, KeyPressed, func() {
-		fmt.Println("Debug mode!")
-		debugMode = (debugMode + 1) % len(DebugModes)
-	})
+	// g.AddInput(rl.KeyD, KeyPressed, func() {
+	// 	fmt.Println("Debug mode!")
+	// 	debugMode = (debugMode + 1) % len(DebugModes)
+	// })
 
-	g.AddInput(rl.KeyLeftBracket, KeyPressed, func() {
-		gridSize = int32(math.Max(float64(gridSize-1), 4))
-	})
+	// g.AddInput(rl.KeyLeftBracket, KeyPressed, func() {
+	// 	gridSize = int32(math.Max(float64(gridSize-1), 4))
+	// })
 
-	g.AddInput(rl.KeyRightBracket, KeyPressed, func() {
-		gridSize = int32(math.Min(float64(gridSize+1), 20))
-	})
+	// g.AddInput(rl.KeyRightBracket, KeyPressed, func() {
+	// 	gridSize = int32(math.Min(float64(gridSize+1), 20))
+	// })
 
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
 	rl.SetTargetFPS(int32(g.FPS))
@@ -60,14 +57,14 @@ func (g *Game) Run() {
 		rl.BeginDrawing()
 		rl.ClearBackground(g.BgColor)
 
-		g.CheckInput()
+		// g.CheckInput()
 		scene := g.GetCurrentScene()
 		scene.OnUpdate()
 		scene.CheckCollisions()
 
 		// Update and draw all object components
 		for _, obj := range scene.GetAll() {
-			obj.CheckInput()
+			// obj.CheckInput()
 			for _, c := range obj.GetComponents() {
 				c.OnUpdate()
 				c.OnDraw()
