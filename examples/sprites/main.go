@@ -33,6 +33,7 @@ func main() {
 		boom.NewRectComp(30, 40, rl.Green, rl.Yellow, 2),
 		boom.NewSpriteComp(UGENE),
 		boom.NewPolyComp("12 13 1 8.5 22 32 101 10", true, rl.Blue, rl.Purple, 2),
+		boom.NewVelocityComp(0.5, 0),
 	)
 
 	anim := boom.Sprite(400, 400, UGENE, DOOR)
@@ -46,9 +47,10 @@ func main() {
 	sprite.SetScale(2, 2)
 	regpoly.SetScale(2, 3)
 
-	vel := boom.NewVelocityComp(0, 0)
-	circle.With(vel)
-	vel.Set(2, 1)
+	// vel := boom.NewVelocityComp(0, 0)
+	circle.With(boom.NewVelocityComp(0, 0))
+	circle.Get("velocity").(*boom.VelocityComp).SetVelocity(2, 1)
+
 
 	scene.Add(circle, rect, sprite, poly, regpoly, multi, test, anim)
 

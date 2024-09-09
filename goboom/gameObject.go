@@ -42,8 +42,8 @@ func NewGameObject() *GameObject {
 	}
 
 	obj.OnUpdate = func() {
-		obj.X += obj.VelX
-		obj.Y += obj.VelY
+		// obj.X += obj.VelX
+		// obj.Y += obj.VelY
 	}
 
 	obj.OnDraw = func() {}

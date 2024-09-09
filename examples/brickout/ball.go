@@ -8,8 +8,11 @@ import (
 
 func createBall() *boom.GameObject {
 
-	ball := boom.Circle(0, 0, 8, rl.White, rl.Red, 2)
-	ball.SetVelocityByHeading(-45, 5)
+	ball := boom.Create(
+		0, 0,
+		boom.NewCircleComp(6, rl.White, rl.Red, 2),
+		boom.NewVelocityComp(-1, -1),
+	)
 	ball.AddTags("ball")
 
 	ball.AddCollider("brick", func(b, brick *boom.GameObject) {

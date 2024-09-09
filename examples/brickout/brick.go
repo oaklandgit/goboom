@@ -8,8 +8,11 @@ import (
 
 func createBrick(color rl.Color) *boom.GameObject {
 
-	brick := boom.Rectangle(0, 0, 40, 20, color, rl.White, 2)
-	brick.AddTags("brick")
+	brick := boom.Create(
+		0, 0,
+		boom.NewRectComp(40, 20, color, rl.White, 2),
+	)
 
+	brick.AddTags("brick")
 	return brick
 }
