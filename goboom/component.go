@@ -29,6 +29,24 @@ func (g *GameObject) GetComponents() []Component {
 	return g.Components
 }
 
+func (g *GameObject) GetComponent(id string) Component {
+	for _, c := range g.Components {
+		if c.GetComponentId() == id {
+			return c
+		}
+	}
+	return nil
+}
+
+func (g *GameObject) HasComponent(id string) bool {
+	for _, c := range g.Components {
+		if c.GetComponentId() == id {
+			return true
+		}
+	}
+	return false
+}
+
 // Alias
 func (g *GameObject) With(c Component) {
 	g.AddComponent(c)

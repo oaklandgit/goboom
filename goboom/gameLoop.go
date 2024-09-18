@@ -60,7 +60,7 @@ func (g *Game) Run() {
 		// g.CheckInput()
 		scene := g.GetCurrentScene()
 		scene.OnUpdate()
-		scene.CheckCollisions()
+		// scene.CheckCollisions()
 
 		// Update and draw all object components
 		for _, obj := range scene.GetAll() {

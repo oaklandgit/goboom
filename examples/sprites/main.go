@@ -47,6 +47,18 @@ func main() {
 	sprite.SetScale(2, 2)
 	regpoly.SetScale(2, 3)
 
+	circle.AddComponent(
+		boom.NewCollideComp(
+			boom.CollisionCircle{Radius: 30},
+			"circle",
+		))
+	rect.AddComponent(
+		boom.NewCollideComp(
+			boom.CollisionRect{Width: 50, Height: 50},
+			"rect",
+		))
+	
+
 	test.AddComponent(boom.NewInputComp())
 
 	turnLeft := boom.NewInput(rl.KeyLeft, boom.KeyDown, func() {

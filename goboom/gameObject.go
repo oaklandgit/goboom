@@ -21,7 +21,7 @@ type GameObject struct {
 	
 	Lifespan
 	// InputHandler
-	Collisions
+	// Collisions
 
 	Game *Game
 	Parent *GameObject

@@ -12,7 +12,6 @@ type Game struct {
 	BgColor rl.Color
 	Scenes []*GameObject
 	CurrentScene int
-	// InputHandler
 }
 
 
