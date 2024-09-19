@@ -4,13 +4,25 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+
+type Entity interface {
+	Init()
+	Update()
+	Draw()
+	GetParent() Entity
+	GetChildren() []Entity
+	Add(...Entity)
+	Remove(Entity)
+	IsDeleted() bool
+}
+
 type Game struct {
 	Title string
 	Width float32
 	Height float32
 	FPS int
 	BgColor rl.Color
-	Scenes []*GameObject
+	Scenes []Entity
 	CurrentScene int
 }
 
@@ -23,7 +35,7 @@ func NewGame(width, height float32, title string) *Game {
 		Height: height,
 		BgColor: rl.White,
 		FPS: 60,
-		Scenes: []*GameObject{},
+		Scenes: []Entity{},
 		CurrentScene: 0,
 	}
 
@@ -47,10 +59,12 @@ func (g *Game) GetHeight() float32 {
 	return g.Height
 }
 
-func (scene *GameObject) Cleanup() {
-	for _, c := range scene.GetAll() {
-		if c.IsDeleted() {
-			c.GetParent().Remove(c)
-		}
-	}
-}
+// put into the scene's own Update method
+
+// func (scene *GameObject) Cleanup() {
+// 	for _, c := range scene.GetAll() {
+// 		if c.IsDeleted() {
+// 			c.GetParent().Remove(c)
+// 		}
+// 	}
+// }

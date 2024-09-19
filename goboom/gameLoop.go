@@ -59,7 +59,7 @@ func (g *Game) Run() {
 
 		// g.CheckInput()
 		scene := g.GetCurrentScene()
-		scene.OnUpdate()
+		scene.Update()
 		// scene.CheckCollisions()
 
 		// Update and draw all object components
@@ -71,7 +71,7 @@ func (g *Game) Run() {
 			}
 		}
 
-		scene.Cleanup()
+		// scene.Cleanup()
 
 		DebugModes[debugMode]()
 		rl.EndDrawing()
