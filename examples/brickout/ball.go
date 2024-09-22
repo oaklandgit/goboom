@@ -15,21 +15,27 @@ func createBall() *boom.GameObject {
 	)
 	ball.AddTags("ball")
 
-	ball.AddCollider("brick", func(b, brick *boom.GameObject) {
+
+	collision := boom.NewCollideComp(boom.CollisionCircle{Radius: 6}, "ball")
+	
+	collision.NewCollider("brick", func(b, brick *boom.GameObject) {
 		brick.SetLifespan(0)
 		b.SetVelocityVect(
 			rl.Vector2Reflect(b.GetVelocityVect(), rl.NewVector2(0, 1)))
+
 	})
 
-	ball.AddCollider("wall", func(b, wall *boom.GameObject) {
+	collision.NewCollider("wall", func(b, wall *boom.GameObject) {
 		b.SetVelocityVect(
 			rl.Vector2Reflect(b.GetVelocityVect(), rl.NewVector2(1, 0)))
 	})
 
-	ball.AddCollider("paddle", func(b, paddle *boom.GameObject) {
+	collision.NewCollider("paddle", func(b, paddle *boom.GameObject) {
 		b.SetVelocityVect(
 			rl.Vector2Reflect(b.GetVelocityVect(), rl.NewVector2(0, 1)))
 	})
+
+	ball.AddComponent(collision)
 
 	return ball
 }

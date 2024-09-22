@@ -1,6 +1,8 @@
 package goboom
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
 
 type InputComp struct {
 	GameObject 	*GameObject
@@ -29,13 +31,15 @@ func NewInputComp(inputs ...Input) *InputComp {
 	return comp
 }
 
-func NewInput(key int32, mode ButtonMode, action func()) Input {
+func (c *InputComp) NewInput(key int32, mode ButtonMode, action func()) Input {
 
 	input := Input{
 		Key:   key,
 		Mode: mode,
 		Action: action,
 	}
+
+	c.Inputs = append(c.Inputs, input)
 
 	return input
 }
@@ -52,6 +56,8 @@ func (c *InputComp) SetGameObject(g *GameObject) {
 func (c *InputComp) OnInit() {}
 
 func (c *InputComp) OnUpdate() {
+
+	
 	for _, input := range c.Inputs {
 
 		if input.Mode == KeyPressed && rl.IsKeyPressed(input.Key) {
@@ -68,9 +74,4 @@ func (c *InputComp) OnUpdate() {
 	}
 }
 
-func (c *InputComp) OnDraw() {
-
-	// key := rl.GetKeyPressed()
-	// rl.DrawText(string(key), 22, 22, 20, rl.Yellow)
-
-}
+func (c *InputComp) OnDraw() {}

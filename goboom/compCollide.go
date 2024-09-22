@@ -85,7 +85,7 @@ func (c CollisionRect) IsCollidingWith(other *CollideComp) bool {
 
 type Collider struct {
 	Vs     string
-	Action func(obj1, obj2 *CollideComp)
+	Action func(obj1, obj2 *GameObject)
 }
 
 func NewCollideComp(shape ColliderShape, tags ...string) *CollideComp {
@@ -96,7 +96,7 @@ func NewCollideComp(shape ColliderShape, tags ...string) *CollideComp {
 	return comp
 }
 
-func (c *CollideComp) NewCollider(vs string, action func(area1, area2 *CollideComp)) Collider {
+func (c *CollideComp) NewCollider(vs string, action func(obj1, obj2 *GameObject)) Collider {
 
 	collider := Collider{
 		Vs: vs,
@@ -150,13 +150,13 @@ func (c *CollideComp) OnUpdate() {
 						// check for colliders
 						for _, c := range c1.Colliders {
 							if c.Vs == o2.Tags[0] {
-								c.Action(c1, c2)
+								c.Action(o1, o2)
 							}
 						}
 
 						for _, c := range c2.Colliders {
 							if c.Vs == o1.Tags[0] {
-								c.Action(c2, c1)
+								c.Action(o2, o1)
 							}
 						}
 

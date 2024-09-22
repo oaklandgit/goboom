@@ -11,21 +11,27 @@ func createPaddle() *boom.GameObject {
 	paddle := boom.Rectangle(0, 0, 80, 16, rl.White, rl.Blank, 0)
 	paddle.AddTags("paddle")
 
-	paddle.AddInput(rl.KeyLeft, boom.KeyDown, func() {
-		paddle.SetVelocityByHeading(-90, PADDLE_SPEED)
+	vel := boom.NewVelocityComp(0, 0)
+	paddle.AddComponent(vel)
+
+	control := boom.NewInputComp()
+	control.NewInput(rl.KeyLeft, boom.KeyDown, func() {
+		vel.SetVelocity(-PADDLE_SPEED, 0)
 	})
 
-	paddle.AddInput(rl.KeyRight, boom.KeyDown, func() {
-		paddle.SetVelocityByHeading(90, PADDLE_SPEED)
+	control.NewInput(rl.KeyRight, boom.KeyDown, func() {
+		vel.SetVelocity(PADDLE_SPEED, 0)
 	})
 
-	paddle.AddInput(rl.KeyLeft, boom.KeyReleased, func() {
-		paddle.SetVelocity(0, 0)
+	control.NewInput(rl.KeyLeft, boom.KeyReleased, func() {
+		vel.SetVelocity(0, 0)
 	})
 
-	paddle.AddInput(rl.KeyRight, boom.KeyReleased, func() {
-		paddle.SetVelocity(0, 0)
+	control.NewInput(rl.KeyRight, boom.KeyReleased, func() {
+		vel.SetVelocity(0, 0)
 	})
+
+	paddle.AddComponent(control)
 	
 	return paddle
 }
