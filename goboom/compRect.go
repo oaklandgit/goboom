@@ -49,9 +49,9 @@ func (c *RectComp) GetGameObject() *GameObject {
 }
 
 func (c *RectComp) OnInit() {
-	obj := c.GameObject
-	obj.Width = (c.modifyWidth(obj.GetWidth()))
-	obj.Height = (c.modifyHeight(obj.GetHeight()))
+	// obj := c.GameObject
+	// obj.Width = (c.modifyWidth(obj.GetWidth()))
+	// obj.Height = (c.modifyHeight(obj.GetHeight()))
 }
 
 func (c *RectComp) OnUpdate(scene *GameObject) {}
@@ -84,16 +84,16 @@ func (c *RectComp) OnDraw(scene *GameObject) {
 	rl.PopMatrix()
 }
 
-func (c *RectComp) modifyWidth(w float32) float32 {
-	if c.Width > w {
-		return c.Width
-	}
-	return w
+func (c *RectComp) GetWidth() float32 {
+	// if c.Width > w {
+	// 	return c.Width
+	// }
+	return c.Width
 }
 
-func (c *RectComp) modifyHeight(h float32) float32 {
-	if c.Height > h {
-		return c.Height
-	}
-	return h
+func (c *RectComp) GetHeight() float32 {
+	// if c.Height > h {
+	// 	return c.Height
+	// }
+	return c.Height
 }

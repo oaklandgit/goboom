@@ -7,6 +7,8 @@ type Component interface {
 	OnUpdate(scene *GameObject)
 	OnDraw(scene *GameObject)
 	GetComponentId() string
+	GetWidth() float32
+	GetHeight() float32
 	// ModifyWidth(float32) float32
 	// ModifyHeight(float32) float32
 }

@@ -53,9 +53,9 @@ func (c *CircleComp) GetGameObject() *GameObject {
 }
 
 func (c *CircleComp) OnInit() {
-	obj := c.GameObject
-	obj.Width = (c.modifyWidth(obj.GetWidth()))
-	obj.Height = (c.modifyHeight(obj.GetHeight()))
+	// obj := c.GameObject
+	// obj.Width = (c.modifyWidth(obj.GetWidth()))
+	// obj.Height = (c.modifyHeight(obj.GetHeight()))
 }
 
 func (c *CircleComp) OnUpdate(scene *GameObject) {}
@@ -102,16 +102,10 @@ func (c *CircleComp) OnDraw(scene *GameObject) {
 // 	return c.Radius * 2
 // }
 
-func (c *CircleComp) modifyWidth(w float32) float32 {
-	if c.Radius * 2 > w{
-		return c.Radius * 2
-	}
-	return w
+func (c *CircleComp) GetWidth() float32 {
+	return c.Radius * 2
 }
 
-func (c *CircleComp) modifyHeight(h float32) float32 {
-	if c.Radius * 2 > h {
-		return c.Radius * 2
-	}
-	return h
+func (c *CircleComp) GetHeight() float32 {
+	return c.Radius * 2
 }

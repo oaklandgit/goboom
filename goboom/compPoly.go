@@ -73,21 +73,21 @@ func (c *PolyComp) OnDraw(scene *GameObject) {
 	rl.PopMatrix()
 }
 
-func (c *PolyComp) ModifyWidth(w float32) float32 {
+func (c *PolyComp) GetWidth() float32 {
 	// should be at least the width of the bounding box
 	localW := GetMaxX(c.Points) - GetMinX(c.Points)
-	if localW > w {
-		return localW
-	}
-	return w
+	// if localW > w {
+	// 	return localW
+	// }
+	return localW
 }
 
-func (c *PolyComp) ModifyHeight(h float32) float32 {
+func (c *PolyComp) GetHeight() float32 {
 	localH := GetMaxY(c.Points) - GetMinY(c.Points)
-	if localH > h {
-		return localH
-	}
-	return h
+	// if localH > h {
+	// 	return localH
+	// }
+	return localH
 }
 
 func StringToVectors(input string) ([]rl.Vector2, error) {

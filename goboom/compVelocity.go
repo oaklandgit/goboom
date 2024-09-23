@@ -103,3 +103,11 @@ func (c *VelocityComp) SetVelocity(args ...interface{}) {
 func (c *VelocityComp) GetVelVector() rl.Vector2 {
 	return rl.NewVector2(c.VelX, c.VelY)
 }
+
+func (c *VelocityComp) GetWidth() float32 {
+	return 0
+}
+
+func (c *VelocityComp) GetHeight() float32 {
+	return 0
+}

@@ -192,3 +192,11 @@ func (c *CollideComp) OnDraw(scene *GameObject) {
 	}
 
 }
+
+func (c *CollideComp) GetWidth() float32 {
+	return 0
+}
+
+func (c *CollideComp) GetHeight() float32 {
+	return 0
+}

@@ -79,3 +79,11 @@ func (c *InputComp) OnUpdate(scene *GameObject) {
 }
 
 func (c *InputComp) OnDraw(scene *GameObject) {}
+
+func (c *InputComp) GetWidth() float32 {
+	return 0
+}
+
+func (c *InputComp) GetHeight() float32 {
+	return 0
+}

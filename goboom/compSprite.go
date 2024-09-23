@@ -100,20 +100,20 @@ func (c *SpriteComp) OnDraw(scene *GameObject) {
 	rl.PopMatrix()
 }
 
-func (c *SpriteComp) ModifyWidth(w float32) float32 {
-	localW := float32(c.Frames[c.CurrentFrame].Width)
-	if localW > w {
-		return localW
-	}
-	return w
+func (c *SpriteComp) GetWidth() float32 {
+	return float32(c.Frames[c.CurrentFrame].Width)
+	// if localW > w {
+	// 	return localW
+	// }
+	// return localW
 }
 
-func (c *SpriteComp) ModifyHeight(h float32) float32 {
-	localH := float32(c.Frames[c.CurrentFrame].Height)
-	if localH > h {
-		return localH
-	}
-	return h
+func (c *SpriteComp) GetHeight() float32 {
+	return float32(c.Frames[c.CurrentFrame].Height)
+	// if localH > h {
+	// 	return localH
+	// }
+	// return h
 }
 
 

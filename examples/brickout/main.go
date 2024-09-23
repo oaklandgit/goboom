@@ -37,7 +37,7 @@ func main() {
 
 	// // Bricks
 	bricks := boom.GridArray(3, 14, 6, redBrick)
-	boom.PutCenter(scene, bricks, 0, -140)
+	boom.PutCenter(scene, bricks, 0, 0)
 
 	
 	// // Walls

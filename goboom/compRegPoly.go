@@ -84,16 +84,16 @@ func (c *RegPolyComp) OnDraw(scene *GameObject) {
 	rl.PopMatrix()
 }
 
-func (c *RegPolyComp) ModifyWidth(w float32) float32 {
-	if c.Radius * 2 > w {
-		return c.Radius * 2
-	}
-	return w
+func (c *RegPolyComp) GetWidth() float32 {
+	// if c.Radius * 2 > w {
+	// 	return c.Radius * 2
+	// }
+	return c.Radius * 2
 }
 
-func (c *RegPolyComp) ModifyHeight(h float32) float32 {
-	if c.Radius * 2 > h {
-		return c.Radius * 2
-	}
-	return h
+func (c *RegPolyComp) GetHeight() float32 {
+	// if c.Radius * 2 > h {
+	// 	return c.Radius * 2
+	// }
+	return c.Radius * 2
 }
