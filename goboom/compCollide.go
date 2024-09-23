@@ -186,8 +186,6 @@ func (c *CollideComp) OnDraw(scene *GameObject) {
 	for _, o := range objs {
 		if o.HasComponent("collide") {
 			c := o.GetComponent("collide").(*CollideComp)
-
-			
 			b := c.Shape.GetBoundingBox()
 			rl.DrawRectangleLines(int32(o.X+b.X), int32(o.Y+b.Y), int32(b.Width), int32(b.Height), rl.Red)
 		}
