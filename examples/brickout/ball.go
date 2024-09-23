@@ -14,8 +14,7 @@ func bounce (b *boom.GameObject, v rl.Vector2) rl.Vector2 {
 func createBall() *boom.GameObject {
 
 	// define components
-	vel := boom.NewVelocityComp(-1, -1)
-	// shape := boom.NewCircleComp(6, rl.White, rl.Red, 2)
+	vel := boom.NewVelocityComp(1, 1)
 	collision := boom.NewCollideComp(boom.CollisionCircle{Radius: 6}, "ball")
 
 	
@@ -32,17 +31,10 @@ func createBall() *boom.GameObject {
 		bounce(b, rl.NewVector2(0, 1))
 	})
 
-	// create game object
-	// ball := boom.Create(
-	// 	0, 0,
-	// 	shape,
-	// 	vel,
-	// 	collision,
-	// )
 	ball := boom.Circle(0, 0, 6, rl.White, rl.Red, 2)
 	ball.AddTags("ball")
 	ball.SetId("the ball")
-	
+
 	ball.AddComponents(vel, collision)
 
 

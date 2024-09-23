@@ -13,7 +13,9 @@ func createPaddle() *boom.GameObject {
 
 	vel := boom.NewVelocityComp(0, 0)
 	control := boom.NewInputComp()
-	
+	collision := boom.NewCollideComp(
+		boom.CollisionRect{Width: 80, Height: 16}, "paddle")
+
 	
 	control.NewInput(rl.KeyLeft, boom.KeyDown, func() {
 		vel.SetVelocity(-PADDLE_SPEED, 0)
@@ -32,7 +34,7 @@ func createPaddle() *boom.GameObject {
 	})
 	
 	paddle.SetId("the paddle")
-	paddle.AddComponents(vel, control)
+	paddle.AddComponents(vel, control, collision)
 	
 	return paddle
 }
