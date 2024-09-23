@@ -114,63 +114,74 @@ func (c *CollideComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *CollideComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
+
 func (c *CollideComp) OnInit() {}
 
-func (c *CollideComp) OnUpdate() {
+func (c *CollideComp) OnUpdate(scene *GameObject) {
 
-	objs := c.GameObject.GetScene().GetAll()
+	// fmt.Println("HELLO", c.GetGameObject().GetTags())
+	fmt.Println("YO", scene.GetGame().GetTitle())
+	// fmt.Printf("Scene: %+v\n", c.GameObject.GetScene())
+	// log.Fatal()
+
+	objs := scene.GetAll()
+	collideObjs := []*GameObject{}
+
+	for _, o := range objs {
+		if o.HasComponent("collide") {
+			collideObjs = append(collideObjs, o)
+		}
+	}
 
 	// reset collidingWith
-	// for _, o := range objs {
-	// 	o.GetComponent("collide").(*CollideComp).CollidingWith =
-	// 		o.GetComponent("collide").(*CollideComp).CollidingWith[:0]
-	// }
+	for _, o := range collideObjs {
+		o.GetComponent("collide").(*CollideComp).CollidingWith =
+			o.GetComponent("collide").(*CollideComp).CollidingWith[:0]
+	}
 	
-	for i, o1 := range objs {
-		for j, o2 := range objs {
+	for i, o1 := range collideObjs {
+		for j, o2 := range collideObjs {
 			if i != j {
 
-				// check all objects with collide component
-				if o1.HasComponent("collide") && o2.HasComponent("collide") {
+				// get the collide components
+				c1 := o1.GetComponent("collide").(*CollideComp)
+				c2 := o2.GetComponent("collide").(*CollideComp)
 
+				
+				// check if they are colliding
+				if c1.Shape.IsCollidingWith(c2) {
 
-					// get the collide components
-					c1 := o1.GetComponent("collide").(*CollideComp)
-					c2 := o2.GetComponent("collide").(*CollideComp)
+					fmt.Println("COLLISION!", c1.Tags, "and", c2.Tags)
+					c1.CollidingWith = append(c1.CollidingWith, o2)
+					c2.CollidingWith = append(c2.CollidingWith, o1)
 
-					
-
-					// check if they are colliding
-					if c1.Shape.IsCollidingWith(c2) {
-
-						fmt.Println("COLLISION!", c1.Tags, "and", c2.Tags)
-						c1.CollidingWith = append(c1.CollidingWith, o2)
-						c2.CollidingWith = append(c2.CollidingWith, o1)
-
-						// check for colliders
-						for _, c := range c1.Colliders {
-							if c.Vs == o2.Tags[0] {
-								c.Action(o1, o2)
-							}
+					// check for colliders
+					for _, c := range c1.Colliders {
+						if c.Vs == o2.Tags[0] {
+							c.Action(o1, o2)
 						}
+					}
 
-						for _, c := range c2.Colliders {
-							if c.Vs == o1.Tags[0] {
-								c.Action(o2, o1)
-							}
+					for _, c := range c2.Colliders {
+						if c.Vs == o1.Tags[0] {
+							c.Action(o2, o1)
 						}
-
 					}
 
 				}
+
 			}
 		}
 	}
 }
 
-func (c *CollideComp) OnDraw() {
+func (c *CollideComp) OnDraw(scene *GameObject) {
 
-	objs := c.GameObject.GetScene().GetAll()
+	objs := scene.GetAll()
 
 	for _, o := range objs {
 		if o.HasComponent("collide") {

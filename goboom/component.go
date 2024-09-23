@@ -2,9 +2,10 @@ package goboom
 
 type Component interface {
 	SetGameObject(g *GameObject)
+	GetGameObject() *GameObject
 	OnInit()
-	OnUpdate()
-	OnDraw()
+	OnUpdate(scene *GameObject)
+	OnDraw(scene *GameObject)
 	GetComponentId() string
 	// ModifyWidth(float32) float32
 	// ModifyHeight(float32) float32
@@ -21,8 +22,20 @@ func Create(x, y float32, c ...Component) *GameObject {
 }
 
 func (g *GameObject) AddComponent(c Component) {
+	
 	c.SetGameObject(g)
 	g.Components = append(g.Components, c)
+
+	// for _, comp := range g.Components {
+	// 	fmt.Println(comp.GetComponentId())
+	// 	fmt.Println(comp.GetGameObject().GetId())
+	// }
+}
+
+func (g *GameObject) AddComponents(c ...Component) {
+	for _, comp := range c {
+		g.AddComponent(comp)
+	}
 }
 
 func (g *GameObject) GetComponents() []Component {

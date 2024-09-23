@@ -29,15 +29,19 @@ func (c *VelocityComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *VelocityComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *VelocityComp) OnInit() {}
 
-func (c *VelocityComp) OnUpdate() {
+func (c *VelocityComp) OnUpdate(scene *GameObject) {
 	obj := c.GameObject
 	obj.X += c.VelX
 	obj.Y += c.VelY
 }
 
-func (c *VelocityComp) OnDraw() {}
+func (c *VelocityComp) OnDraw(scene *GameObject) {}
 
 func (c *VelocityComp) GetVelX() float32 {
 	return c.VelX

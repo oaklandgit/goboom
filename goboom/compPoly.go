@@ -54,11 +54,15 @@ func (c *PolyComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *PolyComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *PolyComp) OnInit() {}
 
-func (c *PolyComp) OnUpdate() {}
+func (c *PolyComp) OnUpdate(scene *GameObject) {}
 
-func (c *PolyComp) OnDraw() {
+func (c *PolyComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
 	rl.PushMatrix()
 	rl.Translatef(obj.X, obj.Y, 0)

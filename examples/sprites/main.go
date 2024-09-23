@@ -28,7 +28,7 @@ func main() {
 
 
 	// or create a new game object with multiple components
-	test := boom.Create(
+	controllable := boom.Create(
 		200, 300,
 		boom.NewRectComp(30, 40, rl.Green, rl.Yellow, 2),
 		boom.NewSpriteComp(UGENE),
@@ -41,7 +41,7 @@ func main() {
 	anim.Get("sprite").(*boom.SpriteComp).AddAnim("idle", []int{0, 1}, 2, true)
 	anim.Get("sprite").(*boom.SpriteComp).Play("idle")
 
-	test.SetAngle(12)
+	controllable.SetAngle(12)
 	rect.SetAngle(30)
 	circle.SetScale(2, 1)
 	sprite.SetScale(2, 2)
@@ -59,23 +59,21 @@ func main() {
 		))
 	
 
-	test.AddComponent(boom.NewInputComp())
-
-	turnLeft := boom.NewInput(rl.KeyLeft, boom.KeyDown, func() {
-		test.AddAngle(-1)
+	control := boom.NewInputComp()
+	control.NewInput(rl.KeyLeft, boom.KeyDown, func() {
+		control.GameObject.AddAngle(-1)
+	})
+	control.NewInput(rl.KeyRight, boom.KeyDown, func() {
+		control.GameObject.AddAngle(1)
 	})
 
-	turnRight := boom.NewInput(rl.KeyRight, boom.KeyDown, func() {
-		test.AddAngle(1)
-	})
-
-	test.AddComponent(boom.NewInputComp(turnLeft, turnRight))
+	controllable.AddComponent(control)
 
 	circle.With(boom.NewVelocityComp(0, 0))
 	circle.Get("velocity").(*boom.VelocityComp).SetVelocity(2, 1)
 
 
-	scene.Add(circle, rect, sprite, poly, regpoly, multi, test, anim)
+	scene.Add(circle, rect, sprite, poly, regpoly, multi, controllable, anim)
 
 	game.Run()
 

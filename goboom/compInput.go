@@ -53,9 +53,13 @@ func (c *InputComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *InputComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *InputComp) OnInit() {}
 
-func (c *InputComp) OnUpdate() {
+func (c *InputComp) OnUpdate(scene *GameObject) {
 
 	
 	for _, input := range c.Inputs {
@@ -74,4 +78,4 @@ func (c *InputComp) OnUpdate() {
 	}
 }
 
-func (c *InputComp) OnDraw() {}
+func (c *InputComp) OnDraw(scene *GameObject) {}

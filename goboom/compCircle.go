@@ -48,15 +48,19 @@ func (c *CircleComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *CircleComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *CircleComp) OnInit() {
 	obj := c.GameObject
 	obj.Width = (c.modifyWidth(obj.GetWidth()))
 	obj.Height = (c.modifyHeight(obj.GetHeight()))
 }
 
-func (c *CircleComp) OnUpdate() {}
+func (c *CircleComp) OnUpdate(scene *GameObject) {}
 
-func (c *CircleComp) OnDraw() {
+func (c *CircleComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
 	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
 	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()

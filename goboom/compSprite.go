@@ -49,6 +49,10 @@ func (c *SpriteComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *SpriteComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *SpriteComp) OnInit() {
 	fmt.Println("Initializing sprite component")
 	for _, path := range c.ImagePaths {
@@ -56,7 +60,7 @@ func (c *SpriteComp) OnInit() {
 	}
 }
 
-func (c *SpriteComp) OnUpdate() {
+func (c *SpriteComp) OnUpdate(scene *GameObject) {
 	if c.CurrentAnim == "" {
         return
     }
@@ -78,7 +82,7 @@ func (c *SpriteComp) OnUpdate() {
     }
 }
 
-func (c *SpriteComp) OnDraw() {
+func (c *SpriteComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
 	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
 	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()

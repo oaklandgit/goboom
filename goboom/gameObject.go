@@ -1,5 +1,7 @@
 package goboom
 
+import "fmt"
+
 type GameObject struct {
 	OnInit   func()
 	OnUpdate func()
@@ -20,8 +22,6 @@ type GameObject struct {
 	Wrapping
 	
 	Lifespan
-	// InputHandler
-	// Collisions
 
 	Game *Game
 	Parent *GameObject
@@ -29,9 +29,13 @@ type GameObject struct {
 	Components []Component
 }
 
+func (g *GameObject) String() string {
+    return fmt.Sprintf("Game: %s, Id: %s", g.Game.Title, g.Id)
+}
+
 func NewGameObject() *GameObject {
 
-	obj := GameObject{
+	obj := &GameObject{
 		Scale: Scale{
 			ScaleX: 1,
 			ScaleY: 1,
@@ -49,9 +53,13 @@ func NewGameObject() *GameObject {
 	obj.OnDraw = func() {}
 	obj.OnInit = func() {}
 
-	return &obj
+	return obj
 }
 
 func (obj *GameObject) GetScene() *GameObject {
+	if obj.Game == nil {
+		fmt.Println("Error: Game is nil")
+		return nil
+	}
 	return obj.GetGame().GetCurrentScene()
 }

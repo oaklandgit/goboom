@@ -12,36 +12,36 @@ func (obj *GameObject) SetParent(parent *GameObject) {
 	obj.Parent = parent
 }
 
-func (h *GameObject) GetParent() *GameObject {
-	return h.Parent
+func (obj *GameObject) GetParent() *GameObject {
+	return obj.Parent
 }
 
-func (h *GameObject) RemoveParent() {
-	h.Parent = nil
+func (obj *GameObject) RemoveParent() {
+	obj.Parent = nil
 }
 
-func (h *GameObject) Add(children ...*GameObject) {
+func (obj *GameObject) Add(children ...*GameObject) {
 	for _, c := range children {
-		h.Children = append(h.Children, c)
+		obj.Children = append(obj.Children, c)
 
 		if c.GetParent() != nil {
 			c.RemoveParent()
 		}
 
-		c.SetParent(h)
-		c.SetGame(h.GetGame())
+		c.SetParent(obj)
+		// c.SetGame(obj.GetGame())
 	}
 }
 
-func (h *GameObject) GetChildren() []*GameObject {
-	return h.Children
+func (obj *GameObject) GetChildren() []*GameObject {
+	return obj.Children
 }
 
 
-func (h *GameObject) Remove(child *GameObject) {
-	for i, c := range h.Children {
+func (obj *GameObject) Remove(child *GameObject) {
+	for i, c := range obj.Children {
 		if c == child {
-			h.Children = append(h.Children[:i], h.Children[i+1:]...)
+			obj.Children = append(obj.Children[:i], obj.Children[i+1:]...)
 			break
 		}
 	}

@@ -46,7 +46,13 @@ func (g *Game) Run() {
 	rl.SetTargetFPS(int32(g.FPS))
 
 	// Inialize all components
-	for _, obj := range g.GetCurrentScene().GetAll() {
+	scene := g.GetCurrentScene()
+	// for _, obj := range g.GetCurrentScene().GetAll() {
+	// 	for _, c := range obj.GetComponents() {
+	// 		c.OnInit()
+	// 	}
+	// }
+	for _, obj := range scene.GetAll() {
 		for _, c := range obj.GetComponents() {
 			c.OnInit()
 		}
@@ -58,7 +64,10 @@ func (g *Game) Run() {
 		rl.ClearBackground(g.BgColor)
 
 		// g.CheckInput()
-		scene := g.GetCurrentScene()
+		scene = g.GetCurrentScene()
+
+	// fmt.Println("SCENE TAGS", scene.GetTags())
+
 		scene.OnUpdate()
 		// scene.CheckCollisions()
 
@@ -66,8 +75,8 @@ func (g *Game) Run() {
 		for _, obj := range scene.GetAll() {
 			// obj.CheckInput()
 			for _, c := range obj.GetComponents() {
-				c.OnUpdate()
-				c.OnDraw()
+				c.OnUpdate(scene)
+				c.OnDraw(scene)
 			}
 		}
 

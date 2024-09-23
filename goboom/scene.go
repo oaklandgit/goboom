@@ -1,5 +1,9 @@
 package goboom
 
+import (
+	"fmt"
+)
+
 func (g *Game) NewScene(id string) *GameObject {
 	
 	scene := &GameObject{
@@ -18,12 +22,16 @@ func (g *Game) NewScene(id string) *GameObject {
 
 	scene.SetGame(g)
 	scene.SetId(id)
-	g.Scenes = append(g.Scenes, scene)
+	g.Scenes = append(g.Scenes, scene)	
 	
 	return scene
 }
 
 func (g *Game) GetCurrentScene() *GameObject {
+	if g.Scenes[g.CurrentScene] == nil {
+		fmt.Println("Error: CurrentScene is nil")
+		return nil
+	}
 	return g.Scenes[g.CurrentScene]
 }
 

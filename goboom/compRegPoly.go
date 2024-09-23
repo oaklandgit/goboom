@@ -44,11 +44,15 @@ func (c *RegPolyComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *RegPolyComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *RegPolyComp) OnInit() {}
 
-func (c *RegPolyComp) OnUpdate() {}
+func (c *RegPolyComp) OnUpdate(scene *GameObject) {}
 
-func (c *RegPolyComp) OnDraw() {
+func (c *RegPolyComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
 	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
 	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()

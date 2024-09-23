@@ -44,15 +44,19 @@ func (c *RectComp) SetGameObject(g *GameObject) {
 	c.GameObject = g
 }
 
+func (c *RectComp) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func (c *RectComp) OnInit() {
 	obj := c.GameObject
 	obj.Width = (c.modifyWidth(obj.GetWidth()))
 	obj.Height = (c.modifyHeight(obj.GetHeight()))
 }
 
-func (c *RectComp) OnUpdate() {}
+func (c *RectComp) OnUpdate(scene *GameObject) {}
 
-func (c *RectComp) OnDraw() {
+func (c *RectComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
 	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
 	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()

@@ -35,17 +35,20 @@ func main() {
 		return createBrick(rl.Red)
 	}
 
-	// Bricks
+	// // Bricks
 	bricks := boom.GridArray(3, 14, 6, redBrick)
 	boom.PutCenter(scene, bricks, 0, -140)
 
 	
-	// Walls
-	leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
-	rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
-	ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
+	// // Walls
+	// leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
+	// rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
+	// ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
 
-	scene.Add(paddle, bricks, ball, ceiling, leftWall, rightWall)
+	// scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall)
+	scene.Add(paddle, bricks, ball)
+
+
 	
 	game.Run()
 
