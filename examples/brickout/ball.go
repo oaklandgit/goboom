@@ -6,9 +6,11 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func bounce (b *boom.GameObject, v rl.Vector2) rl.Vector2 {
-	currVel := b.GetComponent("velocity").(*boom.VelocityComp).GetVelVector()
-	return rl.Vector2Reflect(currVel, v)
+func bounce (b *boom.GameObject, v rl.Vector2) {
+	// b.SetY(b.GetY() - 20)
+	vel := b.GetComponent("velocity").(*boom.VelocityComp)
+	currVel := vel.GetVelVector()
+	vel.SetVelocity(rl.Vector2Reflect(currVel, v))
 }
 
 func createBall() *boom.GameObject {

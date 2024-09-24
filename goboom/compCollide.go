@@ -9,14 +9,13 @@ import (
 type CollideComp struct {
 	GameObject 		*GameObject // my game object
 	Shape 			ColliderShape // my shape for collisions
-	// Tags 			[]string // My identities
 	Colliders 		[]Collider // who to collide with and what to do
 	CollidingWith 	[]*GameObject // who am I currently colliding with?
 }
 
 type ColliderShape interface {
 	GetBoundingBox() rl.Rectangle
-	IsCollidingWith(other *CollideComp) bool
+	// IsCollidingWith(other *CollideComp) bool
 	GetType() string
 }
 
@@ -47,18 +46,68 @@ func (c CollisionRect) GetType() string {
 	return "rect"
 }
 
-func (c CollisionCircle) IsCollidingWith(other *CollideComp) bool {
-	if other.Shape == nil {
-		return false
+func (me CollideComp) IsCollidingWith(other *CollideComp) bool {
+
+	// object position
+	mePos := rl.NewVector2(me.GameObject.X, me.GameObject.Y)
+	otherPos := rl.NewVector2(other.GameObject.X, other.GameObject.Y)
+
+	// circle vs circle
+	if me.Shape.GetType() == "circle" && other.Shape.GetType() == "circle" {
+		circle1 := me.Shape.(CollisionCircle)
+		circle2 := other.Shape.(CollisionCircle)
+		return rl.CheckCollisionCircles(
+			rl.Vector2Add(mePos, circle1.GetCenter()), circle1.GetRadius(), 
+			rl.Vector2Add(otherPos, circle2.GetCenter()), circle2.GetRadius())
+	} 
+
+	// circle vs rect
+	if me.Shape.GetType() == "circle" && other.Shape.GetType() == "rect" {
+		circle := me.Shape.(CollisionCircle)
+		rect := other.Shape.(CollisionRect)
+		return rl.CheckCollisionCircleRec(
+			rl.Vector2Add(mePos, circle.GetCenter()), circle.GetRadius(),
+			rl.Rectangle{
+				X: other.GameObject.X,
+				Y: other.GameObject.Y,
+				Width: rect.Width,
+				Height: rect.Height,
+			})
+	}
+
+	// rect vs circle
+	if me.Shape.GetType() == "rect" && other.Shape.GetType() == "circle" {
+		rect := me.Shape.(CollisionRect)
+		circle := other.Shape.(CollisionCircle)
+		return rl.CheckCollisionCircleRec(
+			rl.Vector2Add(otherPos, circle.GetCenter()), circle.GetRadius(),
+			rl.Rectangle{
+				X: me.GameObject.X,
+				Y: me.GameObject.Y,
+				Width: rect.Width,
+				Height: rect.Height,
+			})
+	}
+
+	// rect vs rect
+	if me.Shape.GetType() == "rect" && other.Shape.GetType() == "rect" {
+		rect1 := me.Shape.(CollisionRect)
+		rect2 := other.Shape.(CollisionRect)
+		return rl.CheckCollisionRecs(
+			rl.Rectangle{
+				X: me.GameObject.X,
+				Y: me.GameObject.Y,
+				Width: rect1.Width,
+				Height: rect1.Height,
+			},
+			rl.Rectangle{
+				X: other.GameObject.X,
+				Y: other.GameObject.Y,
+				Width: rect2.Width,
+				Height: rect2.Height,
+			})
 	}
 	
-    if rect, ok := other.Shape.(*CollisionRect); ok {
-        return rl.CheckCollisionCircleRec(c.GetCenter(), c.GetRadius(), rect.GetBoundingBox())
-    }
-
-    if circle, ok := other.Shape.(*CollisionCircle); ok {
-        return rl.CheckCollisionCircles(c.GetCenter(), c.GetRadius(), circle.GetCenter(), circle.GetRadius())
-    }
 
 	return false
 }
@@ -74,22 +123,19 @@ func (c CollisionRect) GetBoundingBox() rl.Rectangle {
 	return rl.NewRectangle(0, 0, c.Width, c.Height)
 }
 
-func (c CollisionRect) IsCollidingWith(other *CollideComp) bool {
-	if other.Shape == nil {
-		return false
-	}
-
-    if rect, ok := other.Shape.(*CollisionRect); ok {
-        return rl.CheckCollisionRecs(c.GetBoundingBox(), rect.GetBoundingBox())
-    }
-
-    if circle, ok := other.Shape.(*CollisionCircle); ok {
-        return rl.CheckCollisionCircleRec(circle.GetCenter(), circle.GetRadius(), c.GetBoundingBox())
-    }
-
-    return false
+// func (c CollisionRect) IsCollidingWith(other *CollideComp) bool {
 	
-}
+//     if rect, ok := other.Shape.(*CollisionRect); ok {
+//         return rl.CheckCollisionRecs(c.GetBoundingBox(), rect.GetBoundingBox())
+//     }
+
+//     if circle, ok := other.Shape.(*CollisionCircle); ok {
+//         return rl.CheckCollisionCircleRec(circle.GetCenter(), circle.GetRadius(), c.GetBoundingBox())
+//     }
+
+//     return false
+	
+// }
 
 
 type Collider struct {
@@ -105,14 +151,16 @@ func NewCollideComp(shape ColliderShape, tags ...string) *CollideComp {
 	return comp
 }
 
-func (c *CollideComp) NewCollider(vs string, action func(obj1, obj2 *GameObject)) Collider {
+func (c *CollideComp) NewCollider(vs string, action func(obj1, obj2 *GameObject)) *CollideComp {
 
 	collider := Collider{
 		Vs: vs,
 		Action: action,
 	}
 
-	return collider
+	c.Colliders = append(c.Colliders, collider)
+
+	return c
 }
 
 func (c *CollideComp) GetComponentId() string {
@@ -131,11 +179,6 @@ func (c *CollideComp) GetGameObject() *GameObject {
 func (c *CollideComp) OnInit() {}
 
 func (c *CollideComp) OnUpdate(scene *GameObject) {
-
-	// fmt.Println("HELLO", c.GetGameObject().GetTags())
-	// fmt.Println("YO", scene.GetGame().GetTitle())
-	// fmt.Printf("Scene: %+v\n", c.GameObject.GetScene())
-	// log.Fatal()
 
 	objs := scene.GetAll()
 	collideObjs := []*GameObject{}
@@ -162,16 +205,18 @@ func (c *CollideComp) OnUpdate(scene *GameObject) {
 
 				
 				// check if they are colliding
-				if c1.Shape.IsCollidingWith(c2) {
+				if c1.IsCollidingWith(c2) {
 
-					fmt.Println("COLLISION!")
-					// fmt.Println("COLLISION!", c1.Tags, "and", c2.Tags)
+					// fmt.Println("COLLISION!")
+					// fmt.Println("COLLISION!", o1.GetId(), "and", o2.GetId())
 					c1.CollidingWith = append(c1.CollidingWith, o2)
 					c2.CollidingWith = append(c2.CollidingWith, o1)
 
 					// check for colliders
 					for _, c := range c1.Colliders {
+						fmt.Println("COLLIDER!")
 						if c.Vs == o2.Tags[0] {
+							
 							c.Action(o1, o2)
 						}
 					}
@@ -193,13 +238,14 @@ func (c *CollideComp) OnDraw(scene *GameObject) {
 
 	if c.Shape.GetType() == "circle" {
 		circle := c.Shape.(CollisionCircle)
-		rl.DrawCircleLines(int32(c.GameObject.X), int32(c.GameObject.Y), circle.Radius, rl.Yellow)
+		rl.DrawCircleLines(int32(c.GameObject.X + circle.Radius), int32(c.GameObject.Y + circle.Radius), circle.Radius, rl.Yellow)
 		return
 	}
 
 	if c.Shape.GetType() == "rect" {
 		rect := c.Shape.(CollisionRect)
-		rl.DrawRectangleLines(int32(c.GameObject.X), int32(c.GameObject.Y), int32(rect.Width), int32(rect.Height), rl.Red)
+		// rl.DrawRectangleLines(int32(c.GameObject.X), int32(c.GameObject.Y), int32(rect.Width), int32(rect.Height), rl.Red)
+		rl.DrawRectangleLinesEx(rect.GetBoundingBox(), 2, rl.Red)
 		return
 	}
 

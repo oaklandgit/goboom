@@ -13,7 +13,7 @@ func createBrick(color rl.Color) *boom.GameObject {
 		boom.NewRectComp(40, 20, color, rl.White, 2),
 	)
 
-	collision := boom.NewCollideComp(boom.CollisionCircle{Radius: 6}, "brick")
+	collision := boom.NewCollideComp(boom.CollisionRect{Width: 40, Height: 20}, "brick")
 
 	
 	brick.AddTags("brick")
