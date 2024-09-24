@@ -41,12 +41,12 @@ func main() {
 
 	
 	// // Walls
-	// leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
-	// rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
-	// ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
+	leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
+	rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
+	ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
 
-	// scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall)
-	scene.Add(paddle, bricks, ball)
+	scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall)
+	// scene.Add(paddle, bricks, ball)
 
 
 	

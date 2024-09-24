@@ -2,15 +2,17 @@ package goboom
 
 import (
 	"fmt"
+	"time"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 type CollideComp struct {
-	GameObject 		*GameObject // my game object
-	Shape 			ColliderShape // my shape for collisions
-	Colliders 		[]Collider // who to collide with and what to do
-	CollidingWith 	[]*GameObject // who am I currently colliding with?
+	GameObject 			*GameObject // my game object
+	Shape 				ColliderShape // my shape for collisions
+	Colliders 			[]Collider // who to collide with and what to do
+	CollidingWith 		[]*GameObject // who am I currently colliding with?
+	LastCollisionTime 	map[*GameObject]time.Time 
 }
 
 type ColliderShape interface {
@@ -146,7 +148,7 @@ type Collider struct {
 func NewCollideComp(shape ColliderShape, tags ...string) *CollideComp {
 	comp := &CollideComp{
 		Shape: shape,
-		// Tags: tags,
+		LastCollisionTime: make(map[*GameObject]time.Time), 
 	}
 	return comp
 }
@@ -194,6 +196,8 @@ func (c *CollideComp) OnUpdate(scene *GameObject) {
 		o.GetComponent("collide").(*CollideComp).CollidingWith =
 			o.GetComponent("collide").(*CollideComp).CollidingWith[:0]
 	}
+
+	cooldown := 1 * time.Second
 	
 	for i, o1 := range collideObjs {
 		for j, o2 := range collideObjs {
@@ -207,6 +211,26 @@ func (c *CollideComp) OnUpdate(scene *GameObject) {
 				// check if they are colliding
 				if c1.IsCollidingWith(c2) {
 
+					now := time.Now()
+
+					// Check cooldown for c1
+                    if lastTime, ok := c1.LastCollisionTime[o2]; ok {
+                        if now.Sub(lastTime) < cooldown {
+                            continue // Skip this collision due to cooldown
+                        }
+                    }
+
+					// Check cooldown for c2
+                    if lastTime, ok := c2.LastCollisionTime[o1]; ok {
+                        if now.Sub(lastTime) < cooldown {
+                            continue // Skip this collision due to cooldown
+                        }
+                    }
+
+					// Update the last collision time
+                    c1.LastCollisionTime[o2] = now
+                    c2.LastCollisionTime[o1] = now
+					
 					// fmt.Println("COLLISION!")
 					// fmt.Println("COLLISION!", o1.GetId(), "and", o2.GetId())
 					c1.CollidingWith = append(c1.CollidingWith, o2)
