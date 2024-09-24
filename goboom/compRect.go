@@ -57,6 +57,7 @@ func (c *RectComp) OnInit() {
 func (c *RectComp) OnUpdate(scene *GameObject) {}
 
 func (c *RectComp) OnDraw(scene *GameObject) {
+
 	obj := c.GameObject
 	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
 	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()

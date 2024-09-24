@@ -1,7 +1,6 @@
 package goboom
 
 import (
-	"fmt"
 	"time"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -230,17 +229,14 @@ func (c *CollideComp) OnUpdate(scene *GameObject) {
 					// Update the last collision time
                     c1.LastCollisionTime[o2] = now
                     c2.LastCollisionTime[o1] = now
-					
-					// fmt.Println("COLLISION!")
+
 					// fmt.Println("COLLISION!", o1.GetId(), "and", o2.GetId())
 					c1.CollidingWith = append(c1.CollidingWith, o2)
 					c2.CollidingWith = append(c2.CollidingWith, o1)
 
 					// check for colliders
 					for _, c := range c1.Colliders {
-						fmt.Println("COLLIDER!")
 						if c.Vs == o2.Tags[0] {
-							
 							c.Action(o1, o2)
 						}
 					}

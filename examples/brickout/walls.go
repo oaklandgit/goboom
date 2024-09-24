@@ -8,7 +8,7 @@ import (
 
 func createWall(x, y, width, height float32) *boom.GameObject {
 
-	wall := boom.Rectangle(x, y, width, height, rl.Red, rl.White, 2)
+	wall := boom.Rectangle(x, y, width, height, rl.DarkBrown, rl.Blank, 2)
 	wall.AddTags("wall")
 	collision := boom.NewCollideComp(
 		boom.CollisionRect{Width: width, Height: height}, "wall")

@@ -7,16 +7,15 @@ import (
 )
 
 func bounce (b *boom.GameObject, v rl.Vector2) {
-	// b.SetY(b.GetY() - 20)
 	vel := b.GetComponent("velocity").(*boom.VelocityComp)
 	currVel := vel.GetVelVector()
 	vel.SetVelocity(rl.Vector2Reflect(currVel, v))
 }
 
-func createBall() *boom.GameObject {
+func createBall(velx, velY float32) *boom.GameObject {
 
 	// define components
-	vel := boom.NewVelocityComp(1, 1)
+	vel := boom.NewVelocityComp(velx, velY)
 	collision := boom.NewCollideComp(boom.CollisionCircle{Radius: 6}, "ball")
 
 	

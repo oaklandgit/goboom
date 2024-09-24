@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	boom "goboom/goboom"
 	"time"
 
@@ -11,14 +12,15 @@ import (
 const (
 	PADDLE_SPEED = 10
 	WALL_WIDTH = 22
+	BALL_VELX = -1
+	BALL_VELY = 2
 )
-
 
 func main() {
 
 	rand.Seed(uint64(time.Now().UnixNano()))
 	game := boom.NewGame(800, 600, "Brickout")
-	game.SetBgColor(rl.Black)
+	game.SetBgColor(rl.DarkBlue)
 
 	scene := game.GetCurrentScene()
 
@@ -27,7 +29,7 @@ func main() {
 	boom.PutBottom(scene, paddle, 0, -60)
 
 	// Ball
-	ball := createBall()
+	ball := createBall(BALL_VELX, BALL_VELY)
 	boom.PutCenter(scene, ball, 0, 0)
 
 	// One Brick
@@ -35,20 +37,23 @@ func main() {
 		return createBrick(rl.Red)
 	}
 
-	// // Bricks
+	// Bricks
 	bricks := boom.GridArray(3, 14, 6, redBrick)
-	boom.PutCenter(scene, bricks, 0, 0)
+	bricks.SetId("the bricks")
 
+	fmt.Println("Bricks", bricks.GetBoundingBox().Width, bricks.GetBoundingBox().Height)
+	boom.PutCenter(scene, bricks, 0, 100)
 	
-	// // Walls
+	
+	// Walls
 	leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
 	rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
 	ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
-
+	
 	scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall)
-	// scene.Add(paddle, bricks, ball)
-
-
+	
+	// scene.Print()
+	// fmt.Println(scene.GetWidth(), scene.GetHeight())
 	
 	game.Run()
 

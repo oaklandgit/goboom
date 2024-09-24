@@ -45,14 +45,11 @@ func (g *Game) Run() {
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
 	rl.SetTargetFPS(int32(g.FPS))
 
-	// Inialize all components
 	scene := g.GetCurrentScene()
-	// for _, obj := range g.GetCurrentScene().GetAll() {
-	// 	for _, c := range obj.GetComponents() {
-	// 		c.OnInit()
-	// 	}
-	// }
+
+	// Inialize all objects and components
 	for _, obj := range scene.GetAll() {
+		obj.OnInit()
 		for _, c := range obj.GetComponents() {
 			c.OnInit()
 		}
@@ -63,28 +60,44 @@ func (g *Game) Run() {
 		rl.BeginDrawing()
 		rl.ClearBackground(g.BgColor)
 
-		// g.CheckInput()
+		// redeclare scene in case it was changed
 		scene = g.GetCurrentScene()
 
-	// fmt.Println("SCENE TAGS", scene.GetTags())
-
+		// run any additional updating
 		scene.OnUpdate()
-		// scene.CheckCollisions()
+		
 
-		// Update and draw all object components
-		for _, obj := range scene.GetAll() {
-			// obj.CheckInput()
-			for _, c := range obj.GetComponents() {
-				c.OnUpdate(scene)
-				c.OnDraw(scene)
-			}
+		// Update and draw all direct children of the scene
+		for _, obj := range scene.GetChildren() {
+			drawChild(obj, scene)
 		}
 
+		// run any additional drawing
+		scene.OnDraw()
+
+		// clean up any objects that need to be removed
 		scene.Cleanup()
 
+		// debug mode
 		DebugModes[debugMode]()
 		rl.EndDrawing()
 	}
 	rl.CloseWindow()
 
+}
+
+func drawChild(obj *GameObject, scene *GameObject) {
+	obj.OnUpdate()
+	obj.OnDraw()
+	for _, c := range obj.GetComponents() {
+		c.OnUpdate(scene)
+		c.OnDraw(scene)
+	}
+
+	rl.PushMatrix()
+	rl.Translatef(obj.GetX(), obj.GetY(), 0)
+	for _, child := range obj.GetChildren() {
+		drawChild(child, scene)
+	}
+	rl.PopMatrix()
 }
