@@ -54,13 +54,13 @@ func (c *RegPolyComp) OnUpdate(scene *GameObject) {}
 
 func (c *RegPolyComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
-	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
-	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
-	rl.PushMatrix()
-	rl.Translatef(centerX, centerY, 0)
-	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-	rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-	rl.Translatef(-centerX, -centerY, 0)
+	// centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
+	// centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
+	// rl.PushMatrix()
+	// rl.Translatef(centerX, centerY, 0)
+	// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+	// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
+	// rl.Translatef(-centerX, -centerY, 0)
 	
 	
 	if c.FillColor != rl.Blank {
@@ -81,7 +81,7 @@ func (c *RegPolyComp) OnDraw(scene *GameObject) {
 			c.StrokeColor)
 	}
 
-	rl.PopMatrix()
+	// rl.PopMatrix()
 }
 
 func (c *RegPolyComp) GetWidth() float32 {

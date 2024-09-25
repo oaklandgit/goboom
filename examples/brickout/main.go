@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	boom "goboom/goboom"
 	"time"
 
@@ -33,16 +32,16 @@ func main() {
 	boom.PutCenter(scene, ball, 0, 0)
 
 	// One Brick
-	redBrick := func() *boom.GameObject {
+	makeRedBrick := func() *boom.GameObject {
 		return createBrick(rl.Red)
 	}
 
 	// Bricks
-	bricks := boom.GridArray(3, 14, 6, redBrick)
+	bricks := boom.GridArray(3, 14, 6, makeRedBrick)
 	bricks.SetId("the bricks")
 
-	fmt.Println("Bricks", bricks.GetBoundingBox().Width, bricks.GetBoundingBox().Height)
-	boom.PutCenter(scene, bricks, 0, 100)
+	// fmt.Println("Bricks", bricks.GetBoundingBox().Width, bricks.GetBoundingBox().Height)
+	boom.PutCenter(scene, bricks, 0, 0)
 	
 	
 	// Walls

@@ -2,6 +2,7 @@ package goboom
 
 import (
 	"fmt"
+	"math"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -58,6 +59,22 @@ func (c *VelocityComp) GetVelXY() (float32, float32) {
 // Alias
 func (c *VelocityComp) Set(args ...interface{}) {
 	c.SetVelocity(args...)
+}
+
+func (c *VelocityComp) SetVelocityByHeading(heading, speed float32) {
+	// -90 to account for the fact that 0 degrees is to the right
+	// I may need to revisit this later
+	heading = (heading - 90) * rl.Deg2rad
+	c.VelX = speed * float32(math.Cos(float64(heading)))
+	c.VelY = speed * float32(math.Sin(float64(heading)))
+}
+
+func (c *VelocityComp) AddVelocityByHeading(heading, speed float32) {
+	// -90 to account for the fact that 0 degrees is to the right
+	// I may need to revisit this later
+	heading = (heading - 90) * rl.Deg2rad
+	c.VelX += speed * float32(math.Cos(float64(heading)))
+	c.VelY += speed * float32(math.Sin(float64(heading)))
 }
 
 

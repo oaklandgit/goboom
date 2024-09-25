@@ -27,6 +27,19 @@ func (s *GameObject) CenterY() float32 {
 	return s.GetY() + s.GetHeight() / 2
 }
 
+func (s *GameObject) SetWidth(w float32) {
+	s.Width = w
+}
+
+func (s *GameObject) SetHeight(h float32) {
+	s.Height = h
+}
+
+func (s *GameObject) SetSize(w, h float32) {
+	s.SetWidth(w)
+	s.SetHeight(h)
+}
+
 func (s *GameObject) GetWidth() float32 {
 	// w := s.Width
 	// for _, comp := range s.GetComponents() {

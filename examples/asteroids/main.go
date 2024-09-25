@@ -12,8 +12,8 @@ const (
 	ASTEROIDS_COUNT = 12
 )
 
-var score = 0
-var scoreString = "0"
+// var score = 0
+// var scoreString = "0"
 
 func main() {
 
@@ -23,23 +23,25 @@ func main() {
 
 	scene := game.GetCurrentScene()
 
-	scoreboard := boom.NewText(scene.CenterX(), 12, &scoreString, rl.White)
-	scoreboard.SetScale(2, 2)
+	// scoreboard := boom.NewText(scene.CenterX(), 12, &scoreString, rl.White)
+	// scoreboard.SetScale(2, 2)
 
-	ship := createPlayer(scene)
+	ship := createPlayer()
 
-	for i := 0; i < ASTEROIDS_COUNT ; i++ {
-		x := rand.Intn(int(game.GetWidth()))
-		y := rand.Intn(int(game.GetWidth()))
-		angle := float32(rand.Intn(360))
+	// for i := 0; i < ASTEROIDS_COUNT ; i++ {
+	// 	x := rand.Intn(int(game.GetWidth()))
+	// 	y := rand.Intn(int(game.GetWidth()))
+	// 	angle := float32(rand.Intn(360))
 
-        asteroid := createAsteroid(float32(x), float32(y))
-		asteroid.SetVelocityByHeading(angle, 1)
-        scene.Add(asteroid)
-    }
+    //     asteroid := createAsteroid(float32(x), float32(y))
+	// 	asteroid.SetVelocityByHeading(angle, 1)
+    //     scene.Add(asteroid)
+    // }
 
-	ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
-	scene.Add(scoreboard, ship)
+	// ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
+	scene.Add(ship)
+	boom.PutCenter(scene, ship, 0, 0)
+	// scene.Add(scoreboard, ship)
 
 	game.Run()
 

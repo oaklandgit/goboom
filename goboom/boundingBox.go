@@ -17,18 +17,18 @@ import (
 // }
 
 func (obj *GameObject) GetBoundingBox() rl.Rectangle {
-    minX := obj.Position.X
-    minY := obj.Position.Y
-    maxX := minX + obj.GetWidth() // GameObject's own width
-    maxY := minY + obj.GetHeight() // GameObject's own height
+    minX := obj.X
+    minY := obj.Y
+    maxX := minX + obj.Width // GameObject's own width
+    maxY := minY + obj.Height // GameObject's own height
 
     // Check components for width and height
-    for _, comp := range obj.Components {
-		compWidth := comp.GetWidth()
-		maxX = float32(math.Max(float64(maxX), float64(minX + compWidth)))
-		compHeight := comp.GetHeight()
-		maxY = float32(math.Max(float64(maxY), float64(minY + compHeight)))
-    }
+    // for _, comp := range obj.Components {
+	// 	compWidth := comp.GetWidth()
+	// 	maxX = float32(math.Max(float64(maxX), float64(minX + compWidth)))
+	// 	compHeight := comp.GetHeight()
+	// 	maxY = float32(math.Max(float64(maxY), float64(minY + compHeight)))
+    // }
 
     // Check children GameObjects
     for _, child := range obj.Children {

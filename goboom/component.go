@@ -7,16 +7,18 @@ type Component interface {
 	OnUpdate(scene *GameObject)
 	OnDraw(scene *GameObject)
 	GetComponentId() string
-	GetWidth() float32
-	GetHeight() float32
+	// GetWidth() float32
+	// GetHeight() float32
 	// ModifyWidth(float32) float32
 	// ModifyHeight(float32) float32
 }
 
-func Create(x, y float32, c ...Component) *GameObject {	
+func Create(x, y, w, h float32, c ...Component) *GameObject {	
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
+	obj.Width = w
+	obj.Height = h
 	for _, comp := range c {
 		obj.AddComponent(comp)
 	}

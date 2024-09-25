@@ -33,14 +33,14 @@ func createAsteroid(x, y float32) *boom.GameObject {
 
     fmt.Println(points)
 
-    asteroid := boom.NewPolygon(x, y, rl.White, true, points)
+    asteroid := boom.Polygon(x, y, points, true, rl.Blank, rl.White, 2)
     asteroid.SetWrap(true)
     asteroid.AddTags("asteroid")
     asteroid.SetPadding(asteroid.GetWidth(), asteroid.GetHeight())
 
-    asteroid.AddCollider("player", func(a, b *boom.GameObject) {
-        fmt.Println("Asteroid collided with player!")
-    })
+    // asteroid.AddCollider("player", func(a, b *boom.GameObject) {
+    //     fmt.Println("Asteroid collided with player!")
+    // })
 
     return asteroid
 }

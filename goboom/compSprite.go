@@ -28,6 +28,7 @@ func Sprite(x, y float32, imagePaths ...string) *GameObject {
 	obj.Y = y
 
 	comp := NewSpriteComp(imagePaths...)
+	
 	obj.AddComponent(comp)
 	
 	return obj
@@ -55,9 +56,19 @@ func (c *SpriteComp) GetGameObject() *GameObject {
 
 func (c *SpriteComp) OnInit() {
 	fmt.Println("Initializing sprite component")
+
 	for _, path := range c.ImagePaths {
 		c.Frames = append(c.Frames, rl.LoadTexture(path))
 	}
+	
+	if c.GameObject.Width == 0 {
+		c.GameObject.Width = float32(c.Frames[0].Width)
+	}
+
+	if c.GameObject.Height == 0 {
+		c.GameObject.Height = float32(c.Frames[0].Height)
+	}
+
 }
 
 func (c *SpriteComp) OnUpdate(scene *GameObject) {
@@ -84,38 +95,21 @@ func (c *SpriteComp) OnUpdate(scene *GameObject) {
 
 func (c *SpriteComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
-	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
-	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
-	rl.PushMatrix()
-	rl.Translatef(centerX, centerY, 0)
-	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-	rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-	rl.Translatef(-centerX, -centerY, 0)
-	
-	rl.DrawTexture(
+
+	rl.DrawTexturePro(
 		c.Frames[c.CurrentFrame],
-		int32(obj.X - obj.GetWidth() * obj.GetOriginX()),
-		int32(obj.Y - obj.GetHeight() * obj.GetOriginY()),
-		rl.White)
-	rl.PopMatrix()
+		rl.NewRectangle(0, 0, float32(c.Frames[c.CurrentFrame].Width), float32(c.Frames[c.CurrentFrame].Height)), // Source rectangle
+		rl.NewRectangle(
+			obj.X - obj.GetWidth()*obj.GetOriginX(), // Destination X
+			obj.Y - obj.GetHeight()*obj.GetOriginY(), // Destination Y
+			obj.GetWidth(), // Destination width
+			obj.GetHeight(), // Destination height
+		),
+		rl.NewVector2(obj.GetWidth()*obj.GetOriginX(), obj.GetHeight()*obj.GetOriginY()), // Origin
+		0, // Rotation
+		rl.White, // Tint
+	)
 }
-
-func (c *SpriteComp) GetWidth() float32 {
-	return float32(c.Frames[c.CurrentFrame].Width)
-	// if localW > w {
-	// 	return localW
-	// }
-	// return localW
-}
-
-func (c *SpriteComp) GetHeight() float32 {
-	return float32(c.Frames[c.CurrentFrame].Height)
-	// if localH > h {
-	// 	return localH
-	// }
-	// return h
-}
-
 
 func (c *SpriteComp) AddFrame(path string) {
 	c.ImagePaths = append(c.ImagePaths, path)

@@ -32,7 +32,7 @@ func createBall(velx, velY float32) *boom.GameObject {
 		bounce(b, rl.NewVector2(0, 1))
 	})
 
-	ball := boom.Circle(0, 0, 6, rl.White, rl.Red, 2)
+	ball := boom.Ellipse(0, 0, 6, 6, rl.White, rl.Red, 2)
 	ball.AddTags("ball")
 	ball.SetId("the ball")
 

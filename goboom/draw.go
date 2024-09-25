@@ -2,16 +2,15 @@ package goboom
 
 // SCENE GRAPH CURRENTLY WORKS! DON'T BREAK IT!
 
-func (g *Game) Draw() {
+// func (g *Game) Draw() {
 
-	scene := g.GetCurrentScene()
-	scene.OnDraw()
+// 	scene := g.GetCurrentScene()
+// 	scene.OnDraw()
 
-	for _, obj := range scene.GetChildren() {
-		obj.OnDraw()
-    }
-}
-
+// 	for _, obj := range scene.GetChildren() {
+// 		obj.OnDraw()
+//     }
+// }
 
 // func drawWithTransforms(obj *GameObject) {
 
@@ -20,7 +19,7 @@ func (g *Game) Draw() {
 // 		if len(obj.GetChildren()) > 0 {
 
 // 			rl.Translatef(obj.GetX(), obj.GetY(), 0)
-			
+
 // 			for _, c := range obj.GetChildren() {
 // 				drawWithTransforms(c)
 // 			}

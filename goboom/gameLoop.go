@@ -69,7 +69,7 @@ func (g *Game) Run() {
 
 		// Update and draw all direct children of the scene
 		for _, obj := range scene.GetChildren() {
-			drawChild(obj, scene)
+			updateAndDrawChild(obj, scene)
 		}
 
 		// run any additional drawing
@@ -86,18 +86,35 @@ func (g *Game) Run() {
 
 }
 
-func drawChild(obj *GameObject, scene *GameObject) {
+func updateAndDrawChild(obj *GameObject, scene *GameObject) {
+		
+	rl.PushMatrix()
+	
+	
+	centerX := obj.X + obj.GetBoundingBox().Width * obj.GetOriginX()
+	centerY := obj.Y + obj.GetBoundingBox().Height * obj.GetOriginY()
+	
+	// rl.Translatef(obj.GetX(), obj.GetY(), 0)
+	rl.Translatef(centerX, centerY, 0)
+	rl.Rotatef(obj.GetAngle(), 0, 0, 1)
+	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+	
 	obj.OnUpdate()
 	obj.OnDraw()
+	
+	rl.Translatef(-centerX, -centerY, 0)
+
+	// components are not nested further
 	for _, c := range obj.GetComponents() {
 		c.OnUpdate(scene)
 		c.OnDraw(scene)
 	}
-
-	rl.PushMatrix()
-	rl.Translatef(obj.GetX(), obj.GetY(), 0)
+	
+	// but chidren are drawn recursively
 	for _, child := range obj.GetChildren() {
-		drawChild(child, scene)
+		updateAndDrawChild(child, scene)
 	}
+	
+	
 	rl.PopMatrix()
 }

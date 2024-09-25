@@ -17,8 +17,9 @@ func main() {
 
 	// Game objects can be created directly
 	rect := boom.Rectangle(300, 100, 50, 50, rl.Pink, rl.Blue, 8)
-	circle := boom.Circle(10, 20, 30, rl.Red, rl.Yellow, 2)
-	sprite := boom.Sprite(100, 100, UGENE)
+	ellipse := boom.Ellipse(400, 200, 50, 10, rl.Red, rl.Yellow, 2)
+	sprite := boom.Sprite(80, 120, UGENE)
+	sprite.SetSize(100, 200)
 	poly := boom.Polygon(120, 220, "12 13 1 8.5 22 32 101 0", true, rl.Green, rl.Yellow, 2)
 	regpoly := boom.RegPolygon(200, 200, 60, 6, rl.Blue, rl.Yellow, 2)
 
@@ -29,8 +30,8 @@ func main() {
 
 	// or create a new game object with multiple components
 	controllable := boom.Create(
-		200, 300,
-		boom.NewRectComp(30, 40, rl.Green, rl.Yellow, 2),
+		200, 300, 20, 80,
+		boom.NewRectComp(rl.Green, rl.Yellow, 2),
 		boom.NewSpriteComp(UGENE),
 		boom.NewPolyComp("12 13 1 8.5 22 32 101 10", true, rl.Blue, rl.Purple, 2),
 		boom.NewVelocityComp(0.5, 0),
@@ -43,15 +44,8 @@ func main() {
 
 	controllable.SetAngle(12)
 	rect.SetAngle(30)
-	circle.SetScale(2, 1)
-	sprite.SetScale(2, 2)
 	regpoly.SetScale(2, 3)
 
-	circle.AddComponent(
-		boom.NewCollideComp(
-			boom.CollisionCircle{Radius: 30},
-			"circle",
-		))
 	rect.AddComponent(
 		boom.NewCollideComp(
 			boom.CollisionRect{Width: 50, Height: 50},
@@ -69,11 +63,7 @@ func main() {
 
 	controllable.AddComponent(control)
 
-	circle.With(boom.NewVelocityComp(0, 0))
-	circle.Get("velocity").(*boom.VelocityComp).SetVelocity(2, 1)
-
-
-	scene.Add(circle, rect, sprite, poly, regpoly, multi, controllable, anim)
+	scene.Add(ellipse, rect, sprite, poly, regpoly, multi, controllable, anim)
 
 	game.Run()
 

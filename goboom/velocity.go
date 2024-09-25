@@ -11,6 +11,11 @@ type Velocity struct {
 	VelY float32
 }
 
+func (v *Velocity) AddVelocity(x, y float32) {
+	v.VelX += x
+	v.VelY += y
+}
+
 func (v *Velocity) SetVelocity(x, y float32) {
 	v.VelX = x
 	v.VelY = y
@@ -44,4 +49,13 @@ func (v *Velocity) SetVelocityByHeading(heading, speed float32) {
 	
 	v.VelX = speed * float32(math.Cos(float64(heading)))
 	v.VelY = speed * float32(math.Sin(float64(heading)))
+}
+
+func (v *Velocity) AddVelocityByHeading(heading, speed float32) {
+	// -90 to account for the fact that 0 degrees is to the right
+	// I may need to revisit this later
+	heading = (heading - 90) * rl.Deg2rad
+
+	v.VelX += speed * float32(math.Cos(float64(heading)))
+	v.VelY += speed * float32(math.Sin(float64(heading)))
 }

@@ -6,8 +6,8 @@ import (
 
 type RectComp struct {
 	GameObject 		*GameObject
-	Width 			float32
-	Height 			float32
+	// Width 			float32
+	// Height 			float32
 	FillColor 		rl.Color
 	StrokeColor 	rl.Color
 	StrokeWeight 	float32
@@ -18,17 +18,19 @@ func Rectangle(x, y, w, h float32, fill, stroke rl.Color, strokeWeight float32) 
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
+	obj.Width = w
+	obj.Height = h
 
-	comp := NewRectComp(w, h, fill, stroke, strokeWeight)
+	comp := NewRectComp(fill, stroke, strokeWeight)
 	obj.AddComponent(comp)
 	
 	return obj
 }
 
-func NewRectComp(w, h float32, fill, stroke rl.Color, strokeWeight float32) *RectComp {
+func NewRectComp(fill, stroke rl.Color, strokeWeight float32) *RectComp {
 	comp := &RectComp{
-		Width: w,
-		Height: h,
+		// Width: w,
+		// Height: h,
 		FillColor: fill,
 		StrokeColor: stroke,
 		StrokeWeight: strokeWeight,
@@ -59,17 +61,17 @@ func (c *RectComp) OnUpdate(scene *GameObject) {}
 func (c *RectComp) OnDraw(scene *GameObject) {
 
 	obj := c.GameObject
-	centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
-	centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
+	// centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
+	// centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
 
-	rl.PushMatrix()
-	rl.Translatef(centerX, centerY, 0)
-	rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-	rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-	rl.Translatef(-centerX, -centerY, 0)
+	// rl.PushMatrix()
+	// rl.Translatef(centerX, centerY, 0)
+	// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
+	// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
+	// rl.Translatef(-centerX, -centerY, 0)
 	
 	
-	rect := rl.Rectangle{X: obj.X, Y: obj.Y, Width: c.Width, Height: c.Height}
+	rect := rl.Rectangle{X: obj.X, Y: obj.Y, Width: obj.Width, Height: obj.Height}
 
 	rl.DrawRectanglePro(
 		rect,
@@ -82,19 +84,13 @@ func (c *RectComp) OnDraw(scene *GameObject) {
 		c.StrokeWeight,
 		c.StrokeColor)
 
-	rl.PopMatrix()
+	// rl.PopMatrix()
 }
 
-func (c *RectComp) GetWidth() float32 {
-	// if c.Width > w {
-	// 	return c.Width
-	// }
-	return c.Width
-}
+// func (c *RectComp) GetWidth() float32 {
+// 	return c.Width
+// }
 
-func (c *RectComp) GetHeight() float32 {
-	// if c.Height > h {
-	// 	return c.Height
-	// }
-	return c.Height
-}
+// func (c *RectComp) GetHeight() float32 {
+// 	return c.Height
+// }
