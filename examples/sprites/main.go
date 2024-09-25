@@ -20,12 +20,16 @@ func main() {
 	ellipse := boom.Ellipse(400, 200, 50, 10, rl.Red, rl.Yellow, 2)
 	sprite := boom.Sprite(80, 120, UGENE)
 	sprite.SetSize(100, 200)
-	poly := boom.Polygon(120, 220, "12 13 1 8.5 22 32 101 0", true, rl.Green, rl.Yellow, 2)
-	regpoly := boom.RegPolygon(200, 200, 60, 6, rl.Blue, rl.Yellow, 2)
+	// poly := boom.Polygon(120, 220, "12 13 1 8.5 22 32 101 0", true, rl.Green, rl.Yellow, 2)
+	// regpoly := boom.RegPolygon(200, 200, 60, 6, rl.Blue, rl.Yellow, 2)
 
 	// Add new components to any existing game object
-	multi := boom.Polygon(120, 220, "12 13 1 8.5 22 32 101 0", true, rl.Red, rl.Yellow, 2)
-	multi.AddComponent(boom.NewSpriteComp(DOOR))
+	// multi := boom.Polygon(120, 220, "12 13 1 8.5 22 32 101 0", true, rl.Red, rl.Yellow, 2)
+	// multi.AddComponent(boom.NewSpriteComp(DOOR))
+
+	resizedPoly := boom.Polygon(120, 220, "12 13 1 8.5 22 32 101 0", true, rl.Red, rl.DarkPurple, 3)
+	// resizedPoly.SetSize(300, 200)
+	
 
 
 	// or create a new game object with multiple components
@@ -44,7 +48,7 @@ func main() {
 
 	controllable.SetAngle(12)
 	rect.SetAngle(30)
-	regpoly.SetScale(2, 3)
+	// regpoly.SetScale(2, 3)
 
 	rect.AddComponent(
 		boom.NewCollideComp(
@@ -63,7 +67,7 @@ func main() {
 
 	controllable.AddComponent(control)
 
-	scene.Add(ellipse, rect, sprite, poly, regpoly, multi, controllable, anim)
+	scene.Add(ellipse, rect, sprite, controllable, anim, resizedPoly)
 
 	game.Run()
 

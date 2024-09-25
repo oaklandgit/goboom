@@ -12,22 +12,9 @@ const BULLET_FORCE = 10
 
 func createPlayer() *boom.GameObject {
 
-	ship := boom.NewGroup(0, 0)
-	ship.SetId("player")
-	ship.AddTags("player")
-	ship.SetWrap(true)
-
-	// WINDOW
-	window := boom.Ellipse(0, 0, 3, 3, rl.Blank, rl.White, 2)
-	window.SetFill(rl.White)
-	window.SetOrigin(0.5, 0.5)
-	boom.PutLeft(ship, window, -3, -4)
-	ship.Add(window)
-
-	// BODY
-	body := boom.Ellipse(0, 0, 7, 12, rl.Blue, rl.White, 2)
-	body.SetOrigin(0.5, 0.2)
-	ship.Add(body)
+	ship := boom.Polygon(0, 0, "0 20 10 0 20 20", false, rl.Blue, rl.White, 2)
+	ship.SetOrigin(0.5, 0.5)
+	
 
 	// MOVEMENT
 	velocity := boom.NewVelocityComp(0, 0)

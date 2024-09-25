@@ -8,18 +8,12 @@ type GameObject struct {
 	OnDraw   func()
 
 	Identity
-	
 	Shape
-	Stroke
-	Fill
 	
 	Position
 	Rotation
 	Scale
 	Pivot
-	
-	Velocity
-	Wrapping
 	
 	Lifespan
 
@@ -45,11 +39,7 @@ func NewGameObject() *GameObject {
 		},
 	}
 
-	obj.OnUpdate = func() {
-		// obj.X += obj.VelX
-		// obj.Y += obj.VelY
-	}
-
+	obj.OnUpdate = func() {}
 	obj.OnDraw = func() {}
 	obj.OnInit = func() {}
 

@@ -10,7 +10,11 @@ func createBullet(x, y, angle, thrust float32) *boom.GameObject {
 	bullet := boom.Rectangle(x, y, 1, 20, rl.Red, rl.Blank, 0)
 	bullet.AddTags("bullet")
 	bullet.SetOrigin(0, 0)
-	bullet.SetVelocityByHeading(angle, thrust)
+	// bullet.SetVelocityByHeading(angle, thrust)
+	vel := boom.NewVelocityComp(0, 0)
+	vel.SetVelocityByHeading(angle, thrust)
+
+	bullet.AddComponents(vel)
 	bullet.SetAngle(angle)
 	bullet.SetLifespan(1_000) // 1 second
 

@@ -28,17 +28,20 @@ func main() {
 
 	ship := createPlayer()
 
-	// for i := 0; i < ASTEROIDS_COUNT ; i++ {
-	// 	x := rand.Intn(int(game.GetWidth()))
-	// 	y := rand.Intn(int(game.GetWidth()))
-	// 	angle := float32(rand.Intn(360))
+	for i := 0; i < ASTEROIDS_COUNT ; i++ {
+		x := rand.Intn(int(game.GetWidth()))
+		y := rand.Intn(int(game.GetWidth()))
+		angle := float32(rand.Intn(360))
 
-    //     asteroid := createAsteroid(float32(x), float32(y))
-	// 	asteroid.SetVelocityByHeading(angle, 1)
-    //     scene.Add(asteroid)
-    // }
+        asteroid := createAsteroid(float32(x), float32(y))
+		
+		movement := boom.NewVelocityComp(0, 0)
+		movement.SetVelocityByHeading(angle, 1)
 
-	// ship.SetXY(game.GetWidth()/2, game.GetHeight()/2)
+		asteroid.AddComponents(movement)
+        scene.Add(asteroid)
+    }
+
 	scene.Add(ship)
 	boom.PutCenter(scene, ship, 0, 0)
 	// scene.Add(scoreboard, ship)

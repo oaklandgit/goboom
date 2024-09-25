@@ -66,6 +66,19 @@ func (c *PolyComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
 	rl.PushMatrix()
 	rl.Translatef(obj.X, obj.Y, 0)
+
+	var scaleX, scaleY float32 = 1, 1
+
+	if (obj.Width != 0) {
+		scaleX = obj.Width/c.GetNaturalWidth()
+	}
+
+	if (obj.Height != 0) {
+		scaleY = obj.Height/c.GetNaturalHeight()
+	}
+
+	rl.Scalef(scaleX, scaleY, 1)
+	
 	rl.DrawSplineLinear(c.Points, c.StrokeWeight, c.StrokeColor)
 	// TO DO: raylib doesn't have a fill function for irregular polygons
 	// need to implement a custom fill function
@@ -73,21 +86,12 @@ func (c *PolyComp) OnDraw(scene *GameObject) {
 	rl.PopMatrix()
 }
 
-func (c *PolyComp) GetWidth() float32 {
-	// should be at least the width of the bounding box
-	localW := GetMaxX(c.Points) - GetMinX(c.Points)
-	// if localW > w {
-	// 	return localW
-	// }
-	return localW
+func (c *PolyComp) GetNaturalWidth() float32 {
+	return GetMaxX(c.Points) - GetMinX(c.Points)
 }
 
-func (c *PolyComp) GetHeight() float32 {
-	localH := GetMaxY(c.Points) - GetMinY(c.Points)
-	// if localH > h {
-	// 	return localH
-	// }
-	return localH
+func (c *PolyComp) GetNaturalHeight() float32 {
+	return GetMaxY(c.Points) - GetMinY(c.Points)
 }
 
 func StringToVectors(input string) ([]rl.Vector2, error) {

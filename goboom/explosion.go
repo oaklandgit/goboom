@@ -20,7 +20,11 @@ func (node *GameObject) NewExplosion(
 		p.SetXY(x, y)
 		p.SetLifespan(int(d))
 		p.SetAngle(a)
-		p.SetVelocityByHeading(a, strength)
+
+		vel := NewVelocityComp(0, 0)
+		vel.SetVelocityByHeading(a, strength)
+
+		p.AddComponent(vel)
 		node.Add(p)
 	}
 

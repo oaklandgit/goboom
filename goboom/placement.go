@@ -14,7 +14,7 @@ func PutLeft(a *GameObject, b *GameObject, offsetX, offsetY float32) {
 
 func PutCenter(a *GameObject, b *GameObject, offsetX, offsetY float32) {
 
-	b.OnInit = func() {
+	// b.OnInit = func() {
 
 		fmt.Println("Centering", b.GetId(), "on", a.GetId())
 
@@ -23,7 +23,7 @@ func PutCenter(a *GameObject, b *GameObject, offsetX, offsetY float32) {
 		b.SetXY(
 			centerX + offsetX - b.GetBoundingBox().Width/2,
 			centerY + offsetY - b.GetBoundingBox().Width/2)
-	}
+	// }
 }
 
 func PutBottom(a *GameObject, b *GameObject, offsetX, offsetY float32) {

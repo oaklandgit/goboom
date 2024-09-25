@@ -6,37 +6,19 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-// func (obj *GameObject) GetBoundingBox() rl.Rectangle {
-//     rect := rl.Rectangle{
-//             X: obj.GetGlobalX() + obj.GetGlobalWidth() / 2,
-//             Y: obj.GetGlobalY() + obj.GetGlobalHeight() / 2,
-//             Width: obj.GetGlobalWidth(),
-//             Height: obj.GetGlobalHeight()}
-
-//     return rect
-// }
-
 func (obj *GameObject) GetBoundingBox() rl.Rectangle {
     minX := obj.X
     minY := obj.Y
     maxX := minX + obj.Width // GameObject's own width
     maxY := minY + obj.Height // GameObject's own height
 
-    // Check components for width and height
-    // for _, comp := range obj.Components {
-	// 	compWidth := comp.GetWidth()
-	// 	maxX = float32(math.Max(float64(maxX), float64(minX + compWidth)))
-	// 	compHeight := comp.GetHeight()
-	// 	maxY = float32(math.Max(float64(maxY), float64(minY + compHeight)))
-    // }
-
     // Check children GameObjects
     for _, child := range obj.Children {
-        childBB := child.GetBoundingBox()
-        minX = float32(math.Min(float64(minX), float64(childBB.X)))
-        minY = float32(math.Min(float64(minY), float64(childBB.Y)))
-        maxX = float32(math.Max(float64(maxX), float64(childBB.Width + childBB.X)))
-        maxY = float32(math.Max(float64(maxY), float64(childBB.Height + childBB.Y)))
+        childBox := child.GetBoundingBox()
+        minX = float32(math.Min(float64(minX), float64(childBox.X)))
+        minY = float32(math.Min(float64(minY), float64(childBox.Y)))
+        maxX = float32(math.Max(float64(maxX), float64(childBox.Width + childBox.X)))
+        maxY = float32(math.Max(float64(maxY), float64(childBox.Height + childBox.Y)))
     }
 
 	return rl.Rectangle{
