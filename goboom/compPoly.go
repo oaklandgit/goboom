@@ -64,8 +64,6 @@ func (c *PolyComp) OnUpdate(scene *GameObject) {}
 
 func (c *PolyComp) OnDraw(scene *GameObject) {
 	obj := c.GameObject
-	rl.PushMatrix()
-	rl.Translatef(obj.X, obj.Y, 0)
 
 	var scaleX, scaleY float32 = 1, 1
 
@@ -83,7 +81,6 @@ func (c *PolyComp) OnDraw(scene *GameObject) {
 	// TO DO: raylib doesn't have a fill function for irregular polygons
 	// need to implement a custom fill function
 	
-	rl.PopMatrix()
 }
 
 func (c *PolyComp) GetNaturalWidth() float32 {
