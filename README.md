@@ -1,5 +1,6 @@
 ### Notes
 
+- component shapes should always draw at 0, 0. Then let their position be contolled by their GameObjects.
 - Scene graph: for draw functions, don't adjust object positions to global. The draw routine will do that using push/pop matrix. BUT do use global x/y when calculating collisions, drawing debug boxes, etc.
 
 ### To Do

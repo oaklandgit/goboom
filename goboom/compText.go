@@ -50,6 +50,5 @@ func (t *TextComp) OnInit() {
 func (t *TextComp) OnUpdate(scene *GameObject) {}
 
 func (t *TextComp) OnDraw(scene *GameObject) {
-	obj := t.GameObject
-	rl.DrawText(t.Text, int32(obj.X), int32(obj.Y), t.FontSize, t.Color)
+	rl.DrawText(t.Text, 0, 0, t.FontSize, t.Color)
 }

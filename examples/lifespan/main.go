@@ -15,13 +15,15 @@ func main() {
 	text := boom.Text(0, 0, "Goodbye, World (wait for it...)", 30, rl.Black)
 
 	// create a lifespan component and set it to 3 seconds
-	death := boom.NewLifespanComp()
-	death.SetLifespan(3_000)
+	// death := boom.NewLifespanComp()
+	// death.SetLifespan(3_000)
 	
 	// add the lifespan component to the text object
-	text.AddComponent(death)
+	// text.AddComponent(death)
 
 	// add the text object to the scene
+
+	text.SetLifespan(3_000)
 	scene.Add(text)
 
 	// run the game

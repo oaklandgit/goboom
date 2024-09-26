@@ -7,6 +7,8 @@ type GameObject struct {
 	OnUpdate func()
 	OnDraw   func()
 
+	Delete bool
+
 	Identity
 	Shape
 	
@@ -15,7 +17,7 @@ type GameObject struct {
 	Scale
 	Pivot
 	
-	Lifespan
+	// Lifespan
 
 	Game *Game
 	Parent *GameObject

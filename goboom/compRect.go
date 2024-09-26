@@ -6,8 +6,6 @@ import (
 
 type RectComp struct {
 	GameObject 		*GameObject
-	// Width 			float32
-	// Height 			float32
 	FillColor 		rl.Color
 	StrokeColor 	rl.Color
 	StrokeWeight 	float32
@@ -29,8 +27,6 @@ func Rectangle(x, y, w, h float32, fill, stroke rl.Color, strokeWeight float32) 
 
 func NewRectComp(fill, stroke rl.Color, strokeWeight float32) *RectComp {
 	comp := &RectComp{
-		// Width: w,
-		// Height: h,
 		FillColor: fill,
 		StrokeColor: stroke,
 		StrokeWeight: strokeWeight,
@@ -50,28 +46,16 @@ func (c *RectComp) GetGameObject() *GameObject {
 	return c.GameObject
 }
 
-func (c *RectComp) OnInit() {
-	// obj := c.GameObject
-	// obj.Width = (c.modifyWidth(obj.GetWidth()))
-	// obj.Height = (c.modifyHeight(obj.GetHeight()))
-}
+func (c *RectComp) OnInit() {}
 
 func (c *RectComp) OnUpdate(scene *GameObject) {}
 
 func (c *RectComp) OnDraw(scene *GameObject) {
 
 	obj := c.GameObject
-	// centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
-	// centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
 
-	// rl.PushMatrix()
-	// rl.Translatef(centerX, centerY, 0)
-	// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-	// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-	// rl.Translatef(-centerX, -centerY, 0)
 	
-	
-	rect := rl.Rectangle{X: obj.X, Y: obj.Y, Width: obj.Width, Height: obj.Height}
+	rect := rl.Rectangle{X: 0, Y: 0, Width: obj.Width, Height: obj.Height}
 
 	rl.DrawRectanglePro(
 		rect,
@@ -84,13 +68,4 @@ func (c *RectComp) OnDraw(scene *GameObject) {
 		c.StrokeWeight,
 		c.StrokeColor)
 
-	// rl.PopMatrix()
 }
-
-// func (c *RectComp) GetWidth() float32 {
-// 	return c.Width
-// }
-
-// func (c *RectComp) GetHeight() float32 {
-// 	return c.Height
-// }

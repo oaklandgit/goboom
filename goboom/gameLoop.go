@@ -102,8 +102,7 @@ func updateAndDrawChild(obj *GameObject, scene *GameObject) {
 	obj.OnUpdate()
 	obj.OnDraw()
 	
-	rl.Translatef(-centerX, -centerY, 0)
-
+	
 	// components are not nested further
 	for _, c := range obj.GetComponents() {
 		c.OnUpdate(scene)
@@ -115,6 +114,7 @@ func updateAndDrawChild(obj *GameObject, scene *GameObject) {
 		updateAndDrawChild(child, scene)
 	}
 	
+	rl.Translatef(-centerX, -centerY, 0)
 	
 	rl.PopMatrix()
 }

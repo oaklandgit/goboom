@@ -12,8 +12,8 @@ func main() {
 	scene := game.GetCurrentScene()
 
 	text := boom.Text(0, 0, "Hello, World!", 30, rl.Black)
-	text.SetOrigin(0.5, 0.5)
-	boom.PutCenter(scene, text, 0, 0)
+	// text.SetOrigin(0.5, 0.5)
+	// boom.PutCenter(scene, text, 0, 0)
 
 	scene.Print()
 

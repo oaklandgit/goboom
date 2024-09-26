@@ -37,11 +37,10 @@ func main() {
 	}
 
 	// Bricks
-	bricks := boom.GridArray(3, 14, 6, makeRedBrick)
+	bricks := boom.GridArray(3, 14, 4, makeRedBrick)
+	// bricks.SetXY(20, 20)
+	boom.PutCenter(scene, bricks, 0, -140)
 	bricks.SetId("the bricks")
-
-	// fmt.Println("Bricks", bricks.GetBoundingBox().Width, bricks.GetBoundingBox().Height)
-	boom.PutCenter(scene, bricks, 0, 0)
 	
 	
 	// Walls

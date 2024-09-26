@@ -6,8 +6,6 @@ import (
 
 type EllipseComp struct {
 	GameObject 		*GameObject
-	// Width 			float32
-	// Height 			float32
 	FillColor 		rl.Color
 	StrokeColor 	rl.Color
 	StrokeWeight 	float32
@@ -56,7 +54,7 @@ func (e *EllipseComp) OnDraw(scene *GameObject) {
 
 	obj := e.GameObject
 
-	rl.DrawEllipse(int32(obj.X), int32(obj.Y), obj.Height, obj.Width, e.FillColor)
-	rl.DrawEllipseLines(int32(obj.X), int32(obj.Y), obj.Height, obj.Width, e.StrokeColor)
+	rl.DrawEllipse(int32(obj.Width/2), int32(obj.Height/2), obj.Height/2, obj.Width/2, e.FillColor)
+	rl.DrawEllipseLines(int32(obj.Width/2), int32(obj.Height/2), obj.Height/2, obj.Width/2, e.StrokeColor)
 	
 }

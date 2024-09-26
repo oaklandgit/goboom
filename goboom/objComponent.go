@@ -7,10 +7,6 @@ type Component interface {
 	OnUpdate(scene *GameObject)
 	OnDraw(scene *GameObject)
 	GetComponentId() string
-	// GetWidth() float32
-	// GetHeight() float32
-	// ModifyWidth(float32) float32
-	// ModifyHeight(float32) float32
 }
 
 func Create(x, y, w, h float32, c ...Component) *GameObject {	
@@ -26,14 +22,8 @@ func Create(x, y, w, h float32, c ...Component) *GameObject {
 }
 
 func (g *GameObject) AddComponent(c Component) {
-	
 	c.SetGameObject(g)
 	g.Components = append(g.Components, c)
-
-	// for _, comp := range g.Components {
-	// 	fmt.Println(comp.GetComponentId())
-	// 	fmt.Println(comp.GetGameObject().GetId())
-	// }
 }
 
 func (g *GameObject) AddComponents(c ...Component) {
@@ -64,11 +54,6 @@ func (g *GameObject) HasComponent(id string) bool {
 	return false
 }
 
-// Alias
-func (g *GameObject) With(c Component) {
-	g.AddComponent(c)
-}
-
 func (g *GameObject) Get(id string) Component {
 	for _, c := range g.Components {
 		if c.GetComponentId() == id {
@@ -77,25 +62,3 @@ func (g *GameObject) Get(id string) Component {
 	}
 	return nil
 }
-
-// func (obj *GameObject) Do(componentID, methodName string, args ...interface{}) {
-//     comp := obj.Get(componentID)
-//     if comp == nil {
-//         fmt.Printf("Error: component %s not found\n", componentID)
-//         return
-//     }
-
-//     compValue := reflect.ValueOf(comp)
-//     method := compValue.MethodByName(methodName)
-//     if !method.IsValid() {
-//         fmt.Printf("Error: method %s not found on component %s\n", methodName, componentID)
-//         return
-//     }
-
-//     methodArgs := make([]reflect.Value, len(args))
-//     for i, arg := range args {
-//         methodArgs[i] = reflect.ValueOf(arg)
-//     }
-
-//     method.Call(methodArgs)
-// }

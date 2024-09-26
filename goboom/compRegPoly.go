@@ -53,18 +53,8 @@ func (c *RegPolyComp) OnInit() {}
 func (c *RegPolyComp) OnUpdate(scene *GameObject) {}
 
 func (c *RegPolyComp) OnDraw(scene *GameObject) {
-	obj := c.GameObject
-	// centerX := obj.X + obj.GetWidth() * obj.GetOriginX()
-	// centerY := obj.Y + obj.GetHeight() * obj.GetOriginY()
-	// rl.PushMatrix()
-	// rl.Translatef(centerX, centerY, 0)
-	// rl.Scalef(obj.GetScaleX(), obj.GetScaleY(), 1)
-	// rl.Rotatef(obj.GetAngle(), 0, 0, 1)
-	// rl.Translatef(-centerX, -centerY, 0)
-	
-	
 	if c.FillColor != rl.Blank {
-		rl.DrawPoly(rl.Vector2{X: obj.X + c.Radius, Y: obj.Y + c.Radius},
+		rl.DrawPoly(rl.Vector2{X: c.Radius, Y: c.Radius},
 			c.Sides,
 			c.Radius,
 			0, // rotation handled by the GameObject
@@ -73,7 +63,7 @@ func (c *RegPolyComp) OnDraw(scene *GameObject) {
 
 	if c.StrokeColor != rl.Blank {
 		rl.DrawPolyLinesEx(
-			rl.Vector2{X: obj.X + c.Radius, Y: obj.Y + c.Radius},
+			rl.Vector2{X: c.Radius, Y: c.Radius},
 			c.Sides,
 			c.Radius,
 			0, // rotation handled by the GameObject
@@ -81,19 +71,12 @@ func (c *RegPolyComp) OnDraw(scene *GameObject) {
 			c.StrokeColor)
 	}
 
-	// rl.PopMatrix()
 }
 
 func (c *RegPolyComp) GetWidth() float32 {
-	// if c.Radius * 2 > w {
-	// 	return c.Radius * 2
-	// }
 	return c.Radius * 2
 }
 
 func (c *RegPolyComp) GetHeight() float32 {
-	// if c.Radius * 2 > h {
-	// 	return c.Radius * 2
-	// }
 	return c.Radius * 2
 }

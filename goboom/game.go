@@ -49,7 +49,7 @@ func (g *Game) GetHeight() float32 {
 
 func (scene *GameObject) Cleanup() {
 	for _, c := range scene.GetAll() {
-		if c.IsDeleted() {
+		if c.Delete {
 			c.GetParent().Remove(c)
 		}
 	}
