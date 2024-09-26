@@ -29,20 +29,40 @@ func (obj *GameObject) GetBoundingBox() rl.Rectangle {
 	}
 }
 
+func RotatePoint(x, y, angleDegrees float32) (float32, float32) {
+	rads := angleDegrees * (math.Pi / 180)
+	sin, cos := float32(math.Sin(float64(rads))), float32(math.Cos(float64(rads)))
+    return x*cos - y*sin, x*sin + y*cos
+}
 
 func (r *GameObject) GetGlobalX() float32 {
-	if r.GetParent() == nil {
-		return r.GetX()
-	}
-	return r.GetX() + r.GetParent().GetGlobalX()
+	x, _ := r.GetGlobalXY()
+	return x
 }
 
+
 func (r *GameObject) GetGlobalY() float32 {
-	if r.GetParent() == nil {
-		return r.GetY()
-	}
-	return r.GetY() + r.GetParent().GetGlobalY()
+	_, y := r.GetGlobalXY()
+	return y
 }
+
+
+func (r *GameObject) GetGlobalXY() (float32, float32) {
+	if r.GetParent() == nil {
+		return r.GetX(), r.GetY()
+	}
+	parent := r.GetParent()
+	localX, localY := r.GetX(), r.GetY()
+	rotatedX, rotatedY := RotatePoint(localX, localY, parent.GetAngle())
+	return rotatedX + parent.GetGlobalX(), rotatedY + parent.GetGlobalY()
+}
+
+// func (r *GameObject) GetGlobalY() float32 {
+// 	if r.GetParent() == nil {
+// 		return r.GetY()
+// 	}
+// 	return r.GetY() + r.GetParent().GetGlobalY()
+// }
 
 
 func (r *GameObject) GetGlobalScaleX() float32 {

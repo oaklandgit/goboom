@@ -15,7 +15,8 @@ func createPlayer(scene *boom.GameObject) *boom.GameObject {
 	ship := boom.Polygon(0, 0, "-10 10 0 -10 10 10", false, rl.Blue, rl.White, 2)
 	ship.SetSize(18, 18)
 	
-	bulletOrigin := boom.Ellipse(-5, -12, 10, 10, rl.Blank, rl.White, 2)
+	bulletOrigin := boom.Ellipse(0, -22, 4, 4, rl.Blank, rl.White, 2)
+	bulletOrigin.SetOrigin(-0.5, -0.5)
 	ship.Add(bulletOrigin)
 	
 	// MOVEMENT

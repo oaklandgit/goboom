@@ -91,7 +91,6 @@ func updateAndDrawChild(obj *GameObject, scene *GameObject) {
 		
 	rl.PushMatrix()
 	
-	
 	centerX := obj.X + obj.GetBoundingBox().Width * obj.GetOriginX()
 	centerY := obj.Y + obj.GetBoundingBox().Height * obj.GetOriginY()
 	
@@ -108,8 +107,7 @@ func updateAndDrawChild(obj *GameObject, scene *GameObject) {
 		c.OnUpdate(scene)
 		c.OnDraw(scene)
 	}
-	
-	
+
 	// but chidren are drawn recursively
 	for _, child := range obj.GetChildren() {
 		updateAndDrawChild(child, scene)
