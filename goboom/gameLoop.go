@@ -49,10 +49,11 @@ func (g *Game) Run() {
 
 	// Inialize all objects and components
 	for _, obj := range scene.GetAll() {
-		obj.OnInit()
 		for _, c := range obj.GetComponents() {
 			c.OnInit()
 		}
+		
+		obj.OnInit()
 	}
 
 	// Main game loop
@@ -102,12 +103,12 @@ func updateAndDrawChild(obj *GameObject, scene *GameObject) {
 	obj.OnUpdate()
 	obj.OnDraw()
 	
-	
 	// components are not nested further
 	for _, c := range obj.GetComponents() {
 		c.OnUpdate(scene)
 		c.OnDraw(scene)
 	}
+	
 	
 	// but chidren are drawn recursively
 	for _, child := range obj.GetChildren() {
