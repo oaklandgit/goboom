@@ -19,6 +19,7 @@ func createPlayer() *boom.GameObject {
 	// MOVEMENT
 	velocity := boom.NewVelocityComp(0, 0)
 	control := boom.NewInputComp()
+	wrap := boom.NewWrapComp(true)
 
 	control.NewInput(rl.KeyRight, boom.KeyDown, func() {
 		ship.AddAngle(ROTATE_SPEED)
@@ -33,7 +34,7 @@ func createPlayer() *boom.GameObject {
 		
 	})
 
-	ship.AddComponents(velocity, control)
+	ship.AddComponents(velocity, control, wrap)
 
 	// always spawn the ship invincible for 3 seconds
 	// cancelInvincibility := boom.PowerUp(ship, Invincible, 10 * time.Second)

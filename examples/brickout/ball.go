@@ -6,6 +6,8 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+const BALL_RADIUS = 12
+
 func bounce (b *boom.GameObject, v rl.Vector2) {
 	vel := b.GetComponent("velocity").(*boom.VelocityComp)
 	currVel := vel.GetVelVector()
@@ -16,7 +18,7 @@ func createBall(velx, velY float32) *boom.GameObject {
 
 	// define components
 	vel := boom.NewVelocityComp(velx, velY)
-	collision := boom.NewCollideComp(boom.CollisionCircle{Radius: 6}, "ball")
+	collision := boom.NewCollideComp(boom.CollisionCircle{Radius: BALL_RADIUS}, "ball")
 
 	
 	collision.NewCollider("brick", func(b, brick *boom.GameObject) {
@@ -32,12 +34,11 @@ func createBall(velx, velY float32) *boom.GameObject {
 		bounce(b, rl.NewVector2(0, 1))
 	})
 
-	ball := boom.Ellipse(0, 0, 6, 6, rl.White, rl.Red, 2)
+	ball := boom.Ellipse(0, 0, BALL_RADIUS, BALL_RADIUS, rl.White, rl.Red, 2)
 	ball.AddTags("ball")
 	ball.SetId("the ball")
 
 	ball.AddComponents(vel, collision)
-
 
 	return ball
 }
