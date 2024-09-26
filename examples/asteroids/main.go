@@ -22,29 +22,27 @@ func main() {
 	game.SetBgColor(rl.Black)
 
 	scene := game.GetCurrentScene()
-
-	// scoreboard := boom.NewText(scene.CenterX(), 12, &scoreString, rl.White)
-	// scoreboard.SetScale(2, 2)
-
-	ship := createPlayer()
-
+	scoreboard := boom.Text(0, 0, "Score: 0", 30, rl.White)
+	
+	ship := createPlayer(scene)
+	
 	for i := 0; i < ASTEROIDS_COUNT ; i++ {
 		x := rand.Intn(int(game.GetWidth()))
 		y := rand.Intn(int(game.GetWidth()))
 		angle := float32(rand.Intn(360))
-
+		
         asteroid := createAsteroid(float32(x), float32(y))
 		
 		movement := boom.NewVelocityComp(0, 0)
 		movement.SetVelocityByHeading(angle, 1)
-
+		
 		asteroid.AddComponents(movement)
         scene.Add(asteroid)
     }
-
-	scene.Add(ship)
+	
+	scene.Add(ship, scoreboard)
 	boom.PutCenter(scene, ship, 0, 0)
-	// scene.Add(scoreboard, ship)
+	boom.PutTop(scene, scoreboard, 0, 0)
 
 	game.Run()
 

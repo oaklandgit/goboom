@@ -8,8 +8,9 @@ import (
 )
 
 type VelocityComp struct {
-	GameObject 		*GameObject
-	VelX, VelY 		float32
+	GameObject 	*GameObject
+	VelX, VelY 	float32
+	Drag 		float32
 }
 
 
@@ -17,6 +18,7 @@ func NewVelocityComp(vx, vy float32) *VelocityComp {
 	comp := &VelocityComp{
 		VelX: vx,
 		VelY: vy,
+		Drag: 1,
 	}
 	return comp
 }
@@ -38,8 +40,22 @@ func (c *VelocityComp) OnInit() {}
 
 func (c *VelocityComp) OnUpdate(scene *GameObject) {
 	obj := c.GameObject
+
+	// Apply velocity
 	obj.X += c.VelX
 	obj.Y += c.VelY
+
+	// Apply drag
+	c.VelX *= c.Drag
+	c.VelY *= c.Drag
+
+	// clamp to zero
+	if math.Abs(float64(c.VelX)) < 0.01 {
+		c.VelX = 0
+	}
+	if math.Abs(float64(c.VelY)) < 0.01 {
+		c.VelY = 0
+	}
 }
 
 func (c *VelocityComp) OnDraw(scene *GameObject) {}
@@ -77,6 +93,9 @@ func (c *VelocityComp) AddVelocityByHeading(heading, speed float32) {
 	c.VelY += speed * float32(math.Sin(float64(heading)))
 }
 
+func (c *VelocityComp) ApplyDrag(drag float32) {
+	c.Drag = drag
+}
 
 func (c *VelocityComp) SetVelocity(args ...interface{}) {
     if len(args) == 1 {
