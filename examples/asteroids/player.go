@@ -40,6 +40,7 @@ func createPlayer(scene *boom.GameObject) *boom.GameObject {
 
 	control.NewInput(rl.KeySpace, boom.KeyPressed, func() {
 		bullet := createBullet(
+			scene,
 			bulletOrigin.GetGlobalX(),
 			bulletOrigin.GetGlobalY(),
 			bulletOrigin.GetGlobalAngle(),

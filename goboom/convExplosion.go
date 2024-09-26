@@ -4,7 +4,8 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func (node *GameObject) NewExplosion(
+func NewExplosion(
+	scene *GameObject,
 	x, y float32,
 	minCount, maxCount int32,
 	minForce, maxForce int32,
@@ -14,7 +15,7 @@ func (node *GameObject) NewExplosion(
 
 	for i := 0; i < int(count); i++ {
 		a := float32(rl.GetRandomValue(0, 360))
-		d := rl.GetRandomValue(100, 1000)
+		d := rl.GetRandomValue(100, 1_000)
 		strength := float32(rl.GetRandomValue(minForce, maxForce))
 		p := particle()
 		p.SetXY(x, y)
@@ -25,7 +26,7 @@ func (node *GameObject) NewExplosion(
 		vel.SetVelocityByHeading(a, strength)
 
 		p.AddComponent(vel)
-		node.Add(p)
+		scene.Add(p)
 	}
 
 	
