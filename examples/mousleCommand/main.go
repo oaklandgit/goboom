@@ -25,9 +25,7 @@ func main() {
 
 	// splosions
 	mouse.OnClick(func() {
-		boom.NewExplosion(scene, crosshairs.GetX(), crosshairs.GetY(), 3, 12, 1, 3, func() *boom.GameObject {
-			return boom.Rectangle(0, 0, 7, 5, rl.Blank, rl.White, 1)
-		})
+		createBurst(scene, crosshairs.GetX(), crosshairs.GetY())
 	})
 
 	crosshairs.AddComponent(mouse)

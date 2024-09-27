@@ -25,6 +25,11 @@ func Ellipse(x, y, w, h float32, fill, stroke rl.Color, strokeWeight float32) *G
 	return obj
 }
 
+// convenience function for creating a circle
+func Circle(x, y, r float32, fill, stroke rl.Color, strokeWeight float32) *GameObject {
+	return Ellipse(x, y, r*2, r*2, fill, stroke, strokeWeight)
+}
+
 func NewEllipseComp(fill, stroke rl.Color, strokeWeight float32) *EllipseComp {
 	comp := &EllipseComp{
 		FillColor: fill,
