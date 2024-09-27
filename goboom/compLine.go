@@ -43,7 +43,8 @@ func (c *LineComp) OnUpdate(scene *GameObject) {}
 func (c *LineComp) OnDraw(scene *GameObject) {
 	
 	obj := c.GameObject
-	start := rl.NewVector2(obj.GetX(), obj.GetY())
-	rl.DrawLineEx(start, c.End, c.StrokeWeight, c.StrokeColor)
+	start := rl.NewVector2(0, 0)
+	end := rl.NewVector2(c.End.X - obj.X, c.End.Y - obj.Y)
+	rl.DrawLineEx(start, end, c.StrokeWeight, c.StrokeColor)
 	
 }

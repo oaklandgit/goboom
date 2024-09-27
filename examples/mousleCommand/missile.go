@@ -7,20 +7,21 @@ import (
 )
 
 func spawnMissiles(scene *boom.GameObject) {
-	createMissile(scene, rl.NewVector2(100, 0), rl.NewVector2(1, 2))
+	createMissile(scene, rl.NewVector2(100, 0), rl.NewVector2(1, 1))
 }
 
 func createMissile(scene *boom.GameObject, start rl.Vector2, v rl.Vector2) {
 
-	startX := start.X
-	startY := start.Y
+	// startX := start.X
+	// startY := start.Y
 
 	missile := boom.Circle(start.X, start.Y, 5, rl.Red, rl.Blank, 2)
 	missile.SetOrigin(-0.5, -0.5)
 	vel := boom.NewVelocityComp(v.X, v.Y)
 	missile.AddComponent(vel)
 
-	trail := boom.Line(startX, startY, missile.GetGlobalX(), missile.GetGlobalY(), rl.Red, 2)
+	trail := boom.Line(start.X, start.Y, missile.GetGlobalX(), missile.GetGlobalY(), rl.Red, 2)
+	trail.SetSize(0, 0)
 
 	trailComp := trail.GetComponent("line").(*boom.LineComp)
 	
