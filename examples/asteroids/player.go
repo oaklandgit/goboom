@@ -16,7 +16,7 @@ func createPlayer(scene *boom.GameObject) *boom.GameObject {
 	ship.SetSize(18, 18)
 	
 	bulletOrigin := boom.NewGroup(0, -22)
-	bulletOrigin.SetOrigin(-0.5, -0.5)
+	bulletOrigin.SetOrigin(-0.5, -0.5) // this shouldn't require negative values. Investigate.
 	ship.Add(bulletOrigin)
 	
 	// MOVEMENT

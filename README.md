@@ -6,20 +6,20 @@
 ### To Do
 
 - utilize delta time
-- rotational velocity component
-- platformer example
-  - gravity
-  - grounded
-  - jump component
 
 ### Backlog
 
 - load sprite atlas
 - define animations from sprite atlas
 - implement motion scripts / tweening (e.g. for enemy movement)
+- platformer example
+  - gravity
+  - grounded
+  - jump component
 
 ### Done
 
+- rotational velocity component
 - get collisions working (start with circle collisions)
 - figure out why bricks example isn't rendering the brick group properly
 - every object should have a unique id. For groups of objects append an index
