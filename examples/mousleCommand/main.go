@@ -34,7 +34,7 @@ func main() {
 
 	boom.PutCenter(scene, crosshairs, 0, 0)
 
-	spawnMissiles(scene)
+	go spawnMissiles(scene)
 
 	game.Run()
 
