@@ -13,16 +13,23 @@ func main() {
 	game.SetBgColor(rl.Black)
 	scene := game.GetCurrentScene()
 
-	// Create the crosshairs
-	crosshairs := boom.NewGroup(0, 0)
-	crosshairs.Add(boom.Rectangle(0, 0, 20, 2, rl.White, rl.White, 1))
-	crosshairs.Add(boom.Rectangle(0, 0, 2, 20, rl.White, rl.White, 1))
+	// A blank game object to hold the crosshairs
+	crosshairs := boom.NewGameObject()
 
 	// Mouse component
 	mouse := boom.NewMouseComp()
+	mouse.SetCursor(rl.MouseCursorCrosshair)
 	mouse.OnMove(func(x, y float32) {
 		crosshairs.SetXY(x, y)
 	})
+
+	// splosions
+	mouse.OnClick(func() {
+		boom.NewExplosion(scene, crosshairs.GetX(), crosshairs.GetY(), 3, 12, 1, 3, func() *boom.GameObject {
+			return boom.Rectangle(0, 0, 7, 5, rl.Blank, rl.White, 1)
+		})
+	})
+
 	crosshairs.AddComponent(mouse)
 
 	scene.Add(crosshairs)
