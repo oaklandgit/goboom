@@ -9,6 +9,19 @@ type Component interface {
 	GetComponentId() string
 }
 
+type CompSetGet struct {
+	GameObject *GameObject
+}
+
+
+func (c *CompSetGet) SetGameObject(g *GameObject) {
+	c.GameObject = g
+}
+
+func (c *CompSetGet) GetGameObject() *GameObject {
+	return c.GameObject
+}
+
 func Create(x, y, w, h float32, c ...Component) *GameObject {	
 	obj := NewGameObject()
 	obj.X = x

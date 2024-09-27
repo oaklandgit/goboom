@@ -5,7 +5,7 @@ import (
 )
 
 type EllipseComp struct {
-	GameObject 		*GameObject
+	CompSetGet
 	FillColor 		rl.Color
 	StrokeColor 	rl.Color
 	StrokeWeight 	float32
@@ -41,14 +41,6 @@ func NewEllipseComp(fill, stroke rl.Color, strokeWeight float32) *EllipseComp {
 
 func (e *EllipseComp) GetComponentId() string {
 	return "ellipse"
-}
-
-func (e *EllipseComp) SetGameObject(g *GameObject) {
-	e.GameObject = g
-}
-
-func (e *EllipseComp) GetGameObject() *GameObject {
-	return e.GameObject
 }
 
 func (e *EllipseComp) OnInit() {}

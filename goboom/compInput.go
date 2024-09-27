@@ -5,7 +5,7 @@ import (
 )
 
 type InputComp struct {
-	GameObject 	*GameObject
+	CompSetGet
 	Inputs 		[]Input
 }
 
@@ -47,14 +47,6 @@ func (c *InputComp) NewInput(key int32, mode ButtonMode, action func()) Input {
 
 func (c *InputComp) GetComponentId() string {
 	return "input"
-}
-
-func (c *InputComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *InputComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *InputComp) OnInit() {}

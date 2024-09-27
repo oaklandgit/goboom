@@ -9,7 +9,7 @@ import (
 )
 
 type PolyComp struct {
-	GameObject 		*GameObject
+	CompSetGet
 	Points 			[]rl.Vector2
 	Stroke
 	Fill
@@ -48,14 +48,6 @@ func NewPolyComp(path string, closed bool, fill, stroke rl.Color, strokeWeight f
 
 func (c *PolyComp) GetComponentId() string {
 	return "polygon"
-}
-
-func (c *PolyComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *PolyComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *PolyComp) OnInit() {}

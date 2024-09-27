@@ -4,7 +4,7 @@ import rl "github.com/gen2brain/raylib-go/raylib"
 
 
 type MouseComp struct {
-	GameObject 	*GameObject
+	CompSetGet
 	Move 		func(x, y float32)
 	Click 		func()
 	Release 	func()
@@ -36,14 +36,6 @@ func (c *MouseComp) OnRelease(action func()) {
 
 func (c *MouseComp) GetComponentId() string {
 	return "mouse"
-}
-
-func (c *MouseComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *MouseComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *MouseComp) OnInit() {

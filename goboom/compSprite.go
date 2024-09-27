@@ -7,7 +7,7 @@ import (
 )
 
 type SpriteComp struct {
-	GameObject *GameObject
+	CompSetGet
 	ImagePaths []string
 	Frames []rl.Texture2D
 	CurrentFrame int
@@ -44,14 +44,6 @@ func NewSpriteComp(imagePaths ...string) *SpriteComp {
 
 func (c *SpriteComp) GetComponentId() string {
 	return "sprite"
-}
-
-func (c *SpriteComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *SpriteComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *SpriteComp) OnInit() {

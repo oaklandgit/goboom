@@ -4,7 +4,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func NewExplosion(
+func Splosion(
 	scene *GameObject,
 	x, y float32,
 	minCount, maxCount int32,

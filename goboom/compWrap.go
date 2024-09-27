@@ -3,7 +3,7 @@ package goboom
 import rl "github.com/gen2brain/raylib-go/raylib"
 
 type WrapComp struct {
-	GameObject 			*GameObject
+	CompSetGet
 	WrapX, WrapY      	bool
 	PaddingX, PaddingY  float32
 }
@@ -37,14 +37,6 @@ func (w *WrapComp) SetPadding(paddingX, paddingY float32) {
 
 func (*WrapComp) GetComponentId() string {
 	return "wrap"
-}
-
-func (w *WrapComp) SetGameObject(g *GameObject) {
-	w.GameObject = g
-}
-
-func (w *WrapComp) GetGameObject() *GameObject {
-	return w.GameObject
 }
 
 func (w *WrapComp) OnInit() {}

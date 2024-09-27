@@ -5,7 +5,7 @@ import (
 )
 
 type RegPolyComp struct {
-	GameObject 		*GameObject
+	CompSetGet
 	Sides 			int32
 	Radius 			float32
 	Fill
@@ -38,14 +38,6 @@ func RegPolygon(x, y, r float32, sides int32, fill, stroke rl.Color, strokeWeigh
 
 func (c *RegPolyComp) GetComponentId() string {
 	return "regpolygon"
-}
-
-func (c *RegPolyComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *RegPolyComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *RegPolyComp) OnInit() {}

@@ -8,7 +8,7 @@ import (
 )
 
 type VelocityComp struct {
-	GameObject 	*GameObject
+	CompSetGet
 	VelX, VelY 	float32
 	Drag 		float32
 }
@@ -26,14 +26,6 @@ func NewVelocityComp(vx, vy float32) *VelocityComp {
 
 func (c *VelocityComp) GetComponentId() string {
 	return "velocity"
-}
-
-func (c *VelocityComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *VelocityComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *VelocityComp) OnInit() {}

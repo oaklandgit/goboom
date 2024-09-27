@@ -5,7 +5,7 @@ import (
 )
 
 type RectComp struct {
-	GameObject 		*GameObject
+	CompSetGet
 	FillColor 		rl.Color
 	StrokeColor 	rl.Color
 	StrokeWeight 	float32
@@ -36,14 +36,6 @@ func NewRectComp(fill, stroke rl.Color, strokeWeight float32) *RectComp {
 
 func (c *RectComp) GetComponentId() string {
 	return "circle"
-}
-
-func (c *RectComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *RectComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *RectComp) OnInit() {}

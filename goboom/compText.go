@@ -5,7 +5,7 @@ import (
 )
 
 type TextComp struct {
-	GameObject *GameObject
+	CompSetGet
 	Color	  rl.Color
 	Text	  string
 	FontSize  int32
@@ -37,14 +37,6 @@ func NewTextComp(text string, size int32, color rl.Color) *TextComp {
 
 func (t *TextComp) GetComponentId() string {
 	return "text"
-}
-
-func (t *TextComp) SetGameObject(g *GameObject) {
-	t.GameObject = g
-}
-
-func (t *TextComp) GetGameObject() *GameObject {
-	return t.GameObject
 }
 
 func (t *TextComp) OnInit() {

@@ -7,7 +7,7 @@ import (
 )
 
 type CollideComp struct {
-	GameObject 			*GameObject // my game object
+	CompSetGet
 	Shape 				ColliderShape // my shape for collisions
 	Colliders 			[]Collider // who to collide with and what to do
 	CollidingWith 		[]*GameObject // who am I currently colliding with?
@@ -151,15 +151,6 @@ func (c *CollideComp) NewCollider(vs string, action func(obj1, obj2 *GameObject)
 func (c *CollideComp) GetComponentId() string {
 	return "collide"
 }
-
-func (c *CollideComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *CollideComp) GetGameObject() *GameObject {
-	return c.GameObject
-}
-
 
 func (c *CollideComp) OnInit() {}
 

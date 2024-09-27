@@ -5,7 +5,7 @@ import (
 )
 
 type RotVelocityComp struct {
-	GameObject 	*GameObject
+	CompSetGet
 	Speed 		float32
 	Drag 		float32
 }
@@ -22,14 +22,6 @@ func NewRotVelocityComp(speed float32) *RotVelocityComp {
 
 func (c *RotVelocityComp) GetComponentId() string {
 	return "rotvelocity"
-}
-
-func (c *RotVelocityComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *RotVelocityComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *RotVelocityComp) OnInit() {}

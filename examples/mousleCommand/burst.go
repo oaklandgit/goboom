@@ -7,7 +7,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const GROWTH_RATE = 5
+const GROWTH_RATE = 3
 const FADE_RATE = 5
 
 

@@ -2,7 +2,7 @@ package goboom
 
 
 type TweenComp struct {
-	GameObject 		*GameObject
+	CompSetGet
 	ChangeFunc 		func()
 	EndCondition 	func() bool
 	AfterFunc 		func()
@@ -16,14 +16,6 @@ func NewTweenComp() *TweenComp {
 
 func (c *TweenComp) GetComponentId() string {
 	return "tween"
-}
-
-func (c *TweenComp) SetGameObject(g *GameObject) {
-	c.GameObject = g
-}
-
-func (c *TweenComp) GetGameObject() *GameObject {
-	return c.GameObject
 }
 
 func (c *TweenComp) OnInit() {}

@@ -26,7 +26,7 @@ func createBullet(scene *boom.GameObject, x, y, angle, thrust float32) *boom.Gam
 
 	collide := boom.NewCollideComp(boom.CollisionCircle{Radius: 5})
 	collide.NewCollider("asteroid", func(self, asteroid *boom.GameObject) {
-		boom.NewExplosion(
+		boom.Splosion(
 			scene,
 			asteroid.GetX(), asteroid.GetY(),
 			6, 12,
