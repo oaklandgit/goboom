@@ -7,6 +7,12 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+func incrementScore(scene *boom.GameObject, points int) {
+	scoreboard := scene.GetById("scoreboard")
+	score += points
+	scoreboard.GetComponent("text").(*boom.TextComp).SetText(fmt.Sprintf("Score: %d", score))
+}
+
 func createBullet(scene *boom.GameObject, x, y, angle, thrust float32) *boom.GameObject {
 	bullet := boom.Rectangle(x, y, 1, 20, rl.Red, rl.Blank, 0)
 	bullet.AddTags("bullet")
@@ -23,14 +29,12 @@ func createBullet(scene *boom.GameObject, x, y, angle, thrust float32) *boom.Gam
 		boom.NewExplosion(
 			scene,
 			asteroid.GetX(), asteroid.GetY(),
-			4, 6,
-			5, 12,
+			6, 12,
+			1, 3,
 			func() *boom.GameObject {
-				return boom.Rectangle(0, 0, 10, 10, rl.White, rl.Blank, 0)
+				return boom.Rectangle(0, 0, 7, 5, rl.Blank, rl.White, 1)
 			})
-		scoreboard := scene.GetById("scoreboard")
-		score++
-		scoreboard.GetComponent("text").(*boom.TextComp).SetText(fmt.Sprintf("Score: %d", score))
+		incrementScore(scene, 10)
 		asteroid.SetLifespan(0)
 	})
 

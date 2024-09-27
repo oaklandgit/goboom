@@ -36,8 +36,9 @@ func createAsteroid(x, y float32) *boom.GameObject {
     wrap := boom.NewWrapComp(true, true)
     wrap.SetPadding(asteroid.GetWidth(), asteroid.GetHeight())
     collide := boom.NewCollideComp(boom.CollisionCircle{Radius: float32(size)})
+    spin := boom.NewRotVelocityComp(float32(rl.GetRandomValue(-3, 3)) * 0.1)
 
-    asteroid.AddComponents(collide, wrap)
+    asteroid.AddComponents(collide, wrap, spin)
 
     asteroid.AddTags("asteroid")
 

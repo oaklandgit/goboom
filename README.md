@@ -6,6 +6,11 @@
 ### To Do
 
 - utilize delta time
+- rotational velocity component
+- platformer example
+  - gravity
+  - grounded
+  - jump component
 
 ### Backlog
 
