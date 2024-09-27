@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	boom "goboom/goboom"
 	"time"
 
@@ -12,8 +13,7 @@ const (
 	ASTEROIDS_COUNT = 12
 )
 
-// var score = 0
-// var scoreString = "0"
+var score = 0
 
 func main() {
 
@@ -22,7 +22,8 @@ func main() {
 	game.SetBgColor(rl.Black)
 
 	scene := game.GetCurrentScene()
-	scoreboard := boom.Text(0, 0, "Score: 0", 30, rl.White)
+	scoreboard := boom.Text(0, 0, fmt.Sprintf("Score: %d", score), 30, rl.White)
+	scoreboard.SetId("scoreboard")
 	
 	ship := createPlayer(scene)
 	
@@ -42,7 +43,7 @@ func main() {
 	
 	scene.Add(ship, scoreboard)
 	boom.PutCenter(scene, ship, 0, 0)
-	boom.PutTop(scene, scoreboard, 0, 0)
+	boom.PutTopCenter(scene, scoreboard, 0, 12)
 
 	game.Run()
 

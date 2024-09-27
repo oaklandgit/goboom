@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	boom "goboom/goboom"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -14,7 +15,7 @@ func bounce (b *boom.GameObject, v rl.Vector2) {
 	vel.SetVelocity(rl.Vector2Reflect(currVel, v))
 }
 
-func createBall(velx, velY float32) *boom.GameObject {
+func createBall(scene *boom.GameObject, velx, velY float32) *boom.GameObject {
 
 	// define components
 	vel := boom.NewVelocityComp(velx, velY)
@@ -24,6 +25,10 @@ func createBall(velx, velY float32) *boom.GameObject {
 	collision.NewCollider("brick", func(b, brick *boom.GameObject) {
 		brick.SetLifespan(0)
 		bounce(b, rl.NewVector2(0, 1))
+
+		scoreboard := scene.GetById("scoreboard")
+		score++
+		scoreboard.GetComponent("text").(*boom.TextComp).SetText(fmt.Sprintf("Score: %d", score))
 	})
 
 	collision.NewCollider("wall", func(b, wall *boom.GameObject) {

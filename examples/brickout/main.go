@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	boom "goboom/goboom"
 	"time"
 
@@ -15,6 +16,8 @@ const (
 	BALL_VELY = 2
 )
 
+var score int
+
 func main() {
 
 	rand.Seed(uint64(time.Now().UnixNano()))
@@ -28,7 +31,7 @@ func main() {
 	boom.PutBottom(scene, paddle, 0, -60)
 
 	// Ball
-	ball := createBall(BALL_VELX, BALL_VELY)
+	ball := createBall(scene, BALL_VELX, BALL_VELY)
 	boom.PutCenter(scene, ball, 0, 0)
 
 	// One Brick
@@ -41,14 +44,19 @@ func main() {
 	// bricks.SetXY(20, 20)
 	boom.PutCenter(scene, bricks, 0, -140)
 	bricks.SetId("the bricks")
-	
+
+	// Scoreboard
+	scoreboard := boom.Text(0, 0, fmt.Sprintf("Score: %d", score), 30, rl.White)
+	scoreboard.SetId("scoreboard")
 	
 	// Walls
 	leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
 	rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
 	ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
 	
-	scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall)
+	scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall, scoreboard)
+
+	boom.PutTopCenter(scene, scoreboard, 0, 32)
 	
 	// scene.Print()
 	// fmt.Println(scene.GetWidth(), scene.GetHeight())

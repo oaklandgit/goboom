@@ -13,6 +13,17 @@ func (node *GameObject) HasTag(tag string) bool {
 	return false
 }
 
+func (scene *GameObject) GetById(id string) *GameObject {
+	for _, c := range scene.GetAll() {
+		if c.Id == id {
+			return c
+		}
+	}
+
+	return nil
+}
+
+
 func (node *GameObject) GetAllTagged() []*GameObject {
 
 	tagged := []*GameObject{}

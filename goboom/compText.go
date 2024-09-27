@@ -22,6 +22,10 @@ func Text(x, y float32, text string, size int32, color rl.Color) *GameObject {
 	return obj
 }
 
+func (t *TextComp) SetText(text string) {
+	t.Text = text
+}
+
 func NewTextComp(text string, size int32, color rl.Color) *TextComp {
 	comp := &TextComp{
 		Text: text,
