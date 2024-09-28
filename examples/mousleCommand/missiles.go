@@ -16,17 +16,9 @@ const (
 	MAX_SPEED = 1.5
 )
 
-
-// func randIntBetween(min, max int) int {
-//     return rand.Intn(max-min+1) + min // Generate a random number between min and max
-// }
-
-// func randFloatBetween(min, max float32) float32 {
-//     return min + rand.Float32()*(max-min) // Generate a random float32 between min and max
-// }
-
-
 func spawnMissiles(scene *boom.GameObject) {
+
+	totalMissiles := 10
 
 	colors := []rl.Color{
 		rl.Red,
@@ -34,7 +26,7 @@ func spawnMissiles(scene *boom.GameObject) {
 		rl.Pink,
 	}
 
-	for {
+	for i := 0; i < totalMissiles; i++ {
 		time.Sleep(2 * time.Second)
 		index := rand.Intn(len(colors))
 		speed := boom.RandFloatBetween(MIN_SPEED, MAX_SPEED)

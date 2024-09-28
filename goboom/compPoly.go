@@ -69,7 +69,7 @@ func (c *PolyComp) OnDraw(scene *GameObject) {
 
 	rl.Scalef(scaleX, scaleY, 1)
 	
-	rl.DrawPixel(0, 0, rl.Red)
+	// rl.DrawPixel(0, 0, rl.Red)
 	
 	rl.DrawSplineLinear(c.Points, c.StrokeWeight, c.StrokeColor)
 	// TO DO: raylib doesn't have a fill function for irregular polygons
