@@ -12,8 +12,8 @@ import (
 const (
 	PADDLE_SPEED = 10
 	WALL_WIDTH = 22
-	BALL_VELX = -1
-	BALL_VELY = 2
+	BALL_VELX = -2
+	BALL_VELY = 3
 )
 
 var score int
@@ -51,8 +51,11 @@ func main() {
 	
 	// Walls
 	leftWall := createWall(0, 0, WALL_WIDTH, scene.GetHeight())
+	leftWall.AddTags("wall")
 	rightWall := createWall(scene.GetWidth() - WALL_WIDTH, 0, WALL_WIDTH, scene.GetHeight())
+	rightWall.AddTags("wall")
 	ceiling := createWall(0, 0, scene.GetWidth(), WALL_WIDTH)
+	ceiling.AddTags("ceiling")
 	
 	scene.Add(paddle, ball, bricks, ceiling, leftWall, rightWall, scoreboard)
 

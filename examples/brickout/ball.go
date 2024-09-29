@@ -35,6 +35,10 @@ func createBall(scene *boom.GameObject, velx, velY float32) *boom.GameObject {
 		bounce(b, rl.NewVector2(1, 0))
 	})
 
+	collision.NewCollider("ceiling", func(b, wall *boom.GameObject) {
+		bounce(b, rl.NewVector2(0, -1))
+	})
+
 	collision.NewCollider("paddle", func(b, paddle *boom.GameObject) {
 		bounce(b, rl.NewVector2(0, 1))
 	})
