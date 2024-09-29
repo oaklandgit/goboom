@@ -19,7 +19,7 @@ func main() {
 	intro.SetLifespan(4_000)
 
 	// Scoreboard
-	scoreboard, incrementScore := createScoreboard(scene)
+	scoreboard, incrementScore := createScoreboard()
 
 	// Earth
 	earth := createEarth(scene)

@@ -26,6 +26,11 @@ func createPlayer(scene *boom.GameObject) *boom.GameObject {
 	wrap := boom.NewWrapComp(true)
 	wrap.SetPadding(ship.GetWidth(), ship.GetHeight())
 
+	// COLLISION
+	collide := boom.NewCollideComp(boom.CollisionCircle{Radius: 10})
+	ship.AddTags("player")
+	ship.AddComponent(collide)
+
 	control.NewInput(rl.KeyRight, boom.KeyDown, func() {
 		ship.AddAngle(ROTATE_SPEED)
 	})

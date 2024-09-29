@@ -32,7 +32,7 @@ func main() {
 		y := rand.Intn(int(game.GetWidth()))
 		angle := float32(rand.Intn(360))
 		
-        asteroid := createAsteroid(float32(x), float32(y))
+        asteroid := createAsteroid(scene, float32(x), float32(y))
 		
 		movement := boom.NewVelocityComp(0, 0)
 		movement.SetVelocityByHeading(angle, 1)

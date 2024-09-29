@@ -9,7 +9,7 @@ import (
 
 var score int = 0
 
-func createScoreboard(scene *boom.GameObject) (*boom.GameObject, func(int)) {
+func createScoreboard() (*boom.GameObject, func(int)) {
 
 	txt := boom.NewTextComp(fmt.Sprintf("Score: %d", score), 30, rl.White)
 	scoreboard := boom.NewGameObject()

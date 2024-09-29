@@ -14,7 +14,7 @@ const (
     MAX_SIZE = 80
 )
 
-func createAsteroid(x, y float32) *boom.GameObject {
+func createAsteroid(scene *boom.GameObject, x, y float32) *boom.GameObject {
 
     points := ""
     sides := rl.GetRandomValue(MIN_SIDES, MAX_SIDES)
@@ -36,6 +36,17 @@ func createAsteroid(x, y float32) *boom.GameObject {
     wrap := boom.NewWrapComp(true, true)
     wrap.SetPadding(asteroid.GetWidth(), asteroid.GetHeight())
     collide := boom.NewCollideComp(boom.CollisionCircle{Radius: float32(size)})
+    collide.NewCollider("player", func(a, p *boom.GameObject) {
+        fmt.Println("Asteroid collided with player!")
+        boom.Splosion(
+            scene,
+            p.GetGlobalX(), p.GetGlobalY(),
+            5, 10,
+            2, 4,
+            func() *boom.GameObject {
+                return boom.Rectangle(0, 0, 3, 3, rl.Blank, rl.White, 2)
+            })
+    })
     spin := boom.NewRotVelocityComp(float32(rl.GetRandomValue(-3, 3)) * 0.1)
 
     asteroid.AddComponents(collide, wrap, spin)

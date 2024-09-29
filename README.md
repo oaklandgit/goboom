@@ -9,6 +9,7 @@
 
 ### To Do
 
+- pass a customizable "cooldown" period into a collision event
 - centralize collision detection. Current approach is non-performant
 - offscreen die
 - compAnchor - a way to keep objects dynamically anchored (centered, etc) to their parent
