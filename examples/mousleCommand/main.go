@@ -20,6 +20,9 @@ func main() {
 	floor := scene.GetGame().Height - 100
 	width := scene.GetGame().Width
 	earth := boom.Rectangle(0, floor, width, 100, rl.Blue, rl.Black, 1)
+	collide := boom.NewCollideComp(boom.CollisionRect{Width: width, Height: 100})
+	earth.AddComponent(collide)
+	earth.AddTags("earth")
 
 	// Bases
 	bases := boom.GridArray(1, 4, 120, NewBase)
@@ -31,17 +34,19 @@ func main() {
 
 	// A blank game object to hold the crosshairs
 	crosshairs := boom.NewGameObject()
-
-	// Mouse component
 	mouse := boom.NewMouseComp()
 	mouse.SetCursor(rl.MouseCursorCrosshair)
 	mouse.OnMove(func(x, y float32) {
 		crosshairs.SetXY(x, y)
 	})
-
-	// splosions
 	mouse.OnClick(func() {
-		createBurst(scene, crosshairs.GetX(), crosshairs.GetY())
+		defend := createBurst(scene, crosshairs.GetX(), crosshairs.GetY(), rl.White)
+		defend.AddTags("defend")
+		collide := boom.NewCollideComp(boom.CollisionCircle{Radius: 20})
+		defend.AddComponent(collide)
+		collide.NewCollider("missile", func(d, m *boom.GameObject) {
+			// score += 10
+		})
 	})
 
 	crosshairs.AddComponent(mouse)

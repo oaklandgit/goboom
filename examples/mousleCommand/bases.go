@@ -14,7 +14,9 @@ func NewBase() *boom.GameObject {
 	}
 
 	base := boom.GridArray(7, 6, 1, window)
-
+	collide := boom.NewCollideComp(boom.CollisionRect{Width: 100, Height: 100})
+	base.AddComponent(collide)
+	base.AddTags("base")
 
 	return base
 }

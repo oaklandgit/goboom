@@ -9,6 +9,8 @@
 
 ### To Do
 
+- centralize collision detection. Current approach is non-performant
+- offscreen die
 - compAnchor - a way to keep objects dynamically anchored (centered, etc) to their parent
 - utilize delta time
 - load sprite atlas

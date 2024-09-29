@@ -213,6 +213,7 @@ func (c *CollideComp) OnUpdate(scene *GameObject) {
 					for _, c := range c1.Colliders {
 						if c.Vs == o2.Tags[0] {
 							c.Action(o1, o2)
+							
 						}
 					}
 

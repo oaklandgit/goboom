@@ -5,54 +5,63 @@ import (
 	"time"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
-	"golang.org/x/exp/rand"
 )
 
 const (
 	LEFTMOST_STARTX = 40
 	LEFTMOST_ANGLE = 160
 	RIGHTMOST_ANGLE = 200
-	MIN_SPEED = 0.5
-	MAX_SPEED = 1.5
 )
 
 func spawnMissiles(scene *boom.GameObject) {
 
-	totalMissiles := 10
+	delay := 5_000 * time.Millisecond
+	speed := 0.5
+	ticker := time.NewTicker(delay)
+	defer ticker.Stop()
 
-	colors := []rl.Color{
-		rl.Red,
-		rl.Orange,
-		rl.Pink,
-	}
-
-	for i := 0; i < totalMissiles; i++ {
-		time.Sleep(2 * time.Second)
-		index := rand.Intn(len(colors))
-		speed := boom.RandFloatBetween(MIN_SPEED, MAX_SPEED)
+	for range ticker.C {
 		angle := boom.RandIntBetween(LEFTMOST_ANGLE, RIGHTMOST_ANGLE) // towards the base. (180 is straight down)
 		posX := boom.RandIntBetween(LEFTMOST_STARTX, int(scene.GetGame().GetWidth() - LEFTMOST_STARTX))
-		createMissile(scene, float32(posX), angle, float32(speed), colors[index])
+		createMissile(scene, float32(posX), angle, float32(speed), rl.Red)
+		// reduce pause by 500ms each time
+		delay -= 500 * time.Millisecond
+		if delay < 500 * time.Millisecond {
+			delay = 500 * time.Millisecond
+		}
+
+		// increase speed by 0.1 each time
+		speed += 0.1
+
+		// Reset the timer with the new delay
+		ticker.Reset(delay)
+	
 	}
 }
 
 func createMissile(scene *boom.GameObject, posX float32, angle int, speed float32, color rl.Color) {
 
-	missile := boom.Circle(posX, 0, 5, color, rl.Blank, 2)
+	missile := boom.Circle(posX, 0, 3, color, rl.Blank, 2)
 	missile.SetOrigin(-0.5, -0.5)
 	vel := boom.NewVelocityComp(0, 0)
 	vel.SetVelocityByHeading(float32(angle), speed)
-	missile.AddComponent(vel)
+	collide := boom.NewCollideComp(boom.CollisionCircle{Radius: 2})
 
-	trail := boom.Line(posX, 0, missile.GetGlobalX(), missile.GetGlobalY(), color, 2)
-	trail.SetSize(0, 0)
+	collide.NewCollider("base", func(m, b *boom.GameObject) {
+		m.SetLifespan(0)
+		b.SetLifespan(0)
+		createBurst(scene, m.GetGlobalX(), m.GetGlobalY(), rl.Red)
+	})
 
-	trailComp := trail.GetComponent("line").(*boom.LineComp)
-	
-	trail.OnUpdate = func() {
-		trailComp.End.X = missile.GetGlobalX()
-		trailComp.End.Y = missile.GetGlobalY()
+	collide.NewCollider("earth", func(m, e *boom.GameObject) {
+		createBurst(scene, m.GetGlobalX(), m.GetGlobalY(), rl.White)
+		m.SetLifespan(0)
+	})
+
+	missile.AddComponents(vel, collide)
+
+	missile.OnDraw = func() {
+		rl.DrawLine(int32(posX-missile.GetX()), int32(-missile.GetY()), 3, 3, color)
 	}
-
-	scene.Add(missile, trail)
+	scene.Add(missile)
 }

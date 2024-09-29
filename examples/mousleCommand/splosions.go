@@ -11,11 +11,11 @@ const GROWTH_RATE = 3
 const FADE_RATE = 5
 
 
-func createBurst(scene *boom.GameObject, x, y float32) {
+func createBurst(scene *boom.GameObject, x, y float32, color rl.Color) *boom.GameObject {
 
 	var alpha float32 = 255
 
-	burst := boom.Circle(x, y, 2, rl.White, rl.Blank, 2)
+	burst := boom.Circle(x, y, 2, color, rl.Blank, 2)
 	burst.SetOrigin(-0.5, -0.5)
 	shape := burst.GetComponent("ellipse").(*boom.EllipseComp)
 
@@ -38,5 +38,7 @@ func createBurst(scene *boom.GameObject, x, y float32) {
 
 	burst.AddComponent(expand)
 	scene.Add(burst)
+
+	return burst
 
 }
