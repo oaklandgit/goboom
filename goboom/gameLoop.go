@@ -1,6 +1,9 @@
 package goboom
 
 import (
+	"fmt"
+	"math"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -17,35 +20,35 @@ func (g *Game) Run() {
 			DrawMouseCoordinates(22, 46, 20, rl.Yellow)
 			
 		},
-		// func() {
-		// 	DrawBoundingBoxes(
-		// 		g.GetCurrentScene().
-		// 		GetChildren(),
-		// 		rl.Yellow)
-		// },
+		func() {
+			DrawBoundingBoxes(
+				g.GetCurrentScene().
+				GetChildren(),
+				rl.Yellow)
+		},
 		func() {
 			DrawPerformance(22, 22, 20, rl.Yellow)
 			DrawObjectCount(22, 46, 20, rl.Yellow, g.GetCurrentScene().GetAll())
 		},
 	}
 
-	// g.AddInput(rl.KeyD, KeyPressed, func() {
-	// 	fmt.Println("Debug mode!")
-	// 	debugMode = (debugMode + 1) % len(DebugModes)
-	// })
-
-	// g.AddInput(rl.KeyLeftBracket, KeyPressed, func() {
-	// 	gridSize = int32(math.Max(float64(gridSize-1), 4))
-	// })
-
-	// g.AddInput(rl.KeyRightBracket, KeyPressed, func() {
-	// 	gridSize = int32(math.Min(float64(gridSize+1), 20))
-	// })
-
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)
 	rl.SetTargetFPS(int32(g.FPS))
 
 	scene := g.GetCurrentScene()
+	
+	modes := NewInputComp()
+	modes.NewInput(rl.KeyD, KeyPressed, func() {
+		debugMode = (debugMode + 1) % len(DebugModes)
+		fmt.Println("Debug mode!")
+	})
+	modes.NewInput(rl.KeyLeftBracket, KeyPressed, func() {
+		gridSize = int32(math.Max(float64(gridSize-1), 4))
+	})
+	modes.NewInput(rl.KeyRightBracket, KeyPressed, func() {
+		gridSize = int32(math.Min(float64(gridSize+1), 20))
+	})
+	scene.AddComponent(modes)
 
 	// Inialize all objects and components
 	for _, obj := range scene.GetAll() {
@@ -63,6 +66,10 @@ func (g *Game) Run() {
 
 		// redeclare scene in case it was changed
 		scene = g.GetCurrentScene()
+		for _, c := range scene.GetComponents() {
+			c.OnUpdate(scene)
+			c.OnDraw(scene)
+		}
 
 		// run any additional updating
 		scene.OnUpdate()

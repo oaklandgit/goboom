@@ -9,6 +9,8 @@
 
 ### To Do
 
+- bring back debug modes
+- ensure objects with collision components have tags.
 - pass a customizable "cooldown" period into a collision event
 - centralize collision detection. Current approach is non-performant
 - offscreen die
