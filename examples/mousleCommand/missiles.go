@@ -24,10 +24,11 @@ func spawnMissiles(scene *boom.GameObject) {
 		angle := boom.RandIntBetween(LEFTMOST_ANGLE, RIGHTMOST_ANGLE) // towards the base. (180 is straight down)
 		posX := boom.RandIntBetween(LEFTMOST_STARTX, int(scene.GetGame().GetWidth() - LEFTMOST_STARTX))
 		createMissile(scene, float32(posX), angle, float32(speed), rl.Red)
-		// reduce pause by 500ms each time
-		delay -= 500 * time.Millisecond
-		if delay < 500 * time.Millisecond {
-			delay = 500 * time.Millisecond
+
+		// reduce delay by 1/2 second each time
+		delay -= 250 * time.Millisecond
+		if delay < 250 * time.Millisecond {
+			delay = 250 * time.Millisecond
 		}
 
 		// increase speed by 0.1 each time
@@ -42,6 +43,7 @@ func spawnMissiles(scene *boom.GameObject) {
 func createMissile(scene *boom.GameObject, posX float32, angle int, speed float32, color rl.Color) {
 
 	missile := boom.Circle(posX, 0, 3, color, rl.Blank, 2)
+	missile.AddTags("missile")
 	missile.SetOrigin(-0.5, -0.5)
 	vel := boom.NewVelocityComp(0, 0)
 	vel.SetVelocityByHeading(float32(angle), speed)

@@ -1,59 +1,43 @@
 package main
 
 import (
-	"fmt"
 	boom "goboom/goboom"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-
-var score int = 0
-
 func main() {
 
+	// Setup game and scene
 	game := boom.NewGame(800, 600, "Mousle Command")
 	game.SetBgColor(rl.Black)
 	scene := game.GetCurrentScene()
 
-	// Earth
-	floor := scene.GetGame().Height - 100
-	width := scene.GetGame().Width
-	earth := boom.Rectangle(0, floor, width, 100, rl.Blue, rl.Black, 1)
-	collide := boom.NewCollideComp(boom.CollisionRect{Width: width, Height: 100})
-	earth.AddComponent(collide)
-	earth.AddTags("earth")
-
-	// Bases
-	bases := boom.GridArray(1, 4, 120, NewBase)
-	boom.PutCenter(scene, bases, -30, 180)
+	// Intro text
+	intro := boom.Text(0, 0, "Defend Your City!", 30, rl.White)
+	intro.SetOrigin(-0.5, -0.5)
+	intro.SetLifespan(4_000)
 
 	// Scoreboard
-	scoreboard := boom.Text(0, 0, fmt.Sprintf("Score: %d", score), 30, rl.White)
-	scoreboard.SetId("scoreboard")
+	scoreboard, incrementScore := createScoreboard(scene)
 
-	// A blank game object to hold the crosshairs
-	crosshairs := boom.NewGameObject()
-	mouse := boom.NewMouseComp()
-	mouse.SetCursor(rl.MouseCursorCrosshair)
-	mouse.OnMove(func(x, y float32) {
-		crosshairs.SetXY(x, y)
-	})
-	mouse.OnClick(func() {
-		defend := createBurst(scene, crosshairs.GetX(), crosshairs.GetY(), rl.White)
-		defend.AddTags("defend")
-		collide := boom.NewCollideComp(boom.CollisionCircle{Radius: 20})
-		defend.AddComponent(collide)
-		collide.NewCollider("missile", func(d, m *boom.GameObject) {
-			// score += 10
-		})
-	})
+	// Earth
+	earth := createEarth(scene)
 
-	crosshairs.AddComponent(mouse)
-	scene.Add(scoreboard, crosshairs, earth, bases)
-	boom.PutCenter(scene, crosshairs, 0, 0)
+	// Bases
+	bases := boom.GridArray(1, 3, 120, NewBase)
+
+	// Crosshairs
+	player := createCrosshairs(scene, incrementScore)
+
+	// Add to scene
+	scene.Add(intro, scoreboard, player, earth, bases)
+	boom.PutCenter(scene, player, 0, 0)
+	boom.PutCenter(scene, bases, -130, 166)
 	boom.PutTopCenter(scene, scoreboard, 0, 32)
+	boom.PutCenter(scene, intro, 0, 0)
 
+	// Rain down hellfire
 	go spawnMissiles(scene)
 
 	game.Run()
