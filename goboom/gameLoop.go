@@ -15,10 +15,12 @@ func (g *Game) Run() {
 	DebugModes := []func() {
 		func() {}, // DebugOff
 		func() {
+			DrawColliders(g.GetCurrentScene().GetAll(), rl.Red)
+		},
+		func() {
 			DrawGrid(int32(g.Width), int32(g.Height), gridSize, rl.Brown)
 			DrawGridSize(22, 22, gridSize, 20, rl.Yellow)
-			DrawMouseCoordinates(22, 46, 20, rl.Yellow)
-			
+			DrawMouseCoordinates(22, 46, 20, rl.Yellow)		
 		},
 		func() {
 			DrawBoundingBoxes(

@@ -51,3 +51,30 @@ func DrawBoundingBoxes(objects []*GameObject, color rl.Color) {
 			color)
 	}
 }
+
+func DrawColliders(objects []*GameObject, color rl.Color) {
+	for _, obj := range objects {
+		
+		if obj.HasComponent("collide") {
+
+			collide := obj.GetComponent("collide").(*CollideComp)
+			shape := collide.Shape
+			
+			switch shape := shape.(type) {
+				case CollisionCircle:
+					rl.DrawCircleLines(
+						int32(obj.GetX()), int32(obj.GetY()), shape.Radius, color)
+				case CollisionRect:
+					rl.DrawRectangleLines(
+						int32(obj.GetGlobalX()),
+						int32(obj.GetGlobalY()),
+						int32(shape.Width),
+						int32(shape.Height),
+						color)
+					}
+
+		}
+		
+	}
+		
+}
