@@ -35,7 +35,7 @@ func NewRectComp(fill, stroke rl.Color, strokeWeight float32) *RectComp {
 }
 
 func (c *RectComp) GetComponentId() string {
-	return "circle"
+	return "rectangle"
 }
 
 func (c *RectComp) OnInit() {}

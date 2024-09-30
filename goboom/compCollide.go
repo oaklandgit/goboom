@@ -16,7 +16,6 @@ type CollideComp struct {
 
 type ColliderShape interface {
 	GetBoundingBox() rl.Rectangle
-	GetType() string
 }
 
 // CIRCLE COLLISION
@@ -31,19 +30,11 @@ func (c CollisionCircle) GetBoundingBox() rl.Rectangle {
 }
 
 func (c CollisionCircle) GetCenter() rl.Vector2 {
-	return rl.NewVector2(0, 0)
+	return rl.NewVector2(c.Radius, c.Radius)
 }
 
 func (c CollisionCircle) GetRadius() float32 {
 	return c.Radius
-}
-
-func (c CollisionCircle) GetType() string {
-	return "circle"
-}
-
-func (c CollisionRect) GetType() string {
-	return "rect"
 }
 
 func (my CollideComp) IsCollidingWith(other *CollideComp) bool {
@@ -220,22 +211,7 @@ func (c *CollideComp) OnUpdate(scene *GameObject) {
 	}
 }
 
-func (c *CollideComp) OnDraw(scene *GameObject) {
-
-	// if c.Shape.GetType() == "circle" {
-	// 	circle := c.Shape.(CollisionCircle)
-	// 	rl.DrawCircleLines(int32(c.GameObject.X + circle.Radius), int32(c.GameObject.Y + circle.Radius), circle.Radius, rl.Yellow)
-	// 	return
-	// }
-
-	// if c.Shape.GetType() == "rect" {
-	// 	rect := c.Shape.(CollisionRect)
-	// 	// rl.DrawRectangleLines(int32(c.GameObject.X), int32(c.GameObject.Y), int32(rect.Width), int32(rect.Height), rl.Red)
-	// 	rl.DrawRectangleLinesEx(rect.GetBoundingBox(), 3, rl.Red)
-	// 	return
-	// }
-
-}
+func (c *CollideComp) OnDraw(scene *GameObject) {}
 
 func (c *CollideComp) GetWidth() float32 {
 	return 0

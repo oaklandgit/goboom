@@ -21,8 +21,11 @@ func PutCenter(a *GameObject, b *GameObject, offsetX, offsetY float32) {
 
 	b.OnInit = func() {
 
+		// e.g. scene
 		centerX := float32(a.GetBoundingBox().Width/2)
 		centerY := float32(a.GetBoundingBox().Height/2)
+
+		// e.g. player
 		b.SetXY(
 			centerX + offsetX - b.GetBoundingBox().Width/2,
 			centerY + offsetY - b.GetBoundingBox().Height/2)

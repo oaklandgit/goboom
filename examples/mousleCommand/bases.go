@@ -13,7 +13,8 @@ func NewBase() *boom.GameObject {
 	}
 
 	base := boom.GridArray(7, 6, 0, window)
-	collide := boom.NewCollideComp(boom.CollisionRect{Width: 100, Height: 100})
+	size := base.GetBoundingBox()
+	collide := boom.NewCollideComp(boom.CollisionRect{Width: size.Width, Height: size.Height})
 	base.AddComponent(collide)
 	base.AddTags("base")
 

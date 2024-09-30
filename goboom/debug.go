@@ -63,7 +63,7 @@ func DrawColliders(objects []*GameObject, color rl.Color) {
 			switch shape := shape.(type) {
 				case CollisionCircle:
 					rl.DrawCircleLines(
-						int32(obj.GetX()), int32(obj.GetY()), shape.Radius, color)
+						int32(obj.GetX() + shape.Radius), int32(obj.GetY() + shape.Radius), shape.Radius, color)
 				case CollisionRect:
 					rl.DrawRectangleLines(
 						int32(obj.GetGlobalX()),

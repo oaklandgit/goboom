@@ -9,9 +9,11 @@ import (
 func createEarth(scene *boom.GameObject) *boom.GameObject {
 
 	floor := scene.GetGame().Height - 100
-	width := scene.GetGame().Width
-	earth := boom.Rectangle(-200, floor, width + 200, 100, rl.Blue, rl.Black, 1)
-	collide := boom.NewCollideComp(boom.CollisionRect{Width: 1_000, Height: 100})
+	width := scene.GetGame().Width + 400
+	earth := boom.Rectangle(-200, floor, width, 100, rl.Blue, rl.Black, 1)
+
+	size := earth.GetBoundingBox()
+	collide := boom.NewCollideComp(boom.CollisionRect{Width: size.Width, Height: size.Height})
 	earth.AddComponent(collide)
 	earth.AddTags("earth")
 

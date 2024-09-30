@@ -25,7 +25,7 @@ func main() {
 	earth := createEarth(scene)
 
 	// Bases
-	bases := boom.GridArray(1, 3, 120, NewBase)
+	bases := boom.GridArray(1, 4, 120, NewBase)
 
 	// Crosshairs
 	player := createCrosshairs(scene, incrementScore)
@@ -33,7 +33,7 @@ func main() {
 	// Add to scene
 	scene.Add(intro, scoreboard, player, earth, bases)
 	boom.PutCenter(scene, player, 0, 0)
-	boom.PutCenter(scene, bases, -130, 166)
+	boom.PutCenter(scene, bases, -232, 166) // not sure why this won't center
 	boom.PutTopCenter(scene, scoreboard, 0, 32)
 	boom.PutCenter(scene, intro, 0, 0)
 

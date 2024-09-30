@@ -7,7 +7,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const BALL_RADIUS = 12
+const BALL_RADIUS = 6
 
 func bounce (b *boom.GameObject, v rl.Vector2) {
 	vel := b.GetComponent("velocity").(*boom.VelocityComp)
@@ -43,7 +43,7 @@ func createBall(scene *boom.GameObject, velx, velY float32) *boom.GameObject {
 		bounce(b, rl.NewVector2(0, 1))
 	})
 
-	ball := boom.Ellipse(0, 0, BALL_RADIUS, BALL_RADIUS, rl.White, rl.Red, 2)
+	ball := boom.Circle(0, 0, BALL_RADIUS, rl.White, rl.Red, 2)
 	ball.AddTags("ball")
 	ball.SetId("the ball")
 
