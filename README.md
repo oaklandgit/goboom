@@ -9,9 +9,9 @@
 
 ### To Do
 
-- bring back debug modes
-- ensure objects with collision components have tags.
 - pass a customizable "cooldown" period into a collision event
+- Debug collision boxes
+- ensure objects with collision components have tags
 - centralize collision detection. Current approach is non-performant
 - offscreen die
 - compAnchor - a way to keep objects dynamically anchored (centered, etc) to their parent
@@ -26,6 +26,7 @@
 
 ### Done
 
+- bring back debug modes
 - rotational velocity component
 - get collisions working (start with circle collisions)
 - figure out why bricks example isn't rendering the brick group properly

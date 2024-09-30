@@ -52,65 +52,55 @@ func (my CollideComp) IsCollidingWith(other *CollideComp) bool {
 	myPos := rl.NewVector2(my.GameObject.GetGlobalX(), my.GameObject.GetGlobalY())
 	otherPos := rl.NewVector2(other.GameObject.GetGlobalX(), other.GameObject.GetGlobalY())
 
-	// circle vs circle
-	if my.Shape.GetType() == "circle" && other.Shape.GetType() == "circle" {
-		circle1 := my.Shape.(CollisionCircle)
-		circle2 := other.Shape.(CollisionCircle)
-		return rl.CheckCollisionCircles(
-			rl.Vector2Add(myPos, circle1.GetCenter()), circle1.GetRadius(), 
-			rl.Vector2Add(otherPos, circle2.GetCenter()), circle2.GetRadius())
-	} 
-
-	// circle vs rect
-	if my.Shape.GetType() == "circle" && other.Shape.GetType() == "rect" {
-		circle := my.Shape.(CollisionCircle)
-		rect := other.Shape.(CollisionRect)
-		return rl.CheckCollisionCircleRec(
-			rl.Vector2Add(myPos, circle.GetCenter()), circle.GetRadius(),
-			rl.Rectangle{
-				X: otherPos.X,
-				Y: otherPos.Y,
-				Width: rect.Width,
-				Height: rect.Height,
-			})
+	switch myshape := my.Shape.(type) {
+	case CollisionCircle:
+		switch othershape := other.Shape.(type) {
+		case CollisionCircle:
+			return rl.CheckCollisionCircles(
+				rl.Vector2Add(myPos, myshape.GetCenter()), myshape.GetRadius(),
+				rl.Vector2Add(otherPos, othershape.GetCenter()), othershape.GetRadius())
+		case CollisionRect:
+			return rl.CheckCollisionCircleRec(
+				rl.Vector2Add(myPos, myshape.GetCenter()), myshape.GetRadius(),
+				rl.Rectangle{
+					X: otherPos.X,
+					Y: otherPos.Y,
+					Width: othershape.Width,
+					Height: othershape.Height,
+				})		
+		}
+	case CollisionRect:
+		switch othershape := other.Shape.(type) {
+		case CollisionCircle:
+			return rl.CheckCollisionCircleRec(
+				rl.Vector2Add(otherPos, othershape.GetCenter()), othershape.GetRadius(),
+				rl.Rectangle{
+					X: myPos.X,
+					Y: myPos.Y,
+					Width: myshape.Width,
+					Height: myshape.Height,
+				})
+		case CollisionRect:
+			return rl.CheckCollisionRecs(
+				rl.Rectangle{
+					X: myPos.X,
+					Y: myPos.Y,
+					Width: myshape.Width,
+					Height: myshape.Height,
+				},
+				rl.Rectangle{
+					X: otherPos.X,
+					Y: otherPos.Y,
+					Width: othershape.Width,
+					Height: othershape.Height,
+				})
+		}
 	}
-
-	// rect vs circle
-	if my.Shape.GetType() == "rect" && other.Shape.GetType() == "circle" {
-		rect := my.Shape.(CollisionRect)
-		circle := other.Shape.(CollisionCircle)
-		return rl.CheckCollisionCircleRec(
-			rl.Vector2Add(otherPos, circle.GetCenter()), circle.GetRadius(),
-			rl.Rectangle{
-				X: myPos.X,
-				Y: myPos.Y,
-				Width: rect.Width,
-				Height: rect.Height,
-			})
-	}
-
-	// rect vs rect
-	if my.Shape.GetType() == "rect" && other.Shape.GetType() == "rect" {
-		rect1 := my.Shape.(CollisionRect)
-		rect2 := other.Shape.(CollisionRect)
-		return rl.CheckCollisionRecs(
-			rl.Rectangle{
-				X: myPos.X,
-				Y: myPos.Y,
-				Width: rect1.Width,
-				Height: rect1.Height,
-			},
-			rl.Rectangle{
-				X: otherPos.X,
-				Y: otherPos.Y,
-				Width: rect2.Width,
-				Height: rect2.Height,
-			})
-	}
-	
 
 	return false
+
 }
+
 
 // RECT COLLISION
 
