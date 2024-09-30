@@ -7,6 +7,7 @@
 
 ### To Do
 
+- why isn't groupArray in missile example not PutCenter-ing properly?
 - move collision shape drawing responsibility to component
 - pass a customizable "cooldown" period into a collision event
 - ensure objects with collision components have tags

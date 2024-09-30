@@ -75,6 +75,8 @@ func (g *Game) Run() {
 
 		// run any additional updating
 		scene.OnUpdate()
+
+		CheckCollisions(scene)
 		
 
 		// Update and draw all direct children of the scene
