@@ -5,12 +5,10 @@
 
 ### In Progress
 
-- "MousleCommand" - mouse control example
-
 ### To Do
 
+- move collision shape drawing responsibility to component
 - pass a customizable "cooldown" period into a collision event
-- Debug collision boxes
 - ensure objects with collision components have tags
 - centralize collision detection. Current approach is non-performant
 - offscreen die
@@ -26,6 +24,8 @@
 
 ### Done
 
+- "MousleCommand" - mouse control example
+- Debug collision boxes
 - bring back debug modes
 - rotational velocity component
 - get collisions working (start with circle collisions)
