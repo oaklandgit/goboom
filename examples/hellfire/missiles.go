@@ -49,9 +49,9 @@ func createMissile(scene *boom.GameObject, posX float32, angle int, speed float3
 	vel.SetVelocityByHeading(float32(angle), speed)
 	collide := boom.NewCollideComp(boom.CollisionCircle{Radius: 2})
 
-	collide.NewCollider("base", func(m, b *boom.GameObject) {
+	collide.NewCollider("window", func(m, w *boom.GameObject) {
 		m.SetLifespan(0)
-		b.SetLifespan(0)
+		w.SetLifespan(0)
 		createBurst(scene, m.GetGlobalX(), m.GetGlobalY(), rl.Red)
 	})
 
