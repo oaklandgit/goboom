@@ -54,4 +54,8 @@ func (e *EllipseComp) OnDraw(scene *GameObject) {
 	rl.DrawEllipse(int32(obj.Width/2), int32(obj.Height/2), obj.Height/2, obj.Width/2, e.FillColor)
 	rl.DrawEllipseLines(int32(obj.Width/2), int32(obj.Height/2), obj.Height/2, obj.Width/2, e.StrokeColor)
 	
+	// centerpoint for debugging
+	rl.DrawCircle(int32(obj.Width/2), int32(obj.Height/2), 2, rl.Black)
+	// top left corner for debugging
+	rl.DrawCircle(0, 0, 2, rl.Black)
 }

@@ -1,36 +1,33 @@
 package goboom
 
 import (
-	"fmt"
-	"math"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 func (g *Game) Run() {
 
-	debugMode := 0
-	gridSize := int32(10)
+	gridSizes := []int32{8, 16, 32, 64, 128}
+	debugColors := []rl.Color{rl.Red, rl.Blue, rl.Green, rl.Orange, rl.Purple}
 
-	DebugModes := []func() {
+	debugModes := []func() {
 		func() {}, // DebugOff
 		func() {
-			DrawColliders(g.GetCurrentScene().GetAll(), rl.Red)
+			DrawColliders(g.GetCurrentScene().GetAll(), debugColors[0])
 		},
 		func() {
-			DrawGrid(int32(g.Width), int32(g.Height), gridSize, rl.Brown)
-			DrawGridSize(22, 22, gridSize, 20, rl.Yellow)
-			DrawMouseCoordinates(22, 46, 20, rl.Yellow)		
+			DrawGrid(int32(g.Width), int32(g.Height), gridSizes[0], debugColors[0])
+			DrawGridSize(22, 22, gridSizes[0], 20, debugColors[0])
+			DrawMouseCoordinates(22, 46, 20, debugColors[0])		
 		},
 		func() {
 			DrawBoundingBoxes(
 				g.GetCurrentScene().
 				GetChildren(),
-				rl.Yellow)
+				debugColors[0])
 		},
 		func() {
-			DrawPerformance(22, 22, 20, rl.Yellow)
-			DrawObjectCount(22, 46, 20, rl.Yellow, g.GetCurrentScene().GetAll())
+			DrawPerformance(22, 22, 20, debugColors[0])
+			DrawObjectCount(22, 46, 20, debugColors[0], g.GetCurrentScene().GetAll())
 		},
 	}
 
@@ -41,14 +38,14 @@ func (g *Game) Run() {
 	
 	modes := NewInputComp()
 	modes.NewInput(rl.KeyD, KeyPressed, func() {
-		debugMode = (debugMode + 1) % len(DebugModes)
-		fmt.Println("Debug mode!")
+		debugModes = append(debugModes[1:], debugModes[0])
 	})
-	modes.NewInput(rl.KeyLeftBracket, KeyPressed, func() {
-		gridSize = int32(math.Max(float64(gridSize-1), 4))
+	modes.NewInput(rl.KeyG, KeyPressed, func() {
+		gridSizes = append(gridSizes[1:], gridSizes[0])
 	})
-	modes.NewInput(rl.KeyRightBracket, KeyPressed, func() {
-		gridSize = int32(math.Min(float64(gridSize+1), 20))
+	modes.NewInput(rl.KeyC, KeyPressed, func() {
+		debugColors = append(debugColors[1:], debugColors[0])
+
 	})
 	scene.AddComponent(modes)
 
@@ -75,7 +72,6 @@ func (g *Game) Run() {
 
 		// run any additional updating
 		scene.OnUpdate()
-
 		CheckCollisions(scene)
 		
 
@@ -84,14 +80,10 @@ func (g *Game) Run() {
 			updateAndDrawChild(obj, scene)
 		}
 
-		// run any additional drawing
 		scene.OnDraw()
-
-		// clean up any objects that need to be removed
 		scene.Cleanup()
+		debugModes[0]()
 
-		// debug mode
-		DebugModes[debugMode]()
 		rl.EndDrawing()
 	}
 	rl.CloseWindow()
@@ -99,11 +91,14 @@ func (g *Game) Run() {
 }
 
 func updateAndDrawChild(obj *GameObject, scene *GameObject) {
+
 		
 	rl.PushMatrix()
 	
 	centerX := obj.X + obj.GetBoundingBox().Width * obj.GetOriginX()
 	centerY := obj.Y + obj.GetBoundingBox().Height * obj.GetOriginY()
+	// centerX := obj.GetGlobalX() + obj.GetBoundingBox().Width * obj.GetOriginX()
+	// centerY := obj.GetGlobalY() + obj.GetBoundingBox().Height * obj.GetOriginY()
 	
 	// rl.Translatef(obj.GetX(), obj.GetY(), 0)
 	rl.Translatef(centerX, centerY, 0)
@@ -127,4 +122,6 @@ func updateAndDrawChild(obj *GameObject, scene *GameObject) {
 	rl.Translatef(-centerX, -centerY, 0)
 	
 	rl.PopMatrix()
+
+	
 }

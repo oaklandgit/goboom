@@ -42,13 +42,9 @@ func DrawObjectCount(x, y, size int32, color rl.Color, objects []*GameObject) {
 }
 
 func DrawBoundingBoxes(objects []*GameObject, color rl.Color) {
-	for _, r := range objects {
-		rl.DrawRectangleLines(
-			int32(r.GetBoundingBox().X) - int32(r.GetBoundingBox().Width)/2,
-			int32(r.GetBoundingBox().Y) - int32(r.GetBoundingBox().Height)/2,
-			int32(r.GetBoundingBox().Width),
-			int32(r.GetBoundingBox().Height),
-			color)
+	for _, obj := range objects {
+		DrawGlobalXY(obj, color)
+		DrawGlobalCenter(obj, color)
 	}
 }
 
@@ -77,4 +73,23 @@ func DrawColliders(objects []*GameObject, color rl.Color) {
 		
 	}
 		
+}
+
+func DrawCrosshair(x, y, size, thickness float32, color rl.Color) {
+	hStartX, hStartY := x - size, y
+	hEndX, hEndY := x + size, y
+	
+	vStartX, vStartY := x, y - size
+	vEndX, vEndY := x, y + size
+
+	rl.DrawLineEx(rl.NewVector2(hStartX, hStartY), rl.NewVector2(hEndX, hEndY), thickness, color)
+	rl.DrawLineEx(rl.NewVector2(vStartX, vStartY), rl.NewVector2(vEndX, vEndY), thickness, color)
+}
+
+func DrawGlobalXY(obj *GameObject, color rl.Color) {
+	DrawCrosshair(obj.GetGlobalX(), obj.GetGlobalY(), 6, 1, color)
+}
+
+func DrawGlobalCenter(obj *GameObject, color rl.Color) {
+	DrawCrosshair(obj.GetGlobalX() + obj.Width/2, obj.GetGlobalY() + obj.Height/2, 5, 1, color)
 }

@@ -40,12 +40,10 @@ func (r *GameObject) GetGlobalX() float32 {
 	return x
 }
 
-
 func (r *GameObject) GetGlobalY() float32 {
 	_, y := r.GetGlobalXY()
 	return y
 }
-
 
 func (r *GameObject) GetGlobalXY() (float32, float32) {
 	if r.GetParent() == nil {
@@ -56,14 +54,6 @@ func (r *GameObject) GetGlobalXY() (float32, float32) {
 	rotatedX, rotatedY := RotatePoint(localX, localY, parent.GetAngle())
 	return rotatedX + parent.GetGlobalX(), rotatedY + parent.GetGlobalY()
 }
-
-// func (r *GameObject) GetGlobalY() float32 {
-// 	if r.GetParent() == nil {
-// 		return r.GetY()
-// 	}
-// 	return r.GetY() + r.GetParent().GetGlobalY()
-// }
-
 
 func (r *GameObject) GetGlobalScaleX() float32 {
 	if r.GetParent() == nil {
