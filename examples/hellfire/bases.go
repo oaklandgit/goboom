@@ -17,8 +17,8 @@ func NewBase() *boom.GameObject {
 	}
 
 	base := boom.GridArray(7, 6, 0, window)
-	// size := base.GetBoundingBox()
-	// base.AddComponent(collide)
+
+	// base := boom.Rectangle(0, 0, 84, 72, rl.White, rl.Gray, 1)
 	base.AddTags("base")
 
 	return base

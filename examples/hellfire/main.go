@@ -9,13 +9,12 @@ import (
 func main() {
 
 	// Setup game and scene
-	game := boom.NewGame(800, 600, "Mousle Command")
+	game := boom.NewGame(800, 600, "Hellfire")
 	game.SetBgColor(rl.Black)
 	scene := game.GetCurrentScene()
 
 	// Intro text
 	intro := boom.Text(0, 0, "Defend Your City!", 30, rl.White)
-	intro.SetOrigin(-0.5, -0.5)
 	intro.SetLifespan(4_000)
 
 	// Scoreboard
@@ -30,12 +29,15 @@ func main() {
 	// Crosshairs
 	player := createCrosshairs(scene, incrementScore)
 
-	// Add to scene
-	scene.Add(intro, scoreboard, player, earth, bases)
-	boom.PutCenter(scene, player, 0, 0)
-	boom.PutCenter(scene, bases, -232, 166) // not sure why this won't center
-	boom.PutTopCenter(scene, scoreboard, 0, 32)
+	// Position everything
 	boom.PutCenter(scene, intro, 0, 0)
+	boom.PutCenter(scene, player, 0, 0)
+	boom.PutCenter(scene, bases, 0, 180)
+	boom.PutTopCenter(scene, scoreboard, 0, 32)
+	boom.PutBottom(scene, earth, 0, 0)
+
+	// Add everything to the scene
+	scene.Add(earth, bases, intro, scoreboard, player)
 
 	// Rain down hellfire
 	go spawnMissiles(scene)
