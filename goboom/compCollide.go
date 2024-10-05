@@ -45,7 +45,7 @@ type CollisionRect struct {
 }
 
 func (c CollisionRect) GetBoundingBox() rl.Rectangle {
-	return rl.NewRectangle(0, 0, c.Width, c.Height)
+	return rl.NewRectangle(c.Width/2, c.Height/2, c.Width, c.Height)
 }
 
 type Collider struct {

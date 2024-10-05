@@ -17,6 +17,8 @@ func RegPolygon(x, y, r float32, sides int32, fill, stroke rl.Color, strokeWeigh
 	obj := NewGameObject()
 	obj.X = x
 	obj.Y = y
+	obj.Width = r * 2
+	obj.Height = r * 2
 
 	comp := &RegPolyComp{
 		Radius: r,

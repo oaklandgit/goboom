@@ -45,6 +45,7 @@ func DrawBoundingBoxes(objects []*GameObject, color rl.Color) {
 	for _, obj := range objects {
 		DrawGlobalXY(obj, color)
 		DrawGlobalCenter(obj, color)
+		DrawBounds(obj, color)
 	}
 }
 
@@ -59,7 +60,7 @@ func DrawColliders(objects []*GameObject, color rl.Color) {
 			switch shape := shape.(type) {
 				case CollisionCircle:
 					rl.DrawCircleLines(
-						int32(obj.GetGlobalX() + shape.Radius), int32(obj.GetGlobalY() + shape.Radius), shape.Radius, color)
+						int32(obj.GetGlobalX()), int32(obj.GetGlobalY()), shape.Radius, color)
 				case CollisionRect:
 					rl.DrawRectangleLines(
 						int32(obj.GetGlobalX()),
@@ -92,4 +93,19 @@ func DrawGlobalXY(obj *GameObject, color rl.Color) {
 
 func DrawGlobalCenter(obj *GameObject, color rl.Color) {
 	DrawCrosshair(obj.GetGlobalX() + obj.Width/2, obj.GetGlobalY() + obj.Height/2, 5, 1, color)
+}
+
+func DrawBounds(obj *GameObject, color rl.Color) {
+	// rl.DrawRectangleLines(
+	// 	int32(obj.GetGlobalX()),
+	// 	int32(obj.GetGlobalY()),
+	// 	int32(obj.GetBoundingBox().Width),
+	// 	int32(obj.GetBoundingBox().Height),
+	// 	color)
+	rl.DrawRectangleLines(
+		int32(obj.GetGlobalX()),
+		int32(obj.GetGlobalY()),
+		int32(obj.GetBoundingBox().Width),
+		int32(obj.GetBoundingBox().Height),
+		color)
 }

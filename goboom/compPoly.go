@@ -22,6 +22,10 @@ func Polygon(x, y float32, path string, closed bool, fill, stroke rl.Color, stro
 
 	comp := NewPolyComp(path, closed, fill, stroke, strokeWeight)
 
+	// calculate width from the path
+	obj.Width = comp.GetNaturalWidth()
+	obj.Height = comp.GetNaturalHeight()
+
 	obj.AddComponent(comp)
 	return obj
 }

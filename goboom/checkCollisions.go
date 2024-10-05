@@ -10,8 +10,14 @@ import (
 func IsColliding(this, that *CollideComp) bool {
 
 	// object position
-	thisPos := rl.NewVector2(this.GameObject.GetGlobalX(), this.GameObject.GetGlobalY())
-	thatPos := rl.NewVector2(that.GameObject.GetGlobalX(), that.GameObject.GetGlobalY())
+	thisPos := rl.NewVector2(
+		this.GameObject.GetGlobalX(),
+		this.GameObject.GetGlobalY() ,
+	)
+	thatPos := rl.NewVector2(
+		that.GameObject.GetGlobalX(),
+		that.GameObject.GetGlobalY(),
+	)
 
 	switch thisShape := this.Shape.(type) {
 	case CollisionCircle:
