@@ -14,6 +14,7 @@ type CollideComp struct {
 	LastCollisionTime 	map[*GameObject]time.Time 
 }
 
+
 type ColliderShape interface {
 	GetBoundingBox() rl.Rectangle
 }
@@ -77,16 +78,28 @@ func (c *CollideComp) GetComponentId() string {
 	return "collide"
 }
 
-func (c *CollideComp) OnInit() {}
+func (c *CollideComp) OnInit() {
+	if rect, ok := c.Shape.(CollisionRect); ok &&
+		rect.GetBoundingBox().Width == 0 &&
+		rect.GetBoundingBox().Height == 0 {
+        	obj := c.GameObject
+        	c.Shape = CollisionRect{
+				Width:  obj.GetBoundingBox().Width,
+				Height: obj.GetBoundingBox().Height,
+        	}
+    }
+
+	if circle, ok := c.Shape.(CollisionCircle); ok &&
+		circle.GetBoundingBox().Width == 0 &&
+		circle.GetBoundingBox().Height == 0 {
+        	obj := c.GameObject
+        	c.Shape = CollisionCircle{
+				Radius:  obj.GetBoundingBox().Width/2,
+        	}
+    }
+
+}
 
 func (c *CollideComp) OnUpdate(scene *GameObject) {}
 
 func (c *CollideComp) OnDraw(scene *GameObject) {}
-
-func (c *CollideComp) GetWidth() float32 {
-	return 0
-}
-
-func (c *CollideComp) GetHeight() float32 {
-	return 0
-}

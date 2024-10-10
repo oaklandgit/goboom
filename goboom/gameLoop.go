@@ -29,6 +29,12 @@ func (g *Game) Run() {
 			DrawPerformance(22, 22, 20, debugColors[0])
 			DrawObjectCount(22, 46, 20, debugColors[0], g.GetCurrentScene().GetAll())
 		},
+		func() {
+			// DrawColliders(g.GetCurrentScene().GetAll(), debugColors[0])
+			DrawGrid(int32(g.Width), int32(g.Height), gridSizes[0], debugColors[0])
+			DrawGridSize(22, 22, gridSizes[0], 20, debugColors[0])
+			DrawMouseCoordinates(22, 46, 20, debugColors[0])
+		},
 	}
 
 	rl.InitWindow(int32(g.Width), int32(g.Height), g.Title)

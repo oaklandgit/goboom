@@ -68,8 +68,7 @@ func IsColliding(this, that *CollideComp) bool {
 
 }
 
-func CheckCollisions(scene *GameObject) {
-
+func GetAllColliders(scene *GameObject) []*GameObject {
 	objs := scene.GetAll()
 	collideObjs := []*GameObject{}
 
@@ -78,6 +77,13 @@ func CheckCollisions(scene *GameObject) {
 			collideObjs = append(collideObjs, o)
 		}
 	}
+
+	return collideObjs
+}
+
+func CheckCollisions(scene *GameObject) {
+
+	collideObjs := GetAllColliders(scene)
 
 	// reset collidingWith
 	for _, o := range collideObjs {

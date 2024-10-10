@@ -12,7 +12,7 @@ const (
 	PLAYER_SPEED = 4
 )
 
-var tileDefs = boom.TileDefs{
+var tileDefs = boom.TileDict{
 	'#': func() *boom.GameObject {
 		wall := boom.Rectangle(0, 0, CELL_SIZE, CELL_SIZE, rl.Blue, rl.Black, 2)
 		collide := boom.NewCollideComp(boom.CollisionRect{Width: CELL_SIZE, Height: CELL_SIZE})
@@ -58,6 +58,6 @@ var tileDefs = boom.TileDefs{
 }
 
 func createLevel(plan string) *boom.GameObject {
-	grid := boom.NewTileMap(tileDefs, plan, CELL_SIZE, CELL_SIZE)
+	grid := boom.NewTilemap(tileDefs, plan, CELL_SIZE, CELL_SIZE)
 	return grid
 }
