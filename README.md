@@ -1,38 +1,101 @@
-### Notes
+# Goboom
 
-- component shapes should always draw at 0, 0. Then let their position be contolled by their GameObjects.
-- Scene graph: for draw functions, don't adjust object positions to global. The draw routine will do that using push/pop matrix. BUT do use global x/y when calculating collisions, drawing debug boxes, deciding where an object (e.g. bullet) should spawn, etc.
+## A game engine in Go and Raylib.
 
-### Up Next
+Goboom aims to be a simple game engine for Go.
 
-- move collision shape drawing responsibility to component
-- all shapes are not centering the same. E.g. ellipses/circles vs. non-regular polygons
+## Philosophy
 
-### To Do
+Goboom draws its inspiration from the wonderful javascript-based game engine [Kaboom](https://kaboomjs.com/) and its successor, [KaPlay](https://kaplayjs.com/). These engines favor composition over inheritance, where game elements (players, enemies, projectiles, platforms, etc.) derive their functionality "a la carte" in the form of _components_.
 
-- ensure objects with collision components have tags
-- pass a customizable "cooldown" period into a collision event
-- offscreen die
-- utilize delta time
-- load sprite atlas
-- define animations from sprite atlas
-- implement motion scripts / tweening (e.g. for enemy movement)
-- platformer example
-  - gravity
-  - grounded
-  - jump component
-- compAnchor - a way to keep objects dynamically anchored (centered, etc) to their parent
+This simple **Hello World** should give you the idea. It launches a game window and crawls a message up the screen.
 
-### Done
+```go
+package main
 
-- why isn't groupArray in missile example not PutCenter-ing properly?
-- centralize collision detection. Current approach is non-performant
-- "MousleCommand" - mouse control example
-- Debug collision boxes
-- bring back debug modes
-- rotational velocity component
-- get collisions working (start with circle collisions)
-- figure out why bricks example isn't rendering the brick group properly
-- every object should have a unique id. For groups of objects append an index
-- tilemaps
-- Implement convenience functions for velocities
+import (
+	boom "goboom/goboom"
+
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
+
+func main() {
+
+	// set up a game and scene
+	game := boom.NewGame(800, 600, "Hello World!")
+	game.SetBgColor(rl.Blue)
+	scene := game.GetCurrentScene()
+	message := boom.Text(0, 0, "Hello World", 30, rl.White)
+
+	// create a movement component
+	// with an angle of 0 (upwards) and a speed of 3
+	movement := boom.NewVelocityComp(0, 0)
+	movement.SetVelocityByHeading(0, 3)
+
+	// create a wrap component
+	// true means the object will wrap horizontally and vertically
+	wrap := boom.NewWrapComp(true)
+
+	// add the components to the game object
+	message.AddComponents(movement, wrap)
+
+	// add the game object to the scene
+	scene.Add(message)
+
+	// put the game object in the center of the screen
+	boom.PutCenter(scene, message, 0, 0)
+
+	// go!
+	game.Run()
+
+}
+```
+
+## Other Examples
+
+### Hellfire
+
+![Hellfire](/screencaps/hellfire.png) [View Code](/examples/hellfire)
+
+### Asteroids
+
+![Hellfire](/screencaps/asteroids.png) [View Code](/examples/asteroids)
+
+### Brickout
+
+![Brickout](/screencaps/brickout.png) [View Code](/examples/brickout)
+
+## Features and Components
+
+Goboom currently supports these features:
+
+- **Game Lifecycle** - all game objects have init, update and draw
+- **Scene Graph** - create object hierarchies of parents and children
+- **Component System** - Imbue game objects with functionality such as Movement, Rotational Velocity, Collisions, Lifespans, Screen Wrapping, and more.
+
+- **Built-In Debugger** - cycle through useful visualizations
+
+![Hellfire](/screencaps/debug-grid.png) Grid Debugger
+
+- **Game Object Primitives and Sprites** - quickly create elements via vector shapes (rectangle, ellipse, polygon, regular polygon, etc.) or by loading images.
+
+- **Convenience Functions** - for creating grids of objects (e.g. Space Invader enemies)
+
+- **Input Handler** - for applying mouse and keyboard events to object behaviors.
+
+- Lifecycles: Game loop and lifecycle
+- Transformations: Scale, rotation and pivot points.
+- Scene graph: Create parent-child relationships between game objects with `object.Add()`
+- Quickly create groups of game objects with `boom.GridArray()`
+
+- Create simple game elements from shapes such as `boom.Circle()`, `boom.Ellipse()`, `boom.Polygon()`, `boom.RegPolygon()` and `boom.Rectangle()`.
+
+### Components
+
+- Add movement to objects with the `Velocity` component.
+- Define collisions with `Collision` component.
+- Set objects' screen-wrapping behavior with the `Wrap` component.
+
+- Additional components include `boom.NewRotVelocityComp()`,
+
+### Installation / Getting Started

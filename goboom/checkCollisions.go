@@ -6,7 +6,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-
+// IsColliding checks if two CollideComp objects are overlapping
 func IsColliding(this, that *CollideComp) bool {
 
 	// object position
@@ -68,6 +68,7 @@ func IsColliding(this, that *CollideComp) bool {
 
 }
 
+// GetAllColliders returns all GameObjects with a CollideComp component
 func GetAllColliders(scene *GameObject) []*GameObject {
 	objs := scene.GetAll()
 	collideObjs := []*GameObject{}
@@ -81,6 +82,7 @@ func GetAllColliders(scene *GameObject) []*GameObject {
 	return collideObjs
 }
 
+// CheckCollisions checks for collisions between all GameObjects with a CollideComp component
 func CheckCollisions(scene *GameObject) {
 
 	collideObjs := GetAllColliders(scene)

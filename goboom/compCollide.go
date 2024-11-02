@@ -6,6 +6,7 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+// CollideComp is a component that allows an object to collide with other objects
 type CollideComp struct {
 	CompSetGet
 	Shape 				ColliderShape // my shape for collisions
@@ -15,6 +16,7 @@ type CollideComp struct {
 }
 
 
+// ColliderShape is an interface for collision shapes
 type ColliderShape interface {
 	GetBoundingBox() rl.Rectangle
 }
