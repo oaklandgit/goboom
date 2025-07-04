@@ -99,3 +99,5 @@ Goboom currently supports these features:
 - Additional components include `boom.NewRotVelocityComp()`,
 
 ### Installation / Getting Started
+
+COMING SOON
