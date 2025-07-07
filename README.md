@@ -6,7 +6,7 @@ Goboom aims to be a simple game engine for Go.
 
 ## Philosophy
 
-Goboom draws its inspiration from the wonderful javascript-based game engine [Kaboom](https://kaboomjs.com/) and its successor, [KaPlay](https://kaplayjs.com/). These engines favor composition over inheritance, where game elements (players, enemies, projectiles, platforms, etc.) derive their functionality "a la carte" in the form of _components_.
+Goboom draws its inspiration from the wonderful javascript-based game engine [Kaboom](https://kaboomjs.com/) and its successor, [KAPLAY](https://kaplayjs.com/). These engines favor composition over inheritance, where game elements (players, enemies, projectiles, platforms, etc.) derive their functionality "a la carte" in the form of _components_.
 
 This simple **Hello World** should give you the idea. It launches a game window and crawls a message up the screen.
 
