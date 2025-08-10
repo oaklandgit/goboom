@@ -1,5 +1,7 @@
 # Goboom
 
+> ⚠️ **WORK IN PROGRESS** – This project is incomplete and not ready for general use.
+
 ## A game engine in Go and Raylib.
 
 Goboom aims to be a simple game engine for Go.
